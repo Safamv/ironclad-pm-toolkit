@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ironclad Rollout: PM Toolkit Lab v2.1</title>
+<title>Ironclad Rollout: PM Toolkit Lab v2.2</title>
 <style>
   :root{
     --paper:#FBFAF7;
@@ -498,7 +498,7 @@
 
 <header class="masthead">
   <div class="wrap">
-    <div class="eyebrow">Interview Lab · v2.1</div>
+    <div class="eyebrow">Interview Lab · v2.2</div>
     <h1>The PM toolkit behind the Ironclad case</h1>
     <p class="sub">Not a plan for you to memorise. A set of tools, what question each one answers, where this case is quietly asking you to reach for it, and what each one looks like when it is actually built. The thinking is still yours to do.</p>
     <p class="meta">HelloFresh ANZ · Senior Systems Enablement Manager · Ironclad CLM case study</p>
@@ -514,7 +514,8 @@
     <button class="tab" data-p="drill">5 · Drill</button>
     <button class="tab" data-p="sheet">6 · One page</button>
     <button class="tab" data-p="people">7 · Bringing people</button>
-    <button class="tab" data-p="commute">8 · Ten minute review</button>
+    <button class="tab" data-p="gap">8 · Gap analysis</button>
+    <button class="tab" data-p="commute">9 · Ten minute review</button>
   </div>
 </nav>
 
@@ -903,7 +904,198 @@
   </div>
 </section>
 
-<!-- ================= 8. COMMUTE ================= -->
+<!-- ================= 8. GAP ANALYSIS ================= -->
+<section class="panel" id="gap">
+  <h2>Gap analysis: global blueprint versus local need</h2>
+  <p class="lede">The job description asks the holder of this role to "lead deep-dive gap analyses comparing global tech blueprints against local ANZ requirements, challenging proposals with data." The case has that skill baked in and most people walk past it: three of the five contract types span both regions, two are ANZ only.</p>
+
+  <div class="dia"><div class="diah"><span class="diat">The split, straight from the brief</span><span class="tagw wb">Whiteboard-able</span></div>
+  <div class="art"><table class="grid">
+  <tr><td>Contract type</td><td>Owner</td><td>Regions</td></tr>
+  <tr><td>NDA</td><td>Direct &amp; Indirect Procurement</td><td>ANZ + EU</td></tr>
+  <tr><td>Third Party Agreements</td><td>Indirect Procurement</td><td>ANZ + EU</td></tr>
+  <tr><td>MSA / SOW</td><td>Direct Procurement</td><td>ANZ + EU</td></tr>
+  <tr><td>Supply Agreement (PO)</td><td>Direct Procurement</td><td>ANZ only</td></tr>
+  <tr><td>Framework Agreement</td><td>Indirect Procurement</td><td>ANZ only</td></tr>
+  </table></div>
+  <p class="dial"><i>Three shared, two local. That is not decoration, it is the case handing you the skill the job description leads with.</i></p></div>
+
+  <h3>First: what does "shared" actually mean?</h3>
+  <p class="lede">The word is doing a lot of work in that table, and interrogating it is the first analytical move. There are three quite different things it could mean, and only the third is a real gap.</p>
+
+  <div class="dia"><div class="diah"><span class="diat">Three levels of shared</span><span class="tagw sl">Slide</span></div>
+  <div class="layers">
+    <div class="lay c"><h5>Truly shared</h5><p>Same workflow, one build, one configuration. Both regions use it identically. No gap. Build once.</p></div>
+    <div class="lay b"><h5>Shared structure, different parameters</h5><p>Same shape, different values. Approval thresholds differ because currency and legal entities differ. Signatories differ. This is a configuration difference, not a design difference, and it is cheap.</p></div>
+    <div class="lay a"><h5>Shared name only</h5><p>Both regions have something called an NDA and the resemblance ends there. This is the only genuine gap, and it is the expensive one.</p></div>
+  </div>
+  <p class="dial"><i>Mistaking parameter differences for design differences is how this exercise balloons from a fortnight into two months.</i></p></div>
+
+  <div class="note warn">
+    <strong>The power dynamic underneath, worth knowing before the first conversation</strong>
+    The job description says "global tech blueprints" and "local ANZ requirements". That phrasing tells you the expected shape: a global design exists or will exist, and the role is to challenge it where it genuinely does not fit rather than to design from scratch. If the other region is larger or further ahead, their design becomes the global blueprint by default and the local work becomes a localisation exercise, whether or not anyone says so out loud.
+  </div>
+
+  <hr class="rule">
+
+  <h3>The framework: three dispositions</h3>
+  <p class="lede">Every difference you find resolves into exactly one of three answers. Agreeing this framework with your counterpart <i>before</i> you have any actual disagreements is enormously easier than agreeing it mid-argument.</p>
+
+  <div class="dia"><div class="diah"><span class="diat">Adopt, adapt, deviate</span><span class="tagw wb">Whiteboard-able</span></div>
+  <div class="flow">
+    <div class="fs"><b>ADOPT</b>Local changes to match the global design. The difference was habit, not requirement. <br><i>Free.</i></div>
+    <div class="fs warnf"><b>ADAPT</b>Same structure, configured differently. Thresholds, entities, currency, signatories. <br><i>Cheap. A parameter, not a build.</i></div>
+    <div class="fs stop"><b>DEVIATE</b>Genuinely different workflow. <br><i>Expensive, and it has to be earned.</i></div>
+  </div>
+  <p class="dial"><i><b>The burden of proof sits on deviate.</b> Default to adopt and make the local team argue their way out of it. That single rule is what keeps the analysis honest.</i></p></div>
+
+  <div class="note hot">
+    <strong>The credibility rule</strong>
+    Challenging with data has to cut both ways. If you only advocate for the local market you are a protectionist and the global team stops listening to you. If you only accept the blueprint you are a rubber stamp and your own team stops bringing you things. You challenge the blueprint where it genuinely does not fit, <b>and</b> you challenge your own people where "we have always done it this way" is masquerading as a requirement.
+  </div>
+
+  <h3>What justifies a deviation, and what does not</h3>
+  <div class="dia"><div class="diah"><span class="diat">The test</span><span class="tagw doc">Working doc &middot; agreed with your counterpart in week one</span></div>
+  <div class="pw">
+    <div class="pwc yes"><h5>Legitimate drivers</h5><dl>
+      <dt>Law or regulation</dt><dd>Local consumer law, modern slavery reporting, privacy and data residency requirements.</dd>
+      <dt>Legal entity structure</dt><dd>Different signing authorities, different entities, different tax treatment.</dd>
+      <dt>Existing contractual obligation</dt><dd>Supplier agreements with terms that cannot be changed unilaterally.</dd>
+      <dt>Material commercial difference</dt><dd>A genuinely different buying pattern, lead time or risk profile.</dd>
+      <dt>Scale</dt><dd>A process that demonstrably breaks at this volume. Must be shown with numbers, not asserted.</dd>
+    </dl></div>
+    <div class="pwc no"><h5>Not drivers</h5><dl>
+      <dt>"That is how we have always done it"</dt><dd>History, not requirement.</dd>
+      <dt>"Our team prefers it"</dt><dd>Preference.</dd>
+      <dt>"Our approval matrix is different"</dt><dd>That is a parameter. It is an adapt, not a deviate.</dd>
+      <dt>"We are smaller so we need it simpler"</dt><dd>Almost always a preference wearing a constraint's clothing. Ask for the number.</dd>
+    </dl></div>
+  </div></div>
+
+  <div class="note">
+    <strong>The cost argument most people miss</strong>
+    A deviation is not a one-time build cost. It is an annuity. Every future vendor upgrade has to be regression tested twice. Every piece of training material forks. Every support question starts with "which region are you". And you permanently lose the ability to share learnings between the two teams. Saying that out loud is what makes the analysis sound like it came from someone who has lived with the consequences.
+  </div>
+
+  <hr class="rule">
+
+  <h3>The method, step by step</h3>
+  <div class="phase">Setup &middot; before anyone writes anything down</div>
+  <div class="ladder">
+    <div class="rung"><div class="rnum" style="background:#1F5B42">0</div><div>
+      <h5>Establish what you are comparing against</h5>
+      <p>Has the other region already designed and built, are you designing in parallel, or does a global template already exist from the vendor or from group? These are three completely different exercises and you cannot start until you know which one you are in.</p>
+      <span class="cost">First question for your counterpart &middot; scope-defining</span></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#2D6A4F">1</div><div>
+      <h5>Agree the unit of comparison, jointly</h5>
+      <p>You cannot compare "the NDA process" as a blob. Decompose into comparable elements: how a request is triggered, what data is captured, which template is used, routing logic, approval thresholds and authority levels, what triggers legal review, signature method and signatories, storage and metadata rules, renewal and expiry handling, reporting requirements.<br><br><b>Agree this decomposition before either side populates it.</b> Two teams filling in two differently structured documents and then trying to reconcile them is the single most common way this exercise fails.</p>
+      <span class="cost">The concrete deliverable of meeting one</span></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#3D7A5A">2</div><div>
+      <h5>Populate independently</h5>
+      <p>Each region documents theirs against the agreed elements without seeing the other first, so neither anchors on the other. Anchoring quietly erases differences that should have surfaced.</p>
+      <span class="cost">1 to 2 weeks, in parallel</span></div></div>
+  </div>
+
+  <div class="phase">Analyse &middot; where the actual work is</div>
+  <div class="ladder">
+    <div class="rung"><div class="rnum" style="background:#4F8A63">3</div><div>
+      <h5>Merge into a gap register</h5>
+      <p>Rows are elements. Columns are local, global, same or different, the driver, the disposition, the cost if deviating, the owner, and the decision.</p></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#6C9A4E">4</div><div>
+      <h5>Classify every difference by driver</h5>
+      <p>For each one, force it into a category: regulatory, legal entity, commercial, scale, system constraint, or preference and history. This is the analytical heart of the exercise, and in practice most differences land in that last bucket. <b>Which is itself the finding.</b></p></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#7FA33C">5</div><div>
+      <h5>Assign the disposition</h5>
+      <p>Adopt, adapt or deviate, with the burden of proof on deviate. Most classified-as-preference differences resolve to adopt the moment they are written down next to the word "preference".</p></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#C9962F">6</div><div>
+      <h5>Cost the deviations</h5>
+      <p>Build effort, test effort, training divergence, and the ongoing maintenance annuity. Numbers rather than opinion. <b>This is the "challenging proposals with data" the job description is asking for.</b></p></div></div>
+  </div>
+
+  <div class="phase">Resolve &middot; and make it stick</div>
+  <div class="ladder">
+    <div class="rung"><div class="rnum" style="background:#B8801F">7</div><div>
+      <h5>Escalate only the contested ones</h5>
+      <p>Most will resolve between the two project managers. Ten to twenty percent will not, and those need an arbitration route that was agreed before anyone needed it.</p></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#A85F2B">8</div><div>
+      <h5>Log every decision with its basis</h5>
+      <p>Someone reopens this in month four. "Decided 12 March on the basis of X" ends that conversation in thirty seconds. One shared log, not two.</p></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#C9503B">9</div><div>
+      <h5>Feed the output into three places</h5>
+      <p>The requirements pack for the vendor. The change impact assessment, because every deviation is a training difference. And the risk log, because every unresolved gap is a live dependency on somebody else's decision.</p></div></div>
+  </div>
+
+  <div class="dia" style="margin-top:22px"><div class="diah"><span class="diat">The gap register &middot; the artefact this produces</span><span class="tagw doc">Working doc</span></div>
+  <div class="art"><table class="grid">
+  <tr><td>Element</td><td>Local</td><td>Global</td><td>Driver</td><td>Disposition</td></tr>
+  <tr><td>NDA legal review trigger</td><td>Value threshold</td><td>All NDAs</td><td>Scale</td><td>ADAPT</td></tr>
+  <tr><td>NDA template</td><td>Local Word template</td><td>Group template</td><td>Preference</td><td>ADOPT</td></tr>
+  <tr><td>Approval thresholds</td><td>AUD bands</td><td>EUR bands</td><td>Entity / currency</td><td>ADAPT</td></tr>
+  <tr><td>Modern slavery clause</td><td>Mandatory</td><td>Not present</td><td>Regulation</td><td>DEVIATE</td></tr>
+  <tr><td>Signature routing</td><td>Sequential</td><td>Parallel</td><td>History</td><td>ADOPT</td></tr>
+  <tr><td>Contract numbering</td><td>Local scheme</td><td>Group scheme</td><td>Preference</td><td>ADOPT</td></tr>
+  </table></div>
+  <p class="dial"><i>Six rows, one deviation. That ratio is normal and it is the point: the register exists to prove how few real gaps there are, so the ones that survive get taken seriously.</i></p></div>
+
+  <hr class="rule">
+
+  <h3>The first meeting with your counterpart</h3>
+  <p class="lede">The relationship has a specific hazard: you are peers with no authority in either direction. The three failure modes are that it becomes a status swap where nothing is decided, that it becomes a turf war, or that it runs on goodwill and collapses the first time you genuinely disagree.</p>
+
+  <div class="note hot">
+    <strong>The first meeting is about the operating model, not the content</strong>
+    You are not there to compare NDAs. You are there to agree how the two of you will work, because everything after this depends on it.
+  </div>
+
+  <h4 style="font-size:15px;margin:24px 0 8px">What to establish</h4>
+  <ul class="chk">
+    <li><b>Where each of you is up to,</b> and whether anything has already been committed or built.</li>
+    <li><b>Whether a global blueprint exists</b> and who owns it. This defines your scope more than anything else in the first fortnight.</li>
+    <li><b>What is genuinely shared</b> versus what merely shares a name.</li>
+    <li><b>The unit of comparison.</b> The concrete deliverable of the meeting.</li>
+    <li><b>The adopt / adapt / deviate framework</b> and what justifies a deviation. Agree the test while you still have nothing to argue about.</li>
+    <li><b>The arbitration route</b> for when you cannot agree.</li>
+    <li><b>Cadence, and one shared decision log</b> rather than two.</li>
+    <li><b>Vendor coordination.</b> You share an implementation team, and whose requirements land first is a real resource conflict.</li>
+  </ul>
+
+  <div class="note warn">
+    <strong>Two tactical moves</strong>
+    <b>Go first with what you are willing to concede.</b> Opening with "here are three things where I think we should just take whatever you have built" costs almost nothing and buys a great deal, because it signals you are not there to defend territory. When you then argue for a deviation, it reads as considered rather than reflexive.<br><br>
+    <b>Name the mutual dependency, because it makes cooperation self-interested rather than merely polite.</b> You share a vendor. If they are late with requirements, vendor capacity gets consumed and you slip. If you are late, the same happens to them. You can each sink the other. That is a far more durable basis for a working relationship than goodwill, and saying it early is clarifying rather than aggressive.
+  </div>
+
+  <h4 style="font-size:15px;margin:24px 0 8px">Roughly what you would say</h4>
+  <div class="rc" style="margin-top:0">
+    <p class="said">"Before we get into any of the five workflows, I would like us to agree how we are going to work, because we are peers and there is no obvious tiebreaker between us."</p>
+    <p class="said">"First, where are you up to? Has anything been designed or committed already, and is there a global blueprint I should be treating as the starting point?"</p>
+    <p class="said">"Second, three of the five contract types are shared on paper. I would like to test whether that means shared design or just a shared name, because those are very different amounts of work."</p>
+    <p class="said">"Third, I would like us to agree the level we compare at, before either of us writes anything down. If we each produce our own document we will spend two weeks reconciling formats instead of finding gaps."</p>
+    <p class="said">"Fourth, and this is the one I care most about: I would like us to agree now, while we do not disagree about anything, that every difference gets classified as adopt, adapt or deviate, and that the burden of proof sits on deviate. I will hold my own team to that as hard as I hold yours. If my people cannot point at a law, an entity structure or a material commercial difference, then it is a preference and we adopt."</p>
+    <p class="said">"Fifth, we need a route for when we cannot agree. I would rather sort that out today than invent it during an argument."</p>
+    <p class="said">"And one practical thing: we are sharing an implementation team. If either of us is late with requirements, the other one pays for it. So I would like visibility of your dates, and you should have mine."</p>
+  </div>
+
+  <h4 style="font-size:15px;margin:26px 0 8px">What challenging with data actually sounds like</h4>
+  <div class="note">
+    "The blueprint routes every NDA to Legal for review. Here that would be around 2,400 NDAs a year through a Legal team of three. For you it is 800 through a team of twelve. That is roughly 800 reviews per lawyer against 67. The queue does not work at our volumes. I am not asking to change the structure, I am asking for a value threshold as a configurable parameter, which is an adapt rather than a deviate."<br><br>
+    <b>Notice what that does.</b> It uses numbers. It argues for the cheapest of the three dispositions rather than the most expensive. And it explicitly declines to touch the structure. That is a proposal a global team can say yes to.
+  </div>
+
+  <div class="note hot">
+    <strong>And one observation the case invites</strong>
+    Two regional projects, one vendor, shared design on three of five workflows, the same benefit. That is a <b>programme</b> structure. And the brief names no programme layer: no joint governance, no programme manager, nobody accountable for the interdependencies between the two. Noticing that gap out loud is a strong move.
+  </div>
+</section>
+
+<!-- ================= 9. COMMUTE ================= -->
 <section class="panel" id="commute">
   <h2>Ten minute review</h2>
   <p class="lede">A last pass before you walk in. Nothing here is new. Green words and links jump to the tab where the full theory lives, so you can go deeper on anything that feels loose.</p>
@@ -926,6 +1118,22 @@
   </div>
 
   <div class="rc">
+    <h3>The ANZ / EU question</h3>
+    <p class="rcs">Full method on <span class="xref" data-go="gap">tab 8</span>. This is the job description's headline skill.</p>
+    <ul>
+      <li><b>Ask this early, it is scope-defining:</b> is ANZ configuring alongside EU, or separately? Has EU already designed or committed to anything? Does a global blueprint exist and who owns it? The answer changes whether you are co-designing, localising, or starting clean, and those are three different projects.</li>
+      <li><b>Three of the five contract types are shared, two are ANZ only.</b> NDA, Third Party Agreements and MSA/SOW span both. Supply Agreement and Framework Agreement are local.</li>
+      <li><b>Interrogate the word "shared".</b> It could mean one build, or the same structure with different parameters, or just a shared name. Only the last is a real gap and only the last is expensive.</li>
+      <li><b>Every difference is adopt, adapt or deviate,</b> and the burden of proof sits on deviate. Agree that test with your counterpart before you disagree about anything.</li>
+      <li><b>A deviation is legitimate only if it is driven by</b> law, legal entity structure, an existing contractual obligation, a material commercial difference, or demonstrated scale. Not history, not preference, and not a different approval matrix, which is a parameter.</li>
+      <li><b>Challenge in both directions.</b> Only defending the local market makes you a protectionist. Only accepting the blueprint makes you a rubber stamp.</li>
+      <li><b>A deviation is an annuity, not a one-time cost.</b> Every future upgrade gets regression tested twice and every piece of training forks.</li>
+      <li><b>You share a vendor, so you can each sink the other.</b> Late requirements on either side consume the same implementation capacity. That makes cooperation self-interested rather than merely polite, and naming it early is clarifying.</li>
+      <li><b>Two regional projects with a shared design is a programme,</b> and the brief names no programme layer at all. Noticing that is a strong move.</li>
+    </ul>
+  </div>
+
+  <div class="rc">
     <h3>Vocabulary to reach for</h3>
     <p class="rcs">Tap any word to open the tab where it is explained</p>
     <div class="wgrp">Planning under uncertainty</div>
@@ -936,6 +1144,8 @@
     <div class="words"><span class="word" data-go="toolkit">RAID</span><span class="word" data-go="toolkit">mitigation vs contingency</span><span class="word" data-go="toolkit">trigger</span><span class="word" data-go="toolkit">pre-mortem</span><span class="word" data-go="toolkit">change control</span><span class="word" data-go="toolkit">scope creep</span><span class="word" data-go="toolkit">decision log</span></div>
     <div class="wgrp">People and decisions</div>
     <div class="words"><span class="word" data-go="toolkit">RACI</span><span class="word" data-go="toolkit">accountable vs responsible</span><span class="word" data-go="toolkit">power / interest</span><span class="word" data-go="people">engagement gap</span><span class="word" data-go="toolkit">ADKAR</span><span class="word" data-go="people">guiding coalition</span><span class="word" data-go="people">change champion</span><span class="word" data-go="people">structured ask</span></div>
+    <div class="wgrp">Global versus local</div>
+    <div class="words"><span class="word" data-go="gap">global blueprint</span><span class="word" data-go="gap">gap register</span><span class="word" data-go="gap">adopt / adapt / deviate</span><span class="word" data-go="gap">unit of comparison</span><span class="word" data-go="gap">localisation</span><span class="word" data-go="gap">deviation annuity</span><span class="word" data-go="gap">programme</span></div>
     <div class="wgrp">Data and delivery</div>
     <div class="words"><span class="word" data-go="toolkit">data profiling</span><span class="word" data-go="toolkit">cleanse at source</span><span class="word" data-go="toolkit">reconciliation</span><span class="word" data-go="toolkit">in-flight contracts</span><span class="word" data-go="toolkit">freeze date</span><span class="word" data-go="toolkit">mock run</span></div>
     <div class="wgrp">Testing and launch</div>
@@ -965,7 +1175,7 @@
       <li><b>The expiry date is worth testing, not accepting.</b> Find out what an extension costs before deciding the constraint is immovable. Knowing the price of time changes every trade-off after it.</li>
       <li><b>The vendor SOW is not the project scope.</b> The SOW covers configuration. The project also covers migration, training, cutover and adoption, and that gap is most of the effort.</li>
       <li><b>The key user's leave is a certainty, not a risk.</b> Certainties do not get probabilities. It is a dependency and a decision due now.</li>
-      <li><b>Three of the five workflows span both regions and two are local.</b> That split is the gap analysis the job description asks for, hiding inside the case.</li>
+      <li><b>Three of the five workflows span both regions and two are local.</b> That split is the gap analysis the job description asks for, hiding inside the case. <span class="xref" data-go="gap">Method</span></li>
       <li><b>A committee cannot be accountable.</b> Six people sharing an A means nobody holds it. Name the chair or the sponsor.</li>
       <li><b>Training addresses two of five adoption failure modes.</b> Awareness, desire and reinforcement are the other three.</li>
       <li><b>Baselines have to be captured before go-live</b> or the benefit case can never be proven. That is a week-two task.</li>
@@ -980,6 +1190,7 @@
       <li>"The brief describes the Product Manager as ultimately accountable for the rollout while this role is responsible for delivery. How do you see that working in practice?"</li>
       <li>"Has anyone tested what an extension on the existing contract would cost, or is that date genuinely immovable?"</li>
       <li>"Has anyone scoped what is actually sitting in the current system yet, or would that be the incoming person's first job?"</li>
+      <li>"Is ANZ configuring alongside EU on the three shared contract types, or separately? And has EU already designed or committed to anything I would be inheriting?"</li>
       <li>"On the three workflows shared with EU, how much authority does this role have over shared design decisions, and who arbitrates a disagreement?"</li>
       <li>"What resource sits alongside this role? Is there a data or business analyst, or is it a team of one?"</li>
       <li>"What does the Launch Team's playbook look like today, and what is missing from it?"</li>
@@ -1004,7 +1215,7 @@
 </div>
 
 <footer>
-  <div class="wrap">Ironclad Rollout PM Toolkit Lab v2.1 · a self-study system for the HelloFresh ANZ case</div>
+  <div class="wrap">Ironclad Rollout PM Toolkit Lab v2.2 · a self-study system for the HelloFresh ANZ case</div>
 </footer>
 
 <script>
