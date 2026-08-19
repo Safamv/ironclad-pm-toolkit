@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ironclad Rollout: PM Toolkit Lab v1.3</title>
+<title>Ironclad Rollout: PM Toolkit Lab v2.0</title>
 <style>
   :root{
     --paper:#FBFAF7;
@@ -381,6 +381,104 @@
   .spoken .sbody p{margin:0 0 10px}
   .spoken .sbody p:last-child{margin:0}
 
+  /* ---------- cross references ---------- */
+  .xref{color:var(--green);font-weight:600;cursor:pointer;border-bottom:1px dotted currentColor}
+  .xref:hover{color:var(--ink)}
+
+  /* ---------- power split ---------- */
+  .pw{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+  .pwc{border-radius:8px;padding:15px 17px}
+  .pwc.no{background:var(--rose-soft)}
+  .pwc.yes{background:var(--green-soft)}
+  .pwc h5{margin:0 0 10px;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700}
+  .pwc.no h5{color:var(--rose)} .pwc.yes h5{color:var(--green)}
+  .pwc dl{margin:0}
+  .pwc dt{font-size:14px;font-weight:700;color:var(--ink);margin-top:11px}
+  .pwc dt:first-child{margin-top:0}
+  .pwc dd{margin:2px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+
+  /* ---------- ladder ---------- */
+  .ladder{border:1px solid var(--line);border-radius:10px;background:var(--card);overflow:hidden}
+  .rung{display:grid;grid-template-columns:52px 1fr;gap:14px;padding:16px 18px;border-bottom:1px solid var(--line);align-items:start}
+  .rung:last-child{border-bottom:0}
+  .rnum{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff;margin-top:2px}
+  .rung h5{margin:0 0 5px;font-size:15.5px;letter-spacing:-.005em}
+  .rung p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.6}
+  .rung .cost{font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--ink-3);display:block;margin-top:7px}
+
+  /* ---------- layers ---------- */
+  .layers{display:flex;flex-direction:column;gap:8px}
+  .lay{border:1.5px solid;border-radius:8px;padding:14px 16px}
+  .lay h5{margin:0 0 5px;font-size:14.5px}
+  .lay p{margin:0;font-size:13.5px;line-height:1.55}
+  .lay .who{font-size:11.5px;color:var(--ink-3);margin-top:7px;display:block}
+  .lay.a{border-color:#C4705F;background:var(--rose-soft)} .lay.a h5{color:var(--rose)}
+  .lay.b{border-color:#D9BB7E;background:var(--amber-soft)} .lay.b h5{color:var(--amber)}
+  .lay.c{border-color:#8FB5A0;background:var(--green-soft)} .lay.c h5{color:var(--green)}
+  .lay p{color:var(--ink-2)}
+
+  /* ---------- checklist ---------- */
+  .chk{list-style:none;padding:0;margin:0}
+  .chk li{position:relative;padding-left:27px;margin-bottom:12px;font-size:15px;line-height:1.55;color:var(--ink-2)}
+  .chk li::before{content:"";position:absolute;left:0;top:5px;width:13px;height:13px;border:1.5px solid var(--green);border-radius:3px}
+  .chk li b{color:var(--ink)}
+  .chk li:last-child{margin-bottom:0}
+
+  /* ---------- commute cards ---------- */
+  .rc{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:20px 22px;margin-bottom:12px}
+  .rc h3{margin:0 0 4px;font-size:17px}
+  .rc .rcs{font-size:12.5px;color:var(--ink-3);margin:0 0 15px}
+  .rc ul{margin:0;padding-left:19px}
+  .rc li{font-size:14.5px;line-height:1.55;margin-bottom:9px;color:var(--ink-2)}
+  .rc li:last-child{margin-bottom:0}
+  .rc li b{color:var(--ink)}
+  .words{display:flex;flex-wrap:wrap;gap:6px}
+  .word{font-size:12.5px;font-weight:600;background:var(--green-soft);color:var(--green);padding:5px 11px;border-radius:100px;cursor:pointer;border:1px solid transparent;transition:.12s}
+  .word:hover{border-color:var(--green);background:#fff}
+  .wgrp{font-size:10px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--ink-3);margin:16px 0 7px}
+  .wgrp:first-child{margin-top:0}
+  .said{border-left:2px solid var(--green);padding-left:15px;font-size:15px;line-height:1.65;color:var(--ink-2);margin:0 0 14px}
+  .said:last-child{margin-bottom:0}
+  .scrollhint{display:none;font-size:11.5px;color:var(--ink-3);font-style:italic;margin:-14px 0 18px}
+
+  /* ---------- mobile ---------- */
+  @media(max-width:680px){
+    body{font-size:15px}
+    .wrap{padding:0 15px}
+    .navinner{padding:0 15px}
+    header.masthead{padding:32px 0 22px}
+    h1{font-size:27px} h2{font-size:22px} .sub{font-size:15.5px}
+    .panel{padding:28px 0 70px}
+    .scrollhint{display:block}
+    .dia{padding:12px 10px}
+    .cc summary{padding:14px 14px;font-size:14.5px;gap:9px}
+    .ccbody{padding:2px 14px 18px}
+    .step{padding:16px 14px}
+    .qa{padding:15px 16px}
+    .rc{padding:16px 17px}
+    .sheet{padding:20px 16px}
+    .ex>summary{padding:11px 12px}
+    .exb{padding:0 11px 14px}
+    .pw{grid-template-columns:1fr}
+    .ttb{grid-template-columns:1fr}
+    .rung{grid-template-columns:40px 1fr;gap:11px;padding:14px}
+    .bks{grid-template-columns:1fr 1fr;min-width:0}
+    .effbar{min-width:0}
+    .effbar div{font-size:8px;padding:0 2px}
+    .flow{flex-direction:column;gap:4px;min-width:0}
+    .fs{clip-path:none !important;border-radius:6px;padding:10px 13px !important;min-width:0;flex:none}
+    .tkids{grid-template-columns:repeat(8,138px)}
+    .q2{min-width:296px;height:262px}
+    .qd{font-size:9px;padding:3px 6px}
+    .art table{font-size:12.5px}
+    .art td{padding:6px 9px}
+    .art td:first-child{padding-right:12px}
+    .sheet td{font-size:13px}
+    .sheet td:first-child{width:auto;white-space:normal}
+    .tl{grid-template-columns:92px 1fr;gap:4px 8px}
+    .tlname{font-size:9.5px}
+  }
+
   footer{border-top:1px solid var(--line);padding:26px 0 60px;font-size:13px;color:var(--ink-3)}
 
   @media print{
@@ -400,10 +498,10 @@
 
 <header class="masthead">
   <div class="wrap">
-    <div class="eyebrow">Interview Lab · v1.3</div>
+    <div class="eyebrow">Interview Lab · v2.0</div>
     <h1>The PM toolkit behind the Ironclad case</h1>
     <p class="sub">Not a plan for you to memorise. A set of tools, what question each one answers, where this case is quietly asking you to reach for it, and what each one looks like when it is actually built. The thinking is still yours to do.</p>
-    <p class="meta">HelloFresh ANZ · Senior Systems Enablement Manager · Built 19 Aug 2026</p>
+    <p class="meta">HelloFresh ANZ · Senior Systems Enablement Manager · Ironclad CLM case study</p>
   </div>
 </header>
 
@@ -415,6 +513,8 @@
     <button class="tab" data-p="mapper">4 · Question → tool</button>
     <button class="tab" data-p="drill">5 · Drill</button>
     <button class="tab" data-p="sheet">6 · One page</button>
+    <button class="tab" data-p="people">7 · Bringing people</button>
+    <button class="tab" data-p="commute">8 · Ten minute review</button>
   </div>
 </nav>
 
@@ -489,12 +589,14 @@
   <p class="lede">Twenty-four tools, tiered by how well you need to know them by tomorrow. Tier A you should be able to run live if asked. Tier B you should be able to name, define and say when you would reach for. Tier C you only need to recognise so a term does not blindside you.</p>
 
   <div class="note warn">
-    <strong>New in v1.2 · read the tags</strong>
+    <strong>Read the tags on each diagram</strong>
     Every card now ends with <b>"What it actually looks like"</b>: the tool drawn as it is actually drawn, filled in with Ironclad content. Each one carries a tag telling you what it is in the real world.<br><br>
     <span class="tagw wb">Whiteboard</span> means you could draw it live in under a minute if someone hands you a marker. Those are the ones worth being able to sketch from memory: the iron triangle, the dependency chains, the power/interest grid, the as-is / to-be swimlane, the defect quadrant.<br><br>
     <span class="tagw sl">Slide</span> means it is something you would put in front of a SteerCo. <span class="tagw doc">Working doc</span> means it lives in a spreadsheet or a page and nobody presents it, they use it.<br><br>
     Read them for <em>shape</em>. The shape is the part you cannot invent under pressure. The content is the part you will have to invent anyway.
   </div>
+
+  <p class="scrollhint">On a phone, the diagrams scroll sideways. Swipe them.</p>
 
   <div class="filters">
     <button class="chip on" data-f="all">All 24</button>
@@ -523,7 +625,7 @@
   <div class="actionbar">
     <button class="act" id="copyAll">Copy all my answers</button>
     <button class="act ghost" id="clearAll">Clear everything</button>
-    <span class="hint" id="copyHint">Paste them back into the chat and I will pull them apart.</span>
+    <span class="hint" id="copyHint">Copies as plain text so you can review or share them.</span>
   </div>
 </section>
 
@@ -533,15 +635,25 @@
   <p class="lede">Likely questions, the tools that answer each one, the shape of a strong response, and now a spoken version of each. The shape matters more than the content: notice how often the strong version names a tension, offers options with trade-offs, and ends with a recommendation rather than a request for permission.</p>
 
   <div class="note warn">
-    <strong>This is the commute tab · read it in this order</strong>
+    <strong>Read each question in this order</strong>
     Read the question. Say your answer out loud before opening anything. Then open <b>Must touch on · and the traps</b> and mark yourself. Only then open <b>How it comes together</b>.<br><br>
     The touch-on list is deliberately not an answer. It is the set of things a strong response contains in some order, so you can build your own version around them instead of reciting mine. The spoken versions are written the way people actually talk, with hedges and short sentences, because a written answer read aloud sounds rehearsed and that is the one thing they will notice.
   </div>
 
   <div class="note hot">
-    <strong>Your two known weak spots, from tonight's drill</strong>
-    <b>1 · Under pressure you go sequential and inward.</b> Understand everything first, then act, and no people in the room. Both times you were asked to plan, the Icertis data profiling dropped out of week one even though you had already identified it as the critical path. If you catch yourself describing a week of reading and analysis, stop and ask who you have not spoken to and what long-lead item has not started.<br><br>
-    <b>2 · You keep promising a locked scope earlier than the evidence allows.</b> A charter does not need a complete scope. It needs an objective, a constraint, decision rights and success measures, with the quantum marked as to be confirmed by a named date. Separate the charter from the scope baseline: the first you want in week two, the second you cannot have until profiling lands.
+    <strong>The failure modes this case is designed to catch</strong>
+    <b>Planning a desk-based first week.</b> No sponsor conversation, no SME conversations, no vendor contact. A week of reading and analysis feels productive and produces nothing anyone else can act on.<br><br>
+    <b>Front-loading product familiarisation.</b> Learning two contract platforms in depth will consume the week. You need enough to ask a good question, not mastery. There is an implementation partner for the software.<br><br>
+    <b>Building a breakdown out of project paperwork.</b> Charter, RACI, stakeholder map and Gantt are not a work breakdown structure. They are one branch of it.<br><br>
+    <b>Promising a locked scope before the discovery that determines it.</b> A charter needs an objective, a constraint, decision rights and success measures. It does not need a scope quantum. Separate the charter from the scope baseline.<br><br>
+    <b>Announcing a date you do not have.</b> You cannot say the deadline is under investigation and also broadcast an end date in week one.<br><br>
+    <b>Answering the people question with "training and comms".</b> Training addresses two of the five reasons a person fails to adopt a system.<br><br>
+    <b>Stopping the plan at UAT.</b> Cutover, parallel running, in-flight rules, Go/No-Go and hypercare are half the risk and they are where most plans go quiet.
+  </div>
+
+  <div class="note">
+    <strong>Correcting yourself out loud is a strength here</strong>
+    The brief says the interview is about how you think. Catching an error mid-answer and saying so is direct evidence of that, and it reads as senior rather than uncertain. A clean answer that was quietly wrong scores worse than a messy one that got corrected.
   </div>
   <input class="search" id="qsearch" placeholder="Filter questions… try 'deadline', 'risk', 'stakeholder', 'UAT'">
   <div id="qas"></div>
@@ -617,10 +729,282 @@
   </div>
 </section>
 
+<!-- ================= 7. PEOPLE ================= -->
+<section class="panel" id="people">
+  <h2>Bringing people with you</h2>
+  <p class="lede">The brief says the conversation is about three things: how you think, how you plan, and how you would bring people with you on the journey. Most preparation covers the first two and answers the third with "training and communications". This tab is the third one, treated as seriously as the other two.</p>
+
+  <div class="note">
+    <strong>The reframe that makes this a delivery answer, not a soft one</strong>
+    Look at who reports to the project manager in this case. Nobody. Not Legal, not either Procurement team, not the vendor. The EU PM is a peer. The Product Manager is described as ultimately accountable. Every hour of work on this project happens because somebody chose to give it. That is not a people-skills footnote, it is the constraint the entire plan runs on.
+  </div>
+
+  <h3>The tension, named properly</h3>
+  <p class="lede">The formal name is <b>responsibility without authority</b>, and it is the defining feature of a <b>matrix organisation</b>. The most useful lens is <b>French and Raven's bases of social power</b>: six sources of influence, of which three are unavailable to you here and three are entirely earnable.</p>
+
+  <div class="dia"><div class="diah"><span class="diat">Bases of social power · applied to this role</span><span class="tagw wb">Whiteboard-able</span></div>
+  <div class="pw">
+    <div class="pwc no"><h5>Structurally unavailable</h5><dl>
+      <dt>Legitimate</dt><dd>Positional authority. You have none over Legal or Procurement.</dd>
+      <dt>Reward</dt><dd>Raises, promotions, good assignments. Not yours to give.</dd>
+      <dt>Coercive</dt><dd>The ability to impose a consequence. None.</dd>
+    </dl></div>
+    <div class="pwc yes"><h5>Earnable, and fast</h5><dl>
+      <dt>Informational</dt><dd>Having something people need. Quickest to acquire and most underused. The moment profiling tells Legal there are 400 duplicate contracts and 200 with no owner, you hold information they want and did not have.</dd>
+      <dt>Expert</dt><dd>People believing you know what you are doing. Built by being visibly right on things they can verify.</dd>
+      <dt>Referent</dt><dd>People wanting to work with you. Slower, but it is what gets your email answered at 6pm.</dd>
+    </dl></div>
+  </div>
+  <p class="dial"><i>The value of this framework is that it stops the problem feeling like a personality failing. You are structurally short of three power types. The response is to over-invest deliberately in the other three.</i></p></div>
+
+  <h3>The ladder of levers</h3>
+  <p class="lede">Use these in order, cheapest first. Most people skip to rung five and then wonder why it stops working.</p>
+
+  <div class="ladder">
+    <div class="rung"><div class="rnum" style="background:#2D6A4F">1</div><div>
+      <h5>Reduce the cost of yes</h5>
+      <p>Free, unlimited, and where most of the yield sits. Bring a draft to react to rather than a template to fill. Make the ask small, specific and time-bounded. Go to their meeting rather than booking yours. Do every part of the preparation that is not the part only they can do. A request costing fifteen minutes gets answered. One costing two hours gets deferred, and deferred forever is indistinguishable from refused.</p>
+      <span class="cost">Free · unlimited · highest yield</span></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#4F8A63">2</div><div>
+      <h5>Build informational and expert power on purpose</h5>
+      <p>Know their process better than an outsider should. Bring them findings they did not have. Do what you said you would do by the day you said it, four times running. The fourth time is when people start saying yes before you finish the sentence.</p>
+      <span class="cost">Free · compounds over weeks</span></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#7FA33C">3</div><div>
+      <h5>Make the cost of not responding visible, impersonally</h5>
+      <p>Publish a dependency list in the status update. "Approval thresholds for NDA, requested 4 March, outstanding, impacts vendor build slot of 18 March." That is a factual artefact, not an accusation, and it works because people self-correct when their name appears on something the sponsor reads. The discipline: it must never read as blame, or you have spent referent power to gain nothing.</p>
+      <span class="cost">Cheap · high yield · easy to get wrong</span></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#C9962F">4</div><div>
+      <h5>Trade</h5>
+      <p>Almost nobody does this and it works. "Give me four hours across weeks three and four, and I will keep you out of every meeting from week five to ten and write everything up myself." You are offering something real: their time back, and protection. Time-poor people respond to that far more than to explanations of why the project matters.</p>
+      <span class="cost">Cheap · requires you to honour it</span></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#B8801F">5</div><div>
+      <h5>Borrowed authority</h5>
+      <p>The sponsor sets the expectation once, publicly, so you can reference it afterwards. Use it to establish the frame, not to chase individual items. Supply is limited and it degrades: the second time a sponsor intervenes on your behalf, people conclude you cannot manage the relationship yourself.</p>
+      <span class="cost">Limited supply · roughly twice per project</span></div></div>
+
+    <div class="rung"><div class="rnum" style="background:#C9503B">6</div><div>
+      <h5>Escalation</h5>
+      <p>Expensive, and it costs relationship every time. One rule makes it survivable: <b>never escalate a person, escalate a decision.</b> "I need a decision on approval thresholds by Friday or the build slot moves" is a project matter. "Legal is not responding to me" is a complaint about a colleague, and it will get back to them.</p>
+      <span class="cost">Expensive · last resort</span></div></div>
+  </div>
+
+  <hr class="rule">
+
+  <h3>Kotter's guiding coalition</h3>
+  <p class="lede">Kotter's argument in <i>Leading Change</i> is that no individual drives change through an organisation, not even a chief executive, because change that depends on one person's energy fails when that energy runs out. Step two of his eight is to deliberately assemble a group who carry it together.</p>
+  <p class="lede">He says the group needs four things: <b>position power</b> (enough seniority that those left out cannot quietly block it), <b>expertise</b> (the relevant disciplines actually represented), <b>credibility</b> (people others genuinely respect, which is a different list from people with titles), and <b>leadership</b> (people who drive rather than administer). Crucially, he argues the trust inside that group does not appear by putting people on an invite list. You build it through shared work.</p>
+
+  <div class="dia"><div class="diah"><span class="diat">Three layers people constantly conflate</span><span class="tagw sl">Slide</span></div>
+  <div class="layers">
+    <div class="lay a"><h5>Steering committee · decides</h5><p>A governance body. Controls money, owns the Go/No-Go, meets fortnightly, produces minutes. Formal by design.</p><span class="who">Sponsor, function heads, Product Manager</span></div>
+    <div class="lay b"><h5>Guiding coalition · carries</h5><p>A working leadership group. Does not decide, it persuades and unblocks. Speaks with one voice about why this is happening and clears obstacles inside their own functions. Lends you their credibility.</p><span class="who">Sponsor, Product Manager, one respected senior person from Legal and from each Procurement team, the PM, possibly the EU PM. Five to eight people.</span></div>
+    <div class="lay c"><h5>Champion network · absorbs and warns</h5><p>Operational. One person per team, close to the daily work, who is the local first line for questions and the early warning system when something is going wrong.</p><span class="who">One per team, junior to mid, chosen for respect rather than rank</span></div>
+  </div></div>
+
+  <h3>How to recruit a coalition when you are new and have no standing</h3>
+  <ul class="chk">
+    <li><b>Ask the sponsor one specific question:</b> who do people here actually listen to? That answer differs from the org chart, and it is the most valuable thing a sponsor gives you in week one.</li>
+    <li><b>Listen for who gets cited.</b> When someone says "well, Sarah has been doing NDAs for eight years", Sarah is on the list.</li>
+    <li><b>Approach individually, never by group email.</b> Ask for their <i>view</i> before you ask for their <i>time</i>. "Three people have told me you are the person who understands how NDAs actually work here" opens very differently from "I would like you to join the working group".</li>
+    <li><b>Give them something real.</b> Nobody joins a coalition to attend a meeting. They join because they get to shape something they have opinions about.</li>
+    <li><b>Meet as a group only when there is genuine work.</b> A coalition that becomes a status meeting decays into apologies.</li>
+  </ul>
+
+  <h3>Choosing champions, including the non-obvious criterion</h3>
+  <p class="lede">Respected by peers. Close to the daily work rather than senior. And ideally <b>mildly sceptical rather than enthusiastic</b>. A converted sceptic is dramatically more persuasive to their colleagues than a cheerleader, because their peers know they were not an easy sell. An enthusiast advocating for change is heard as management's voice.</p>
+  <p class="lede">They get early access, information before everyone else, real influence on design, and public credit. They give roughly two hours a fortnight, front and back loaded. In this case a champion recruited in Indirect Procurement in week two is also the trained delegate you would otherwise be scrambling for when the key user goes on leave during UAT.</p>
+
+  <hr class="rule">
+
+  <h3>Managing a time-poor subject matter expert</h3>
+  <p class="lede">The brief says Legal and Procurement are time-poor and will need structured asks. Here is what that means in practice.</p>
+
+  <h4 style="font-size:15px;margin:24px 0 8px">What you need before the first conversation</h4>
+  <ul class="chk">
+    <li><b>Enough understanding to ask a good question rather than an ignorant one.</b> Not mastery. The existing system configuration, three or four sample contracts of each type, and the vendor SOW. Two days of work, and it changes the entire tenor of the meeting.</li>
+    <li><b>A draft as-is process map that is deliberately incomplete and slightly wrong.</b> The single highest-leverage preparation item. Correcting something takes ten minutes and people rather enjoy it. Producing something from a blank page takes two hours and comes back empty.</li>
+    <li><b>Clarity on what you will NOT ask them for.</b> Saying "I will not need you for the vendor build, the data cleanse or the technical testing" buys trust immediately, because their private fear is that this is open-ended.</li>
+    <li><b>The sponsor having already told them it is coming,</b> so you are not arriving cold.</li>
+  </ul>
+
+  <div class="note warn">
+    <strong>The first conversation is not a requirements session</strong>
+    Thirty minutes, and you listen. Three questions: walk me through the last contract you processed, what is broken about how it works today, and what worries you about this change. No ask at the end except "who else should I be talking to".<br><br>
+    The reasoning: your first interaction with someone is the only one where you have no history. Spending it on a transaction wastes it. Spending it listening builds credit and gathers requirements at the same time.
+  </div>
+
+  <div class="dia"><div class="diah"><span class="diat">Realistic time budget · one Legal or Procurement lead, ~17 week project</span><span class="tagw doc">Working doc · shared with them upfront</span></div>
+  <div class="tl">
+    <div class="tlname">Discovery<br>wks 2-5</div><div class="tltrack"><div class="tlbar b-det" style="grid-column:1/8">5 to 6 hours</div></div>
+    <div class="tlname">Build<br>wks 6-11</div><div class="tltrack"><div class="tlbar b-pkg" style="grid-column:1/4">under 2 hrs</div></div>
+    <div class="tlname">Testing<br>wks 12-16</div><div class="tltrack"><div class="tlbar b-crit" style="grid-column:1/19">10 to 18 hours · mostly hands-on UAT</div></div>
+    <div class="tlname">Go-live<br>wks 17+</div><div class="tltrack"><div class="tlbar b-amb" style="grid-column:1/5">2 to 3 hours</div></div>
+  </div>
+  <div style="margin-top:14px;font-size:13px;line-height:1.7;color:var(--ink-2)">
+    <b>Discovery:</b> one 30 min intro, four to six 60 min working sessions, one session on approval thresholds (usually the contentious one), ~45 min async review, one sign-off.<br>
+    <b>Build:</b> deliberately near-silent. One or two 30 min configuration checkpoints. Protecting them here is what makes the testing phase possible.<br>
+    <b>Testing:</b> one 60 min UAT briefing, then 8 to 16 hours of hands-on testing across two to three weeks, two or three 30 min triage sessions, one sign-off.<br>
+    <b>Total: roughly 25 to 35 hours across four months.</b>
+  </div>
+  <p class="dial"><i>Give them the total upfront. "I think I need about thirty hours from you across four months, weighted to two windows, and here is when they are." Then come in under it. Almost nobody does this, and it converts you from an unpredictable drain into something they can plan around.</i></p></div>
+
+  <h3>The other tactics worth knowing</h3>
+  <ul class="chk">
+    <li><b>Batch your asks.</b> Never one at a time.</li>
+    <li><b>Use async for anything review-shaped.</b> A marked-up document beats a meeting.</li>
+    <li><b>End meetings early when the agenda is done.</b> Absurd goodwill for the effort involved.</li>
+    <li><b>Send pre-reads 48 hours ahead</b> and say explicitly that if they have not read it you will walk them through it. That removes the guilt that causes people to cancel.</li>
+    <li><b>Do the write-up yourself, same day, always.</b></li>
+    <li><b>Never make someone re-make a decision they already made.</b> That is what the decision log is for.</li>
+    <li><b>Close the loop.</b> "You raised X, here is what we did with it." The cheapest goodwill mechanism there is, and almost nobody does it.</li>
+  </ul>
+
+  <hr class="rule">
+
+  <h3>The kickoff</h3>
+  <div class="note hot">
+    <strong>Not week one</strong>
+    A kickoff in week one, where all you have is enthusiasm and a project name, burns goodwill and teaches people your meetings are optional. A kickoff at the <b>end of week two or start of week three</b>, where you can say "here is what we are doing, here is what I have learned in a fortnight, here is exactly what I need from you and when, and here is what I will not need you for", earns the following twelve weeks.<br><br>
+    Something does happen in week one, but it is not the kickoff. It is the <b>awareness announcement</b>: short, fronted by the sponsor, saying what is changing and why, carrying no date, and committing to confirm the timeline by a stated point. Two different events, and conflating them is a common error.
+  </div>
+
+  <h4 style="font-size:15px;margin:24px 0 8px">Who</h4>
+  <p class="lede">One meeting cannot serve both an executive sponsor and a procurement officer, so run a <b>core kickoff plus function-specific follow-ups</b>. Core: sponsor, Product Manager, Legal lead, both Procurement leads, EU PM, and the vendor implementation team. Sixty minutes. Then twenty to thirty minutes per function on what it specifically means for them.</p>
+  <p class="lede">Include the vendor. It sets the tone that they are part of the team rather than a supplier held at arm's length, and they need to hear the objective and constraints in the same words as everyone else.</p>
+
+  <div class="dia"><div class="diah"><span class="diat">Core kickoff agenda · 60 minutes</span><span class="tagw doc">Working doc</span></div>
+  <div class="tl">
+    <div class="tlname">Sponsor opens</div><div class="tltrack"><div class="tlbar b-crit" style="grid-column:1/3">5 min</div></div>
+    <div class="tlname">What is changing</div><div class="tltrack"><div class="tlbar b-det" style="grid-column:1/5">10 min</div></div>
+    <div class="tlname">Known / unknown</div><div class="tltrack"><div class="tlbar b-amb" style="grid-column:1/5">10 min</div></div>
+    <div class="tlname">What I need</div><div class="tltrack"><div class="tlbar b-det" style="grid-column:1/7">15 min</div></div>
+    <div class="tlname">How we work</div><div class="tltrack"><div class="tlbar b-pkg" style="grid-column:1/5">10 min</div></div>
+    <div class="tlname">Concerns</div><div class="tltrack"><div class="tlbar b-ms" style="grid-column:1/5">10 min</div></div>
+  </div>
+  <div style="margin-top:16px;font-size:13.5px;line-height:1.75;color:var(--ink-2)">
+    <b>Sponsor opens.</b> Why this is happening and why it matters. Not the PM. A new person asserting importance carries no weight; the sponsor saying it does.<br>
+    <b>What is changing.</b> Plain language, not a product demo. What raising a contract looks like today versus tomorrow.<br>
+    <b>Known and unknown.</b> The unusual section, and the one that makes you credible. State what is confirmed, what is still being investigated, and when you will know. Every other kickoff these people have attended pretended to a certainty everyone knew was false.<br>
+    <b>What I need from you and when.</b> The longest section, because it is the only one they care about. Total hours by group, the windows, the first specific asks with dates.<br>
+    <b>How we work.</b> Cadence, who decides what by walking the RACI, where decisions get logged, how to raise a problem without it becoming a formal escalation.<br>
+    <b>Concerns.</b> Ask properly. "What is your biggest worry about this" surfaces far more than "any questions".
+  </div></div>
+
+  <div class="note hot">
+    <strong>What to avoid in the kickoff</strong>
+    <b>A product demo.</b> The vendor will offer one. Decline it here, because it makes the meeting about software when it needs to be about the change and the asks. Run it separately for anyone who wants it.<br><br>
+    <b>A Gantt chart on screen.</b> It drags the conversation onto dates you cannot yet defend, and it will consume forty of your sixty minutes.<br><br>
+    <b>Doing most of the talking.</b><br><br>
+    <b>Ending without a specific named next action per group.</b>
+  </div>
+</section>
+
+<!-- ================= 8. COMMUTE ================= -->
+<section class="panel" id="commute">
+  <h2>Ten minute review</h2>
+  <p class="lede">A last pass before you walk in. Nothing here is new. Green words and links jump to the tab where the full theory lives, so you can go deeper on anything that feels loose.</p>
+
+  <div class="note">
+    <strong>The three things being assessed</strong>
+    The brief names them: <b>how you think</b>, <b>how you plan</b>, and <b>how you would bring people with you</b>. Most preparation covers the first two. The third is on <span class="xref" data-go="people">tab 7</span> and it is probably where the conversation is won.
+  </div>
+
+  <div class="rc">
+    <h3>Five things to hold onto</h3>
+    <p class="rcs">If everything else falls out of your head, keep these</p>
+    <ul>
+      <li><b>Name the tension before you offer the tool.</b> "These two things are in conflict, here is how I would work out which gives" is the whole job, and it is what the brief is testing.</li>
+      <li><b>The date is fixed and the cost is contracted, so scope is the only lever.</b> Everything else follows from that. <span class="xref" data-go="toolkit">Iron triangle</span></li>
+      <li><b>Nobody knows what is in the old system, so nothing downstream can be sized.</b> That makes the data profiling a planning task, not a migration task, and it starts in week one. <span class="xref" data-go="toolkit">Critical path</span></li>
+      <li><b>Nobody on this project reports to you.</b> Every hour of work happens because somebody chose to give it. <span class="xref" data-go="people">Bringing people</span></li>
+      <li><b>Bad news early is the job.</b> Missing a date is survivable. Surprising a sponsor late is not.</li>
+    </ul>
+  </div>
+
+  <div class="rc">
+    <h3>Vocabulary to reach for</h3>
+    <p class="rcs">Tap any word to open the tab where it is explained</p>
+    <div class="wgrp">Planning under uncertainty</div>
+    <div class="words"><span class="word" data-go="toolkit">rolling wave</span><span class="word" data-go="toolkit">progressive elaboration</span><span class="word" data-go="toolkit">planning package</span><span class="word" data-go="toolkit">scope lock</span><span class="word" data-go="toolkit">cone of uncertainty</span><span class="word" data-go="toolkit">three-point estimate</span><span class="word" data-go="toolkit">contingency vs management reserve</span></div>
+    <div class="wgrp">Scope and sequence</div>
+    <div class="words"><span class="word" data-go="toolkit">work breakdown structure</span><span class="word" data-go="toolkit">100% rule</span><span class="word" data-go="toolkit">MoSCoW</span><span class="word" data-go="toolkit">won't-have-this-time</span><span class="word" data-go="toolkit">critical path</span><span class="word" data-go="toolkit">float</span><span class="word" data-go="toolkit">finish-to-start</span><span class="word" data-go="toolkit">crashing</span><span class="word" data-go="toolkit">fast-tracking</span></div>
+    <div class="wgrp">Risk and control</div>
+    <div class="words"><span class="word" data-go="toolkit">RAID</span><span class="word" data-go="toolkit">mitigation vs contingency</span><span class="word" data-go="toolkit">trigger</span><span class="word" data-go="toolkit">pre-mortem</span><span class="word" data-go="toolkit">change control</span><span class="word" data-go="toolkit">scope creep</span><span class="word" data-go="toolkit">decision log</span></div>
+    <div class="wgrp">People and decisions</div>
+    <div class="words"><span class="word" data-go="toolkit">RACI</span><span class="word" data-go="toolkit">accountable vs responsible</span><span class="word" data-go="toolkit">power / interest</span><span class="word" data-go="people">engagement gap</span><span class="word" data-go="toolkit">ADKAR</span><span class="word" data-go="people">guiding coalition</span><span class="word" data-go="people">change champion</span><span class="word" data-go="people">structured ask</span></div>
+    <div class="wgrp">Data and delivery</div>
+    <div class="words"><span class="word" data-go="toolkit">data profiling</span><span class="word" data-go="toolkit">cleanse at source</span><span class="word" data-go="toolkit">reconciliation</span><span class="word" data-go="toolkit">in-flight contracts</span><span class="word" data-go="toolkit">freeze date</span><span class="word" data-go="toolkit">mock run</span></div>
+    <div class="wgrp">Testing and launch</div>
+    <div class="words"><span class="word" data-go="toolkit">SIT vs UAT</span><span class="word" data-go="toolkit">entry and exit criteria</span><span class="word" data-go="toolkit">severity vs priority</span><span class="word" data-go="toolkit">Go/No-Go</span><span class="word" data-go="toolkit">cutover runbook</span><span class="word" data-go="toolkit">rollback point</span><span class="word" data-go="toolkit">hypercare</span><span class="word" data-go="toolkit">parallel running</span></div>
+    <div class="wgrp">Value</div>
+    <div class="words"><span class="word" data-go="toolkit">output vs outcome vs benefit</span><span class="word" data-go="toolkit">baseline</span><span class="word" data-go="toolkit">leading indicator</span><span class="word" data-go="toolkit">adoption rate</span><span class="word" data-go="toolkit">workaround rate</span><span class="word" data-go="toolkit">post-implementation review</span></div>
+  </div>
+
+  <div class="rc">
+    <h3>People to bring along</h3>
+    <p class="rcs">Full analysis on <span class="xref" data-go="toolkit">the power/interest card</span></p>
+    <ul>
+      <li><b>The sponsor.</b> One named person, not the steering committee. Day one, forty-five minutes, and you are there to receive rather than present.</li>
+      <li><b>The Product Manager.</b> The brief gives them ultimate accountability while giving you delivery responsibility. That ambiguity gets resolved in week one, not month four.</li>
+      <li><b>Legal, Direct Procurement, Indirect Procurement.</b> They own the requirements, they do not report to you, and they are the critical path.</li>
+      <li><b>The EU counterpart.</b> A peer with no authority in either direction, on shared workflows. Needs an agreed mechanism, not goodwill.</li>
+      <li><b>The vendor implementation team.</b> In the kickoff, not held at arm's length.</li>
+      <li><b>The outgoing vendor.</b> High power, hostile incentives. They control the data export and they are being terminated. Secure cooperation while it is still commercial rather than personal.</li>
+      <li><b>Easily forgotten:</b> IT and security (a third-party system holding contracts needs review), finance (a vendor change), signatories (e-signature makes executives into users), and the business teams who actually request contracts, who are the largest user group and appear in nobody's plan.</li>
+    </ul>
+  </div>
+
+  <div class="rc">
+    <h3>Observations most candidates miss</h3>
+    <p class="rcs">Worth working into an answer if the opening appears</p>
+    <ul>
+      <li><b>The expiry date is worth testing, not accepting.</b> Find out what an extension costs before deciding the constraint is immovable. Knowing the price of time changes every trade-off after it.</li>
+      <li><b>The vendor SOW is not the project scope.</b> The SOW covers configuration. The project also covers migration, training, cutover and adoption, and that gap is most of the effort.</li>
+      <li><b>The key user's leave is a certainty, not a risk.</b> Certainties do not get probabilities. It is a dependency and a decision due now.</li>
+      <li><b>Three of the five workflows span both regions and two are local.</b> That split is the gap analysis the job description asks for, hiding inside the case.</li>
+      <li><b>A committee cannot be accountable.</b> Six people sharing an A means nobody holds it. Name the chair or the sponsor.</li>
+      <li><b>Training addresses two of five adoption failure modes.</b> Awareness, desire and reinforcement are the other three.</li>
+      <li><b>Baselines have to be captured before go-live</b> or the benefit case can never be proven. That is a week-two task.</li>
+      <li><b>A cosmetic defect can be the highest priority fix on the project.</b> Severity and priority are different axes.</li>
+    </ul>
+  </div>
+
+  <div class="rc">
+    <h3>Questions worth asking them</h3>
+    <p class="rcs">Pick two or three. Each one also happens to be something you would need on day one.</p>
+    <ul>
+      <li>"The brief describes the Product Manager as ultimately accountable for the rollout while this role is responsible for delivery. How do you see that working in practice?"</li>
+      <li>"Has anyone tested what an extension on the existing contract would cost, or is that date genuinely immovable?"</li>
+      <li>"Has anyone scoped what is actually sitting in the current system yet, or would that be the incoming person's first job?"</li>
+      <li>"On the three workflows shared with EU, how much authority does this role have over shared design decisions, and who arbitrates a disagreement?"</li>
+      <li>"What resource sits alongside this role? Is there a data or business analyst, or is it a team of one?"</li>
+      <li>"What does the Launch Team's playbook look like today, and what is missing from it?"</li>
+      <li>"What would make you say, twelve months from now, that this hire went well?"</li>
+    </ul>
+  </div>
+
+  <div class="rc">
+    <h3>Three sentences worth having ready</h3>
+    <p class="rcs">Not scripts. Shapes.</p>
+    <p class="said"><b>On the deadline.</b> "The date is fixed and the commercial is signed, so scope and quality are the only variables. That means the first conversation I want with the steering committee is about what go-live must include, not what it could include, and I would rather have that as a planning conversation in week two than a crisis conversation in month four."</p>
+    <p class="said"><b>On unknown scope.</b> "I would not pretend to have a full plan on day one. I would plan the next four weeks in detail, put a date on when scope locks, and treat the data profiling as the deliverable that unlocks the rest of the schedule."</p>
+    <p class="said"><b>On people.</b> "Nobody on this project reports to me. Legal, Procurement, the vendor, the EU counterpart, none of them. So every hour of work happens because someone chose to give it, which makes how I ask the delivery mechanism rather than a soft skill. It is why I would spend week one listening, and why I would want to know early who this change makes worse off, because those are the people who decide whether it lands."</p>
+  </div>
+
+  <div class="note warn">
+    <strong>And when you are in the room</strong>
+    Think out loud rather than presenting. Correct yourself when you hear an error, because that is direct evidence of the thing they said they are assessing. Offer options with trade-offs and then recommend one. And when you do not know something, say what you would do to find out, which is a better answer than a guess.
+  </div>
+</section>
+
 </div>
 
 <footer>
-  <div class="wrap">Ironclad Rollout PM Toolkit Lab v1.3 · built for Safa · 19 August 2026</div>
+  <div class="wrap">Ironclad Rollout PM Toolkit Lab v2.0 · a self-study system for the HelloFresh ANZ case</div>
 </footer>
 
 <script>
@@ -1972,8 +2356,8 @@ document.getElementById('copyAll').addEventListener('click',()=>{
   const hint=document.getElementById('copyHint');
   if(!out){ hint.textContent="Nothing written yet."; return; }
   navigator.clipboard.writeText("MY IRONCLAD PLAN DRAFT\n\n"+out).then(()=>{
-    hint.textContent="Copied. Paste it into the chat and I will pull it apart.";
-    setTimeout(()=>hint.textContent="Paste them back into the chat and I will pull them apart.",4000);
+    hint.textContent="Copied to clipboard.";
+    setTimeout(()=>hint.textContent="Copies as plain text so you can review or share them.",4000);
   }).catch(()=>{ hint.textContent="Copy blocked by the browser. Select the boxes manually."; });
 });
 document.getElementById('clearAll').addEventListener('click',()=>{
@@ -2005,6 +2389,14 @@ document.addEventListener('keydown',e=>{
   if(e.key===' '){e.preventDefault();card.classList.toggle('flip');}
 });
 paint();
+
+/* ============ CROSS-TAB LINKS ============ */
+document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-go]');
+  if(!t)return;
+  var btn=document.querySelector('.tab[data-p="'+t.getAttribute('data-go')+'"]');
+  if(btn)btn.click();
+});
 </script>
 </body>
 </html>
