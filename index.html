@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ironclad Rollout: PM Toolkit Lab v1.1</title>
+<title>Ironclad Rollout: PM Toolkit Lab v1.2</title>
 <style>
   :root{
     --paper:#FBFAF7;
@@ -225,6 +225,130 @@
   .exnote{font-size:13px;color:var(--ink-3);font-style:italic;margin:0}
   .exnote b{color:var(--amber);font-style:normal}
 
+  /* ---------- diagrams ---------- */
+  .dia{background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:12px;overflow-x:auto}
+  .diah{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+  .diat{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-3)}
+  .tagw{font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:3px 7px;border-radius:100px;white-space:nowrap}
+  .tagw.wb{background:#EAF1ED;color:var(--green)}
+  .tagw.sl{background:#EDEBF7;color:#514A94}
+  .tagw.doc{background:#F3F1EA;color:#7A6A42}
+  .dial{font-size:10.5px;color:var(--ink-3);margin-top:14px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .dial i{font-style:normal;display:inline-flex;align-items:center;gap:5px}
+  .sw{width:10px;height:10px;border-radius:3px;display:inline-block;flex:0 0 auto}
+
+  .nd{border:1.5px solid #D8D4C8;border-radius:6px;padding:7px 9px;font-size:11px;font-weight:700;background:#fff;text-align:center;line-height:1.25;color:var(--ink)}
+  .nd small{display:block;font-weight:500;font-size:9.5px;color:var(--ink-3);margin-top:3px}
+  .nd.crit{border-color:#C4705F;background:var(--rose-soft);color:var(--rose)}
+  .nd.crit small{color:var(--rose)}
+  .nd.ok{border-color:#8FB5A0;background:var(--green-soft);color:var(--green)}
+  .nd.ok small{color:var(--green)}
+  .nd.amb{border-color:#D9BB7E;background:var(--amber-soft);color:var(--amber)}
+  .nd.amb small{color:var(--amber)}
+  .chain{display:flex;gap:5px;align-items:stretch;min-width:max-content;margin-bottom:8px}
+  .chain .nd{flex:0 0 auto;max-width:120px}
+  .arw{align-self:center;color:#B9B3A4;font-size:15px;flex:0 0 auto;font-weight:700}
+  .chlbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:14px 0 6px}
+  .chlbl.critl{color:var(--rose)}
+
+  .tree{min-width:max-content}
+  .troot{background:var(--ink);color:#fff;border-radius:6px;padding:9px 16px;font-size:11.5px;font-weight:700;text-align:center;letter-spacing:.03em}
+  .tstem{width:1.5px;height:14px;background:#D8D4C8;margin:0 auto}
+  .tbar{height:1.5px;background:#D8D4C8;margin:0 6%}
+  .tkids{display:grid;grid-template-columns:repeat(8,minmax(98px,1fr));gap:8px}
+  .tk{display:flex;flex-direction:column;align-items:stretch}
+  .tk .tstem{height:12px}
+  .tk ul{margin:6px 0 0;padding-left:12px;list-style:none}
+  .tk li{font-size:9.5px;color:var(--ink-3);line-height:1.45;position:relative;margin-bottom:2px}
+  .tk li::before{content:"·";position:absolute;left:-9px;color:#C4BFB0}
+
+  .hm{display:grid;grid-template-columns:66px repeat(5,minmax(46px,1fr));gap:3px;min-width:370px}
+  .hm div{display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;border-radius:3px;min-height:38px;text-align:center;line-height:1.2}
+  .hm .ax{background:none;color:var(--ink-3);font-size:9px;letter-spacing:.05em;text-transform:uppercase}
+  .hm .c1{background:#DCEBE0;color:#2D6A4F}
+  .hm .c2{background:#E8EFCF;color:#5A7F19}
+  .hm .c3{background:#F7E9CB;color:#8C6015}
+  .hm .c4{background:#F4D7CF;color:#8E3626}
+  .hm .c5{background:#C9503B;color:#fff}
+
+  .q2wrap{display:flex;gap:8px}
+  .q2ax{writing-mode:vertical-rl;transform:rotate(180deg);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 2px}
+  .q2{position:relative;flex:1;height:300px;border:1.5px solid #D8D4C8;border-radius:6px;min-width:350px;background:
+    linear-gradient(to right,transparent calc(50% - 1px),#E8E4DA calc(50% - 1px),#E8E4DA calc(50% + 1px),transparent calc(50% + 1px)),
+    linear-gradient(to bottom,transparent calc(50% - 1px),#E8E4DA calc(50% - 1px),#E8E4DA calc(50% + 1px),transparent calc(50% + 1px))}
+  .qlab{position:absolute;font-size:9px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#BDB7A8;padding:7px 9px}
+  .qd{position:absolute;transform:translate(-50%,50%);font-size:9.5px;font-weight:700;padding:4px 8px;border-radius:100px;white-space:nowrap;border:1.5px solid}
+  .qd.hi{background:var(--rose-soft);border-color:#C4705F;color:var(--rose)}
+  .qd.md{background:var(--amber-soft);border-color:#D9BB7E;color:var(--amber)}
+  .qd.lo{background:var(--green-soft);border-color:#8FB5A0;color:var(--green)}
+  .qd.nu{background:#F2F1ED;border-color:#D8D4C8;color:var(--ink-2)}
+  .q2xax{text-align:center;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin-top:6px}
+
+  .tl{display:grid;grid-template-columns:120px 1fr;gap:5px 12px;align-items:center;min-width:470px}
+  .tlname{font-size:10.5px;font-weight:600;color:var(--ink-2);text-align:right;line-height:1.3}
+  .tltrack{display:grid;grid-template-columns:repeat(20,1fr);gap:1px;height:22px}
+  .tlbar{border-radius:3px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;color:#fff;overflow:hidden;white-space:nowrap;padding:0 4px}
+  .b-det{background:#2D6A4F}
+  .b-pkg{background:#9DBE6E}
+  .b-ms{background:#C7C2B4;color:var(--ink-2)}
+  .b-crit{background:#C9503B}
+  .b-amb{background:#C9962F}
+  .b-blu{background:#5C6FA8}
+  .tlhdr span{font-size:8.5px;color:var(--ink-3);text-align:center;font-weight:700}
+
+  .flow{display:flex;gap:2px;min-width:max-content}
+  .fs{flex:1 1 0;min-width:100px;padding:11px 10px 11px 20px;font-size:10.5px;line-height:1.35;background:var(--green-soft);color:var(--green);
+      clip-path:polygon(0 0,calc(100% - 11px) 0,100% 50%,calc(100% - 11px) 100%,0 100%,11px 50%)}
+  .fs:first-child{clip-path:polygon(0 0,calc(100% - 11px) 0,100% 50%,calc(100% - 11px) 100%,0 100%);padding-left:12px}
+  .fs:last-child{clip-path:polygon(0 0,100% 0,100% 100%,0 100%,11px 50%)}
+  .fs b{display:block;font-size:11px;margin-bottom:3px}
+  .fs.stop{background:var(--rose-soft);color:var(--rose)}
+  .fs.warnf{background:var(--amber-soft);color:var(--amber)}
+  .fs.grey{background:#F0EFEA;color:var(--ink-2)}
+
+  .bks{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;min-width:450px}
+  .bk{border:1.5px solid;border-radius:6px;overflow:hidden}
+  .bkh{padding:6px 9px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+  .bkb{padding:8px 9px;display:flex;flex-direction:column;gap:5px}
+  .bkb span{font-size:10px;line-height:1.3;color:var(--ink-2);padding-bottom:5px;border-bottom:1px solid #F0EEE8}
+  .bkb span:last-child{border-bottom:0;padding-bottom:0}
+  .bk.m{border-color:#C9503B} .bk.m .bkh{background:#C9503B}
+  .bk.s{border-color:#C9962F} .bk.s .bkh{background:#C9962F}
+  .bk.c{border-color:#7FA33C} .bk.c .bkh{background:#7FA33C}
+  .bk.w{border-color:#8B8677} .bk.w .bkh{background:#8B8677}
+  .effbar{display:flex;height:26px;border-radius:5px;overflow:hidden;margin-top:12px;min-width:450px}
+  .effbar div{display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;color:#fff}
+
+  .rng{display:grid;grid-template-columns:150px 1fr;gap:7px 12px;align-items:center;min-width:430px}
+  .rngt{position:relative;height:24px;background:#F4F3EF;border-radius:4px}
+  .rngb{position:absolute;top:5px;height:14px;background:#B9CE96;border-radius:3px}
+  .rngm{position:absolute;top:1px;width:2px;height:22px;background:var(--ink)}
+  .rngp{position:absolute;top:-1px;width:2px;height:26px;background:var(--rose)}
+
+  .sl2{display:grid;grid-template-columns:76px repeat(5,1fr);gap:5px;min-width:530px;align-items:stretch}
+  .slh{font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center}
+  .slc{border-radius:5px;padding:8px;font-size:10px;line-height:1.35;text-align:center;display:flex;align-items:center;justify-content:center}
+  .slc.old{background:#F2F1ED;color:var(--ink-2);border:1px solid #E3E0D8}
+  .slc.new{background:var(--green-soft);color:var(--green);border:1px solid #A8C7B5;font-weight:600}
+  .slc.imp-h{background:var(--rose-soft);color:var(--rose);border:1px solid #DDB4AA;font-weight:700;font-size:9.5px}
+  .slc.imp-m{background:var(--amber-soft);color:var(--amber);border:1px solid #E3CC9C;font-weight:700;font-size:9.5px}
+  .slc.imp-l{background:#F2F1ED;color:var(--ink-3);border:1px solid #E3E0D8;font-weight:700;font-size:9.5px}
+
+  .rgrid{display:grid;gap:3px;min-width:520px;font-size:10px}
+  .rgrid div{padding:7px 5px;text-align:center;border-radius:3px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1.2}
+  .rgrid .rh{background:#F4F3EF;color:var(--ink-2);font-size:9px;letter-spacing:.04em;text-transform:uppercase}
+  .rgrid .rl{background:none;text-align:left;justify-content:flex-start;font-weight:600;color:var(--ink);font-size:10px;padding-left:0}
+  .rgrid .rA{background:#C9503B;color:#fff}
+  .rgrid .rR{background:#2D6A4F;color:#fff}
+  .rgrid .rC{background:#DCE7DE;color:#2D6A4F}
+  .rgrid .rI{background:#F1F0EB;color:#9A9486}
+  .rgrid .rN{background:#FAFAF8;color:#CFCABB}
+
+  @media(max-width:640px){
+    .tkids{grid-template-columns:repeat(8,112px)}
+    .bks{grid-template-columns:repeat(4,124px)}
+  }
+
   .wa{margin-top:8px}
   .wa>summary{color:var(--amber)}
   .wa .rbody{background:var(--amber-soft)}
@@ -259,7 +383,7 @@
 
 <header class="masthead">
   <div class="wrap">
-    <div class="eyebrow">Interview Lab · v1.1</div>
+    <div class="eyebrow">Interview Lab · v1.2</div>
     <h1>The PM toolkit behind the Ironclad case</h1>
     <p class="sub">Not a plan for you to memorise. A set of tools, what question each one answers, where this case is quietly asking you to reach for it, and what each one looks like when it is actually built. The thinking is still yours to do.</p>
     <p class="meta">HelloFresh ANZ · Senior Systems Enablement Manager · Built 19 Aug 2026</p>
@@ -348,8 +472,11 @@
   <p class="lede">Twenty-four tools, tiered by how well you need to know them by tomorrow. Tier A you should be able to run live if asked. Tier B you should be able to name, define and say when you would reach for. Tier C you only need to recognise so a term does not blindside you.</p>
 
   <div class="note warn">
-    <strong>New in v1.1</strong>
-    Every card now ends with <b>"What it actually looks like"</b>: a snippet of the real artefact, filled in with Ironclad content. They are deliberately short. Read them for <em>shape</em> rather than content, because the shape is the part you cannot guess and the content is the part you will have to invent live tomorrow anyway.
+    <strong>New in v1.2 · read the tags</strong>
+    Every card now ends with <b>"What it actually looks like"</b>: the tool drawn as it is actually drawn, filled in with Ironclad content. Each one carries a tag telling you what it is in the real world.<br><br>
+    <span class="tagw wb">Whiteboard</span> means you could draw it live in under a minute if someone hands you a marker. Those are the ones worth being able to sketch from memory: the iron triangle, the dependency chains, the power/interest grid, the as-is / to-be swimlane, the defect quadrant.<br><br>
+    <span class="tagw sl">Slide</span> means it is something you would put in front of a SteerCo. <span class="tagw doc">Working doc</span> means it lives in a spreadsheet or a page and nobody presents it, they use it.<br><br>
+    Read them for <em>shape</em>. The shape is the part you cannot invent under pressure. The content is the part you will have to invent anyway.
   </div>
 
   <div class="filters">
@@ -469,7 +596,7 @@
 </div>
 
 <footer>
-  <div class="wrap">Ironclad Rollout PM Toolkit Lab v1.1 · built for Safa · 19 August 2026</div>
+  <div class="wrap">Ironclad Rollout PM Toolkit Lab v1.2 · built for Safa · 19 August 2026</div>
 </footer>
 
 <script>
@@ -501,7 +628,7 @@ const CARDS = [
    x:"A RAID log with no named owners and no review cadence is decoration. Also, unverified assumptions are where projects actually die, and they are the letter everyone skips."},
 
   {t:"A",n:"RACI",q:"Who decides, who does the work, who gets asked first, and who just gets told?",
-   w:"A matrix of decisions and deliverables against people. <b>R</b>esponsible does the work. <b>A</b>ccountable owns the outcome and there is only ever one per row. <b>C</b>onsulted gives input before the decision. <b>I</b>nformed is told after. Variants worth knowing: RASCI (adds Support), DACI, and Bain's RAPID (Recommend, Agree, Perform, Input, Decide) which is better for pure decision rights.",
+   w:"A matrix of decisions and deliverables against people. <b>R</b>esponsible does the work. <b>A</b>ccountable owns the consequence and holds the authority to approve or reject, and there is only ever one per row. <b>C</b>onsulted gives input before the decision. <b>I</b>nformed is told after.<br><br><b>The test that resolves almost every case:</b> whose hands built it is R, whose name is on it if it goes wrong is A.<br><br><b>The counter-intuitive part:</b> A is about authority and consequence, not effort. The Accountable party often does almost nothing. On Go/No-Go the PM is R (assembles the evidence, checks the criteria, writes the recommendation, chairs the meeting) and the SteerCo is A (authorised the spend, carries the business risk, can say no even when the PM says yes). Instinct says the most involved person should hold the A. It is the opposite. Claiming an A you have no authority to exercise is worse than not having it, because the first time you are overruled the whole grid is revealed as fiction.<br><br><b>One refinement worth having ready:</b> strictly, a committee cannot be accountable, because six people sharing an A means nobody has it. The tighter version names the SteerCo <i>chair</i> or the sponsor as the A, with the SteerCo as the forum where it gets decided.<br><br>Variants: RASCI (adds Support), DACI, and Bain's RAPID (Recommend, Agree, Perform, Input, Decide), which is better for pure decision rights.",
    c:"The brief says there is no RACI. It also gives you delivery responsibility while giving the Product Manager ultimate accountability for the rollout. Sit with that. Then ask who holds the A on requirements sign-off for each of the five workflows, on migration scope, on UAT exit, and on Go/No-Go.",
    x:"Two people holding the A on one row. Also, producing the RACI as a document rather than running it as a negotiation. The grid is worthless. The conversation that produces the grid is the point."},
 
@@ -1129,6 +1256,344 @@ WEEKS 13+        MILESTONES ONLY
 <p class="exnote"><b>Notice:</b> neither answer names the law. You use the idea to support a recommendation. Naming the law out loud is trivia; using it is judgement.</p>`
 ];
 
+/* ============ DATA: visual form of each tool ============ */
+const H = (t,tag,lbl) => `<div class="diah"><span class="diat">${t}</span><span class="tagw ${tag}">${lbl}</span></div>`;
+
+const VIS = [
+/* 00 Charter */ `<div class="dia">${H('Project charter · the one-pager','doc','Working doc · A4, 1 page')}
+<div style="border:1.5px solid #D8D4C8;border-radius:6px;overflow:hidden">
+<div style="background:var(--ink);color:#fff;padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:.04em">IRONCLAD CLM · ANZ · PROJECT CHARTER · v0.1 DRAFT · [date]</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#E8E4DA">
+<div style="background:#fff;padding:11px 13px"><div style="font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:5px">Objective</div><div style="font-size:11px;line-height:1.45;color:var(--ink-2)">One system for creating, approving, signing and storing ANZ contracts. Less manual handling, real visibility for Legal and Procurement.</div></div>
+<div style="background:#fff;padding:11px 13px"><div style="font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--rose);font-weight:700;margin-bottom:5px">Hard constraint</div><div style="font-size:11px;line-height:1.45;color:var(--ink-2)">Icertis expires [date]. Past it we lose access to our contract history. A stop, not a slip.</div></div>
+<div style="background:#fff;padding:11px 13px"><div style="font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:5px">In scope</div><div style="font-size:11px;line-height:1.45;color:var(--ink-2)">5 ANZ workflows · migration · UAT · training and adoption · cutover and hypercare · Icertis decommission</div></div>
+<div style="background:#fff;padding:11px 13px"><div style="font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--rose);font-weight:700;margin-bottom:5px">Out of scope</div><div style="font-size:11px;line-height:1.45;color:var(--ink-2)">EU-specific variants · ERP integration · template redrafting · post-hypercare enhancements</div></div>
+<div style="background:#fff;padding:11px 13px"><div style="font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin-bottom:5px">Success measures</div><div style="font-size:11px;line-height:1.45;color:var(--ink-2)">All committed workflows live · 100% in-scope contracts reconciled · Icertis decommissioned clean · 90% of new contracts in Ironclad by day 60</div></div>
+<div style="background:#fff;padding:11px 13px"><div style="font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin-bottom:5px">Decision rights</div><div style="font-size:11px;line-height:1.45;color:var(--ink-2)">Scope change: Sponsor · Go/No-Go: SteerCo chair · Requirements: business owner per workflow · Delivery: PM</div></div>
+</div></div>
+<p class="dial"><i>Fits on one page on purpose. If it needs two, you have written a plan, not a charter.</i></p></div>`,
+
+/* 01 WBS */ `<div class="dia">${H('Work breakdown structure · the tree','sl','Slide · and whiteboard-able')}
+<div class="tree">
+<div class="troot">IRONCLAD CLM ROLLOUT · ANZ</div><div class="tstem"></div><div class="tbar"></div>
+<div class="tkids">
+<div class="tk"><div class="tstem"></div><div class="nd">1.0<small>Requirements<br>and design</small></div><ul><li>As-is mapping</li><li>ANZ vs EU gap</li><li>To-be design</li><li>Sign-off</li></ul></div>
+<div class="tk"><div class="tstem"></div><div class="nd">2.0<small>Vendor<br>configuration</small></div><ul><li>Brief pack</li><li>Build cycles</li><li>Environments</li></ul></div>
+<div class="tk"><div class="tstem"></div><div class="nd crit">3.0<small>Data<br>migration</small></div><ul><li>Profiling</li><li>Cleanse</li><li>Mapping</li><li>Mock runs</li><li>Reconcile</li><li>In-flight rule</li></ul></div>
+<div class="tk"><div class="tstem"></div><div class="nd">4.0<small>Testing and<br>acceptance</small></div><ul><li>Scripts</li><li>SIT</li><li>UAT</li><li>Triage</li><li>Sign-off</li></ul></div>
+<div class="tk"><div class="tstem"></div><div class="nd">5.0<small>Change and<br>training</small></div><ul><li>Impact assess</li><li>Comms</li><li>Training</li><li>Floorwalking</li></ul></div>
+<div class="tk"><div class="tstem"></div><div class="nd">6.0<small>Cutover and<br>hypercare</small></div><ul><li>Runbook</li><li>Parallel rules</li><li>Go/No-Go</li><li>Hypercare</li></ul></div>
+<div class="tk"><div class="tstem"></div><div class="nd">7.0<small>Icertis<br>decommission</small></div><ul><li>Final extract</li><li>Retention</li><li>Contract close</li></ul></div>
+<div class="tk"><div class="tstem"></div><div class="nd">8.0<small>PM and<br>governance</small></div><ul><li>Plan, RAID, RACI</li><li>SteerCo</li><li>PIR, playbook</li></ul></div>
+</div></div>
+<p class="dial"><i><span class="sw" style="background:#C9503B"></span> The branch that sinks projects</i><i>Every artefact you would think to build sits inside 8.0. One branch of eight.</i></p></div>`,
+
+/* 02 Iron triangle */ `<div class="dia">${H('The iron triangle · applied to this project','wb','Whiteboard · 60 seconds')}
+<svg viewBox="0 0 420 210" style="width:100%;max-width:420px;display:block;margin:0 auto">
+<polygon points="210,18 396,192 24,192" fill="#FBFAF7" stroke="#D8D4C8" stroke-width="2"/>
+<text x="210" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#2D6A4F" font-family="Georgia,serif">QUALITY</text>
+<text x="210" y="136" text-anchor="middle" font-size="9.5" fill="#77857E">legal records · protected</text>
+<rect x="150" y="0" width="120" height="22" rx="11" fill="#C9503B"/><text x="210" y="15" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">TIME · FIXED</text>
+<text x="210" y="36" text-anchor="middle" font-size="9" fill="#A6402F">Icertis expiry</text>
+<rect x="336" y="192" width="84" height="22" rx="11" fill="#C9962F"/><text x="378" y="207" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">COST · SOW</text>
+<text x="378" y="184" text-anchor="middle" font-size="9" fill="#B8801F">signed</text>
+<rect x="0" y="192" width="108" height="22" rx="11" fill="#2D6A4F"/><text x="54" y="207" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">SCOPE · THE LEVER</text>
+<text x="54" y="184" text-anchor="middle" font-size="9" fill="#2D6A4F">undefined</text>
+</svg>
+<p class="dial"><i>Two corners are nailed down. Draw this, point at the third, and the rest of your answer writes itself.</i></p></div>`,
+
+/* 03 MoSCoW */ `<div class="dia">${H('MoSCoW · scope against a fixed date','sl','Slide · taken to SteerCo')}
+<div class="bks">
+<div class="bk m"><div class="bkh">Must · go-live fails without</div><div class="bkb"><span>NDA workflow (ANZ + EU)</span><span>Supply Agreement (ANZ Direct)</span><span>MSA / SOW workflow</span><span>Migration: active contracts</span></div></div>
+<div class="bk s"><div class="bkh">Should · painful, survivable</div><div class="bkb"><span>Third Party Agreements</span><span>Migration: closed, last 24 mths</span><span>Role-based reporting</span></div></div>
+<div class="bk c"><div class="bkh">Could · if room</div><div class="bkb"><span>Framework Agreement (ANZ Indirect)</span><span>Bulk template library</span></div></div>
+<div class="bk w"><div class="bkh">Won't · this time</div><div class="bkb"><span>Migration: closed &gt;24 mths<br><small style="color:#8B8677">read-only archive instead</small></span><span>Dashboards and analytics</span><span>ERP integration</span></div></div>
+</div>
+<div class="effbar">
+<div style="flex:55;background:#C9503B">MUST · 55% of effort</div>
+<div style="flex:22;background:#C9962F">SHOULD · 22%</div>
+<div style="flex:13;background:#7FA33C">COULD · 13%</div>
+<div style="flex:10;background:#8B8677">WON'T · 10%</div>
+</div>
+<p class="dial"><i>The effort bar is the whole argument. If Must is 90% you have not prioritised, and the bar makes that impossible to hide in a meeting.</i></p></div>`,
+
+/* 04 RAID */ `<div class="dia">${H('Risk matrix · probability × impact','sl','Slide · one per SteerCo pack')}
+<div class="hm">
+<div class="ax"></div><div class="ax">Impact 1</div><div class="ax">2</div><div class="ax">3</div><div class="ax">4</div><div class="ax">5</div>
+<div class="ax">Prob 5</div><div class="c2">5</div><div class="c3">10</div><div class="c4">15</div><div class="c5">20</div><div class="c5">R-01</div>
+<div class="ax">4</div><div class="c1">4</div><div class="c2">8</div><div class="c3">12</div><div class="c4">R-03</div><div class="c5">R-02</div>
+<div class="ax">3</div><div class="c1">3</div><div class="c2">6</div><div class="c2">R-04</div><div class="c3">12</div><div class="c4">15</div>
+<div class="ax">2</div><div class="c1">2</div><div class="c1">4</div><div class="c2">6</div><div class="c2">8</div><div class="c3">R-05</div>
+<div class="ax">1</div><div class="c1">1</div><div class="c1">2</div><div class="c1">3</div><div class="c1">4</div><div class="c2">5</div>
+</div>
+<div style="margin-top:14px;font-size:11px;line-height:1.6;color:var(--ink-2)">
+<b>R-01</b> Icertis contents unknown, so migration and the whole schedule are unestimated · <b>R-02</b> Corrupt or incomplete data migrated · <b>R-03</b> Legal and Procurement do not engage in time for vendor build · <b>R-04</b> Vendor build slips against SOW · <b>R-05</b> EU changes a shared workflow design late
+</div>
+<p class="dial"><i>R-01 sits top right because the probability is 5. It is not a maybe, it is true right now. That is the placement most people get wrong.</i></p></div>`,
+
+/* 05 RACI */ `<div class="dia">${H('RACI · decisions against roles','doc','Working doc · negotiated in week 1')}
+<div class="rgrid" style="grid-template-columns:176px repeat(7,1fr)">
+<div class="rh" style="text-align:left;justify-content:flex-start">Decision</div><div class="rh">PM</div><div class="rh">Prod Mgr</div><div class="rh">Legal</div><div class="rh">Direct Proc</div><div class="rh">Indir Proc</div><div class="rh">SteerCo</div><div class="rh">Ironclad</div>
+<div class="rl">Requirements · NDA</div><div class="rR">R</div><div class="rC">C</div><div class="rA">A</div><div class="rC">C</div><div class="rC">C</div><div class="rI">I</div><div class="rI">I</div>
+<div class="rl">Requirements · Supply Agmt</div><div class="rR">R</div><div class="rC">C</div><div class="rC">C</div><div class="rA">A</div><div class="rI">I</div><div class="rI">I</div><div class="rI">I</div>
+<div class="rl">Migration scope and cut-off</div><div class="rA">A</div><div class="rC">C</div><div class="rC">C</div><div class="rC">C</div><div class="rC">C</div><div class="rI">I</div><div class="rC">C</div>
+<div class="rl">In-flight contract rule</div><div class="rA">A</div><div class="rC">C</div><div class="rC">C</div><div class="rR">R</div><div class="rR">R</div><div class="rI">I</div><div class="rC">C</div>
+<div class="rl">UAT exit / acceptance</div><div class="rR">R</div><div class="rA">A</div><div class="rC">C</div><div class="rC">C</div><div class="rC">C</div><div class="rI">I</div><div class="rC">C</div>
+<div class="rl">Go / No-Go</div><div class="rR">R</div><div class="rC">C</div><div class="rC">C</div><div class="rC">C</div><div class="rC">C</div><div class="rA">A</div><div class="rI">I</div>
+<div class="rl">Training approach</div><div class="rA">A</div><div class="rI">I</div><div class="rC">C</div><div class="rC">C</div><div class="rC">C</div><div class="rI">I</div><div class="rC">C</div>
+</div>
+<p class="dial"><i><span class="sw" style="background:#C9503B"></span> Accountable · owns the consequence, one per row</i><i><span class="sw" style="background:#2D6A4F"></span> Responsible · does the work</i><i><span class="sw" style="background:#DCE7DE"></span> Consulted</i><i><span class="sw" style="background:#F1F0EB"></span> Informed</i></p>
+<p class="dial"><i>Scan each row left to right. Exactly one red square, every time. That visual check is the whole quality control on a RACI.</i></p></div>`,
+
+/* 06 Power/interest */ `<div class="dia">${H('Power / interest grid','sl','Slide · and whiteboard-able')}
+<div class="q2wrap"><div class="q2ax">Power to affect the project</div>
+<div class="q2">
+<span class="qlab" style="top:0;left:0">Keep satisfied</span>
+<span class="qlab" style="top:0;right:0">Manage closely</span>
+<span class="qlab" style="bottom:0;left:0">Monitor</span>
+<span class="qlab" style="bottom:0;right:0">Keep informed</span>
+<span class="qd hi" style="left:80%;bottom:88%">Sponsor</span>
+<span class="qd hi" style="left:74%;bottom:70%">Product Mgr</span>
+<span class="qd hi" style="left:24%;bottom:86%">SteerCo</span>
+<span class="qd nu" style="left:13%;bottom:70%">Icertis</span>
+<span class="qd nu" style="left:26%;bottom:58%">IT / Security</span>
+<span class="qd md" style="left:58%;bottom:52%">EU PM</span>
+<span class="qd md" style="left:84%;bottom:40%">Ironclad</span>
+<span class="qd md" style="left:56%;bottom:26%">Legal</span>
+<span class="qd md" style="left:80%;bottom:14%">Indirect key user</span>
+<span class="qd nu" style="left:18%;bottom:32%">Finance</span>
+<span class="qd nu" style="left:24%;bottom:10%">Requesters</span>
+</div></div>
+<div class="q2xax">Interest in the project</div>
+<p class="dial"><i>The bottom-right box is the one that hits your date. No formal authority over you, total ability to stop you. Everyone stares at the top-right box and gets blindsided by the bottom-right one.</i></p></div>`,
+
+/* 07 ADKAR */ `<div class="dia">${H('ADKAR · where adoption actually breaks','sl','Slide · change plan on a page')}
+<div class="flow">
+<div class="fs warnf"><b>Awareness</b>Why is this changing?</div>
+<div class="fs stop"><b>Desire</b>What does it cost me?</div>
+<div class="fs"><b>Knowledge</b>How do I do it?</div>
+<div class="fs"><b>Ability</b>Can I do it for real?</div>
+<div class="fs warnf"><b>Reinforcement</b>Does it stick?</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:6px">
+<div></div>
+<div></div>
+<div style="grid-column:3/5;border-top:2px solid #2D6A4F;padding-top:6px;text-align:center;font-size:10px;font-weight:700;color:#2D6A4F">TRAINING REACHES HERE</div>
+<div></div>
+</div>
+<p class="dial"><i><span class="sw" style="background:#F4D7CF"></span> Where this project will actually fail</i><i><span class="sw" style="background:#FBF3E4"></span> Underdone by default</i></p>
+<p class="dial"><i>Training covers two boxes out of five. Draw this, point at the green line, and the "how do you bring people with you" question is answered.</i></p></div>`,
+
+/* 08 Critical path */ `<div class="dia">${H('Dependency chains · finding the real path','wb','Whiteboard · draw this live')}
+<div class="chlbl">Chain A · the visible one · 17 weeks</div>
+<div class="chain">
+<div class="nd">Requirements<small>3w</small></div><span class="arw">›</span>
+<div class="nd">Sign-off<small>1w</small></div><span class="arw">›</span>
+<div class="nd">Vendor build<small>6w</small></div><span class="arw">›</span>
+<div class="nd">SIT<small>2w</small></div><span class="arw">›</span>
+<div class="nd">UAT<small>4w</small></div><span class="arw">›</span>
+<div class="nd">Go/No-Go<small>1w</small></div>
+</div>
+<div class="chlbl">Chain B · the quiet one · 14 weeks, and nobody has started it</div>
+<div class="chain">
+<div class="nd amb">Profile Icertis<small>3w</small></div><span class="arw">›</span>
+<div class="nd amb">Cleanse<small>4w</small></div><span class="arw">›</span>
+<div class="nd amb">Map fields<small>2w</small></div><span class="arw">›</span>
+<div class="nd amb">Mock runs<small>3w</small></div><span class="arw">›</span>
+<div class="nd amb">Reconcile<small>2w</small></div>
+</div>
+<div class="chlbl critl">The real critical path · B feeds A, because migration scope is a requirement input</div>
+<div class="chain">
+<div class="nd crit">Profile Icertis<small>3w · zero float</small></div><span class="arw">›</span>
+<div class="nd crit">Migration scope<small>1w</small></div><span class="arw">›</span>
+<div class="nd crit">Requirements<small>3w</small></div><span class="arw">›</span>
+<div class="nd crit">Vendor build<small>6w</small></div><span class="arw">›</span>
+<div class="nd crit">SIT + UAT<small>6w</small></div><span class="arw">›</span>
+<div class="nd crit">Cutover<small>1w</small></div>
+</div>
+<div class="chlbl">Where the float is · this is where you take resource from</div>
+<div class="chain">
+<div class="nd ok">Third Party Agmts<small>4w float</small></div>
+<div class="nd ok">Training design<small>5w float</small></div>
+<div class="nd ok">Cleanse of old records<small>descopable</small></div>
+</div>
+<p class="dial"><i>Drawing chain A then chain B and asking "which feeds which" in front of someone is more convincing than any Gantt chart. It shows the reasoning rather than the output.</i></p></div>`,
+
+/* 09 Rolling wave */ `<div class="dia">${H('Rolling wave plan · detail decreasing with distance','sl','Slide · the plan on a page')}
+<div class="tl">
+<div></div><div class="tltrack tlhdr"><span style="grid-column:1/5">W1-4 · detailed</span><span style="grid-column:5/13">W5-12 · sized packages</span><span style="grid-column:13/21">W13+ · milestones</span></div>
+<div class="tlname">Charter, RACI</div><div class="tltrack"><div class="tlbar b-det" style="grid-column:1/3">2w</div></div>
+<div class="tlname">Stakeholder map</div><div class="tltrack"><div class="tlbar b-det" style="grid-column:1/3"></div></div>
+<div class="tlname">Icertis profiling</div><div class="tltrack"><div class="tlbar b-crit" style="grid-column:1/5">CRITICAL PATH · starts week 1</div></div>
+<div class="tlname">Requirements</div><div class="tltrack"><div class="tlbar b-det" style="grid-column:2/5">3w</div></div>
+<div class="tlname" style="color:var(--rose);font-weight:700">SCOPE LOCK</div><div class="tltrack"><div class="tlbar b-crit" style="grid-column:5/6">▲</div></div>
+<div class="tlname">Vendor build</div><div class="tltrack"><div class="tlbar b-pkg" style="grid-column:5/12">est 6w · ±2w until scope locks</div></div>
+<div class="tlname">Data cleanse</div><div class="tltrack"><div class="tlbar b-amb" style="grid-column:5/12">UNSIZED until profiling lands</div></div>
+<div class="tlname">Test scripts</div><div class="tltrack"><div class="tlbar b-pkg" style="grid-column:8/12">est 3w</div></div>
+<div class="tlname">Training design</div><div class="tltrack"><div class="tlbar b-pkg" style="grid-column:9/13">est 3w</div></div>
+<div class="tlname">UAT</div><div class="tltrack"><div class="tlbar b-ms" style="grid-column:13/17">window</div></div>
+<div class="tlname">Go/No-Go</div><div class="tltrack"><div class="tlbar b-ms" style="grid-column:17/18">▲</div></div>
+<div class="tlname">Cutover</div><div class="tltrack"><div class="tlbar b-ms" style="grid-column:18/19">▲</div></div>
+<div class="tlname">Hypercare exit</div><div class="tltrack"><div class="tlbar b-ms" style="grid-column:19/21">2w</div></div>
+</div>
+<p class="dial"><i><span class="sw" style="background:#2D6A4F"></span> Detailed, owned, dated</i><i><span class="sw" style="background:#9DBE6E"></span> Sized, not scheduled</i><i><span class="sw" style="background:#C9962F"></span> Not sizeable yet</i><i><span class="sw" style="background:#C7C2B4"></span> Milestone only</i></p>
+<p class="dial"><i>The bars getting paler as they go right is the entire point of the slide. It says "I know what I know and I know when I will know the rest," which is a much stronger position than a fully detailed plan everyone knows is invented.</i></p></div>`,
+
+/* 10 Estimation */ `<div class="dia">${H('Three-point estimates · read the spread, not the number','doc','Working doc · feeds the plan')}
+<div class="rng">
+<div class="tlname" style="text-align:left">Icertis profiling</div><div class="rngt"><div class="rngb" style="left:16.7%;width:33.3%"></div><div class="rngm" style="left:25%"></div><div class="rngp" style="left:27.5%"></div></div>
+<div class="tlname" style="text-align:left;color:var(--rose)">Metadata cleanse</div><div class="rngt"><div class="rngb" style="left:16.7%;width:83.3%;background:#E8B4A5"></div><div class="rngm" style="left:33.3%"></div><div class="rngp" style="left:41.7%"></div></div>
+<div class="tlname" style="text-align:left">Field mapping</div><div class="rngt"><div class="rngb" style="left:8.3%;width:16.7%"></div><div class="rngm" style="left:16.7%"></div><div class="rngp" style="left:16.7%"></div></div>
+<div class="tlname" style="text-align:left">Mock runs + reconcile</div><div class="rngt"><div class="rngb" style="left:16.7%;width:25%"></div><div class="rngm" style="left:25%"></div><div class="rngp" style="left:26.7%"></div></div>
+<div></div><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--ink-3);font-weight:700">${[0,2,4,6,8,10,12].map(w=>'<span>'+w+'w</span>').join('')}</div>
+</div>
+<p class="dial"><i><span class="sw" style="background:#B9CE96"></span> Optimistic to pessimistic range</i><i><span class="sw" style="background:#16211C"></span> Most likely</i><i><span class="sw" style="background:#A6402F"></span> PERT weighted</i></p>
+<p class="dial"><i>Cleanse ranges from 2 weeks to 12. That single wide bar tells you where to spend your investigation effort, and it is invisible if you only report the PERT number.</i></p></div>`,
+
+/* 11 Requirements */ `<div class="dia">${H('As-is / to-be swimlane · NDA, ANZ Indirect','wb','Whiteboard · built live with the SME')}
+<div class="sl2">
+<div class="slh"></div><div class="slh" style="justify-content:center">Request</div><div class="slh" style="justify-content:center">Draft</div><div class="slh" style="justify-content:center">Approve</div><div class="slh" style="justify-content:center">Sign</div><div class="slh" style="justify-content:center">Store</div>
+<div class="slh">As-is</div>
+<div class="slc old">Email to Procurement inbox</div><div class="slc old">Manual from Word template</div><div class="slc old">Email chain, no audit trail</div><div class="slc old">Print, sign, scan</div><div class="slc old">Manual upload, ad hoc naming</div>
+<div class="slh">To-be</div>
+<div class="slc new">Self-serve form, auto-routed</div><div class="slc new">Auto-generated from template</div><div class="slc new">Routed by value threshold</div><div class="slc new">E-signature</div><div class="slc new">Auto-filed with metadata</div>
+<div class="slh">Impact</div>
+<div class="slc imp-h">HIGH<br>new entry point</div><div class="slc imp-m">MED<br>Legal loses control</div><div class="slc imp-h">HIGH<br>thresholds need an owner</div><div class="slc imp-m">MED<br>signatories become users</div><div class="slc imp-l">LOW<br>pure improvement</div>
+</div>
+<p class="dial"><i>The bottom row is free. You built it while gathering requirements, and it is simultaneously your change impact assessment, your training plan and your ADKAR input. Two red boxes tell you exactly where adoption will fail.</i></p></div>`,
+
+/* 12 Testing */ `<div class="dia">${H('Test flow with gates','doc','Working doc · agreed before testing starts')}
+<div class="flow">
+<div class="fs grey"><b>Build</b>Vendor config</div>
+<div class="fs warnf"><b>ENTRY GATE</b>0 open Sev 1-2 · data loaded · scripts written · testers trained</div>
+<div class="fs"><b>SIT</b>Does it work as built</div>
+<div class="fs"><b>UAT</b>Does it do what we need</div>
+<div class="fs stop"><b>EXIT GATE</b>All Sev 1-2 passed · reconciliation clean · owner sign-off</div>
+</div></div>
+<div class="dia">${H('Defect triage · severity is not priority','wb','Whiteboard · settles arguments fast')}
+<div class="q2wrap"><div class="q2ax">Priority · how soon</div>
+<div class="q2" style="height:230px">
+<span class="qlab" style="top:0;left:0">Fix now, cheap</span>
+<span class="qlab" style="top:0;right:0">Stop the launch</span>
+<span class="qlab" style="bottom:0;left:0">Backlog</span>
+<span class="qlab" style="bottom:0;right:0">Fix soon</span>
+<span class="qd hi" style="left:84%;bottom:88%">Wrong approver routing</span>
+<span class="qd md" style="left:18%;bottom:82%">Dropdown mislabelled</span>
+<span class="qd md" style="left:72%;bottom:26%">Bulk export fails &gt;500</span>
+<span class="qd nu" style="left:20%;bottom:16%">Cosmetic spacing</span>
+</div></div>
+<div class="q2xax">Severity · how bad</div>
+<p class="dial"><i>Top left is the box people argue about. A mislabelled dropdown is trivially severe and the highest priority fix on the project, because every user sees it on day one and it destroys confidence in the whole system.</i></p></div>`,
+
+/* 13 Migration */ `<div class="dia">${H('Migration pipeline · six phases, six gates','sl','Slide · owns its own SteerCo section')}
+<div class="flow">
+<div class="fs stop"><b>1 Profile</b>What have we got?</div>
+<div class="fs warnf"><b>2 Cleanse</b>Fix at source</div>
+<div class="fs"><b>3 Map</b>Field to field</div>
+<div class="fs"><b>4 Mock run</b>Rehearse ×2, timed</div>
+<div class="fs"><b>5 Reconcile</b>Prove it matches</div>
+<div class="fs grey"><b>6 Cutover</b>Final delta</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:2px;margin-top:8px;font-size:9px;color:var(--ink-3);line-height:1.4">
+<div style="padding:0 6px">Gate: sized and reported</div>
+<div style="padding:0 6px">Gate: quality threshold met</div>
+<div style="padding:0 6px">Gate: signed by owner</div>
+<div style="padding:0 6px">Gate: fits the cutover window</div>
+<div style="padding:0 6px">Gate: zero unexplained variance</div>
+<div style="padding:0 6px">Gate: Go decision</div>
+</div>
+<div style="margin-top:16px;border:1.5px dashed #C4705F;border-radius:6px;padding:11px 13px;background:var(--rose-soft)">
+<div style="font-size:9px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--rose);margin-bottom:5px">The in-flight rule · the thing everyone forgets</div>
+<div style="font-size:11px;line-height:1.5;color:var(--ink-2)">From [freeze date], all new contracts start in Ironclad. Anything already in progress finishes in Icertis and migrates as a closed record in the final delta. During the overlap, Icertis is authoritative for in-flight only. One named person adjudicates edge cases.</div></div>
+<p class="dial"><i>Phase 1 is not started on this project. Everything to its right is therefore unestimated, which is why it is red.</i></p></div>`,
+
+/* 14 Cutover */ `<div class="dia">${H('Cutover runbook · hour by hour','doc','Working doc · printed, on the wall')}
+<div class="tl" style="grid-template-columns:96px 1fr">
+<div class="tlname">Fri 17:00</div><div class="tltrack"><div class="tlbar b-blu" style="grid-column:1/5">Icertis to read-only · freeze confirmed</div></div>
+<div class="tlname">Fri 18:00</div><div class="tltrack"><div class="tlbar b-blu" style="grid-column:1/8">Final delta extract from Icertis</div></div>
+<div class="tlname">Sat 09:00</div><div class="tltrack"><div class="tlbar b-blu" style="grid-column:1/12">Load into Ironclad production</div></div>
+<div class="tlname">Sat 14:00</div><div class="tltrack"><div class="tlbar b-amb" style="grid-column:1/9">Reconciliation run and review</div></div>
+<div class="tlname" style="color:var(--rose);font-weight:700">Sat 17:00</div><div class="tltrack"><div class="tlbar b-crit" style="grid-column:1/13">GO / NO-GO · LAST ROLLBACK POINT</div></div>
+<div class="tlname">Sun 09:00</div><div class="tltrack"><div class="tlbar b-det" style="grid-column:1/10">Production opened to users</div></div>
+<div class="tlname">Mon 08:00</div><div class="tltrack"><div class="tlbar b-det" style="grid-column:1/21">Hypercare begins · floorwalkers on site · daily 09:00 triage</div></div>
+</div>
+<div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div style="border:1.5px solid #8FB5A0;border-radius:6px;padding:11px 13px;background:var(--green-soft)"><div style="font-size:9px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--green);margin-bottom:6px">GO requires · written 2 weeks earlier</div><div style="font-size:10.5px;line-height:1.55;color:var(--ink-2)">UAT exit met and signed · reconciliation clean · no open Sev 1-2 · training above 85% for day-one users · support rostered · rollback tested</div></div>
+<div style="border:1.5px solid #D9BB7E;border-radius:6px;padding:11px 13px;background:var(--amber-soft)"><div style="font-size:9px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--amber);margin-bottom:6px">Hypercare exits when</div><div style="font-size:10.5px;line-height:1.55;color:var(--ink-2)">Under 3 new Sev 3 defects per day for 3 consecutive days, no open Sev 1-2, and first-line support has taken over triage. Target 10 business days.</div></div>
+</div>
+<p class="dial"><i>The red bar is the only row that matters. After it, there is no going back, which is why the criteria are written a fortnight earlier when nobody has skin in the decision.</i></p></div>`,
+
+/* 15 Governance */ `<div class="dia">${H('Governance cadence · a fortnight, laid out','sl','Slide · agreed at kickoff')}
+<div class="tl" style="grid-template-columns:126px 1fr">
+<div></div><div class="tltrack tlhdr" style="grid-template-columns:repeat(10,1fr)">${['M','T','W','T','F','M','T','W','T','F'].map(d=>'<span>'+d+'</span>').join('')}</div>
+<div class="tlname">Core standup</div><div class="tltrack" style="grid-template-columns:repeat(10,1fr)"><div class="tlbar b-det" style="grid-column:1/2">20m</div><div class="tlbar b-det" style="grid-column:4/5">20m</div><div class="tlbar b-det" style="grid-column:6/7">20m</div><div class="tlbar b-det" style="grid-column:9/10">20m</div></div>
+<div class="tlname">Workstream check-in</div><div class="tltrack" style="grid-template-columns:repeat(10,1fr)"><div class="tlbar b-pkg" style="grid-column:2/3">30m</div><div class="tlbar b-pkg" style="grid-column:7/8">30m</div></div>
+<div class="tlname">ANZ / EU sync</div><div class="tltrack" style="grid-template-columns:repeat(10,1fr)"><div class="tlbar b-blu" style="grid-column:3/4">skippable</div><div class="tlbar b-blu" style="grid-column:8/9">skippable</div></div>
+<div class="tlname">SME working session</div><div class="tltrack" style="grid-template-columns:repeat(10,1fr)"><div class="tlbar b-amb" style="grid-column:4/6">bookended: heavy in requirements and UAT</div></div>
+<div class="tlname" style="font-weight:700">SteerCo</div><div class="tltrack" style="grid-template-columns:repeat(10,1fr)"><div class="tlbar b-crit" style="grid-column:10/11">45m</div></div>
+</div>
+<div style="margin-top:16px;border:1.5px solid #D8D4C8;border-radius:6px;overflow:hidden">
+<div style="background:#F4F3EF;padding:7px 12px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--ink-2)">SteerCo pack · one page, in this order</div>
+<div style="padding:11px 13px;font-size:11px;line-height:1.9;color:var(--ink-2)">
+<b style="color:var(--rose)">1 · DECISIONS REQUESTED TODAY</b> &nbsp;←&nbsp; <span style="color:var(--ink-3)">always first</span><br>
+2 · Status: RAG per workstream, one line each<br>
+3 · Milestones hit, at risk, missed<br>
+4 · Top 3 risks: owner and whether the trigger has fired<br>
+5 · Scope changes since last time<br>
+6 · What I need from you before we meet again</div></div>
+<p class="dial"><i>Fortnightly, not weekly. A weekly executive forum gets cancelled by week three and then you have no governance at all.</i></p></div>`,
+
+/* 16 Comms */ ``,
+
+/* 17 Methodology */ `<div class="dia">${H('Hybrid delivery · how the two halves join','sl','Slide · one line in the charter')}
+<div class="chain" style="align-items:center">
+<div class="nd amb" style="max-width:150px">Discovery<small>iterative · short cycles<br>requirements + profiling</small></div>
+<span class="arw">›</span>
+<div class="nd crit" style="max-width:110px">SCOPE LOCK<small>week 4 · the join</small></div>
+<span class="arw">›</span>
+<div class="nd ok" style="max-width:96px">Build<small>staged</small></div><span class="arw">›</span>
+<div class="nd ok" style="max-width:96px">Test<small>gated</small></div><span class="arw">›</span>
+<div class="nd ok" style="max-width:96px">Cutover<small>gated</small></div>
+</div>
+<p class="dial"><i><span class="sw" style="background:#FBF3E4"></span> Iterative, because we do not know enough to specify it</i><i><span class="sw" style="background:#EAF1ED"></span> Staged, because the SOW is fixed and the date is hard</i></p>
+<p class="dial"><i>Showing where the two halves join beats naming a methodology. It is the constraints doing the choosing, which is the point.</i></p></div>`,
+
+/* 18 Benefits */ `<div class="dia">${H('Output → outcome → benefit','sl','Slide · closes the business case')}
+<div class="flow">
+<div class="fs grey"><b>OUTPUT</b>System live · contracts migrated<br><span style="opacity:.7">Measured at go-live. Nobody funded this.</span></div>
+<div class="fs warnf"><b>OUTCOME</b>90% of new contracts raised in Ironclad · workarounds under 5%<br><span style="opacity:.7">Day 60 to 90</span></div>
+<div class="fs"><b>BENEFIT</b>Cycle time down 30% · metadata complete above 95%<br><span style="opacity:.7">Day 120. This is why it was funded.</span></div>
+</div>
+<div style="margin-top:16px;border:1.5px dashed #C4705F;border-radius:6px;padding:11px 13px;background:var(--rose-soft);font-size:11px;line-height:1.5;color:var(--ink-2)">
+<b style="color:var(--rose)">Baselines must be captured BEFORE go-live.</b> Cycle time and workaround rate cannot be measured retrospectively. If you do not capture them in week two, you have permanently lost the ability to prove the project worked.</div>
+<p class="dial"><i>The red box is the line that signals you have done this before. Almost nobody says it, and it is a week-two task.</i></p></div>`,
+
+/* 19 Pre-mortem */ `<div class="dia">${H('Pre-mortem output · ranked by how many people raised it','wb','Whiteboard · 45 min, week 2')}
+<div class="rng" style="grid-template-columns:1fr 132px;gap:9px 12px">
+<div style="font-size:11px;color:var(--ink-2);text-align:right">Icertis data far worse than expected</div><div class="rngt" style="height:20px"><div class="rngb" style="left:0;width:75%;top:3px;height:14px;background:#C9503B"></div><span style="position:absolute;left:79%;top:2px;font-size:9.5px;font-weight:700;color:var(--ink-2)">6 / 8</span></div>
+<div style="font-size:11px;color:var(--ink-2);text-align:right">Legal never engaged, requirements guessed</div><div class="rngt" style="height:20px"><div class="rngb" style="left:0;width:62.5%;top:3px;height:14px;background:#C9503B"></div><span style="position:absolute;left:66%;top:2px;font-size:9.5px;font-weight:700;color:var(--ink-2)">5 / 8</span></div>
+<div style="font-size:11px;color:var(--rose);text-align:right;font-weight:700">EU changed a shared workflow late · NEW</div><div class="rngt" style="height:20px"><div class="rngb" style="left:0;width:50%;top:3px;height:14px;background:#C9962F"></div><span style="position:absolute;left:54%;top:2px;font-size:9.5px;font-weight:700;color:var(--ink-2)">4 / 8</span></div>
+<div style="font-size:11px;color:var(--rose);text-align:right;font-weight:700">Nobody owned approval thresholds · NEW</div><div class="rngt" style="height:20px"><div class="rngb" style="left:0;width:37.5%;top:3px;height:14px;background:#C9962F"></div><span style="position:absolute;left:41%;top:2px;font-size:9.5px;font-weight:700;color:var(--ink-2)">3 / 8</span></div>
+<div style="font-size:11px;color:var(--rose);text-align:right;font-weight:700">Signatories never onboarded · NEW</div><div class="rngt" style="height:20px"><div class="rngb" style="left:0;width:25%;top:3px;height:14px;background:#C9962F"></div><span style="position:absolute;left:29%;top:2px;font-size:9.5px;font-weight:700;color:var(--ink-2)">2 / 8</span></div>
+</div>
+<p class="dial"><i>Framing: "it is go-live weekend, the project failed badly, write down why." Three new risks in forty-five minutes, including a whole user group nobody had counted. A normal risk workshop finds none of these, because "what could go wrong" invites politeness and "it already failed" does not.</i></p></div>`,
+
+/* 20 Change control */ `<div class="dia">${H('Change control · the route, not the wall','doc','Working doc · one page per request')}
+<div class="flow">
+<div class="fs grey"><b>Request</b>Who, what, why</div>
+<div class="fs warnf"><b>Impact</b>Time · cost · quality · risk</div>
+<div class="fs"><b>Options</b>Accept · defer · reject</div>
+<div class="fs"><b>Recommend</b>PM says which and why</div>
+<div class="fs stop"><b>Decide</b>Accountable party only</div>
+<div class="fs grey"><b>Log</b>So it is not relitigated</div>
+</div>
+<p class="dial"><i>Notice there is no "no" box. The form does not refuse the change, it makes the cost of yes visible and offers a recommendation. That is the difference between administering change and managing it.</i></p></div>`,
+
+/* 21 Influence */ ``,
+/* 22 PIR */ ``,
+/* 23 Brooks */ ``
+];
+
 /* ============ DATA: worked answers for the practice steps ============ */
 const WORKED = [
 /* 01 */ `<p>HelloFresh ANZ is replacing Icertis with Ironclad so that contracts are created, approved, signed and stored in one system, cutting manual handling and giving Legal and Procurement visibility they do not have today.</p>
@@ -1272,7 +1737,7 @@ document.getElementById('cards').innerHTML = CARDS.map((c,i)=>`
       <div class="field"><div class="lbl">What it is</div><div class="val">${c.w}</div></div>
       <div class="field case"><div class="lbl">Where this case points at it</div><div class="val">${c.c}</div></div>
       <div class="field trap"><div class="lbl">The trap</div><div class="val">${c.x}</div></div>
-      <details class="ex"><summary>What it actually looks like</summary><div class="exb">${EXAMPLES[i]||''}</div></details>
+      <details class="ex"><summary>What it actually looks like</summary><div class="exb">${VIS[i]||''}${EXAMPLES[i]||''}</div></details>
     </div>
   </details>`).join('');
 
