@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ironclad Rollout: PM Toolkit Lab v1.0</title>
+<title>Ironclad Rollout: PM Toolkit Lab v1.1</title>
 <style>
   :root{
     --paper:#FBFAF7;
@@ -193,6 +193,53 @@
   .sheet ol li{margin-bottom:7px;color:var(--ink-2)}
   .sheet ol li b{color:var(--ink)}
 
+  /* ---------- artefact examples ---------- */
+  .ex{margin-top:18px;border:1px dashed #C9C4B6;border-radius:8px;background:#FCFCF9}
+  .ex>summary{
+    cursor:pointer;list-style:none;padding:11px 15px;font-size:13px;font-weight:700;color:var(--amber);
+  }
+  .ex>summary::-webkit-details-marker{display:none}
+  .ex>summary::before{content:"› "}
+  .ex[open]>summary::before{content:"⌄ "}
+  .ex>summary:hover{color:#8C6015}
+  .exb{padding:0 15px 16px}
+  .art{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:12px}
+  .artt{
+    background:#F4F4F0;border-bottom:1px solid var(--line);padding:8px 12px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--ink-2);font-weight:700;
+  }
+  .art table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.5}
+  .art td{padding:7px 12px;border-bottom:1px solid #F0EEE8;vertical-align:top;color:var(--ink-2)}
+  .art tr:last-child td{border-bottom:0}
+  .art td:first-child{font-weight:700;color:var(--ink);white-space:nowrap;width:1%;padding-right:18px}
+  .art table.grid td:first-child{white-space:normal;width:auto}
+  .art table.grid td{text-align:center;font-family:ui-monospace,Menlo,monospace;font-size:12px}
+  .art table.grid td:first-child{text-align:left;font-family:inherit;font-size:13px}
+  .art table.grid tr:first-child td{background:#F8F8F5;font-weight:700;color:var(--ink);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+  .art pre{
+    margin:0;padding:12px 14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:12.5px;line-height:1.65;color:var(--ink-2);white-space:pre-wrap;
+  }
+  .art .body{padding:12px 14px;font-size:14px;color:var(--ink-2)}
+  .exnote{font-size:13px;color:var(--ink-3);font-style:italic;margin:0}
+  .exnote b{color:var(--amber);font-style:normal}
+
+  .wa{margin-top:8px}
+  .wa>summary{color:var(--amber)}
+  .wa .rbody{background:var(--amber-soft)}
+  .spoken{margin-top:12px}
+  .spoken>summary{cursor:pointer;list-style:none;font-size:13px;font-weight:700;color:var(--amber);padding:6px 0}
+  .spoken>summary::-webkit-details-marker{display:none}
+  .spoken>summary::before{content:"› "}
+  .spoken[open]>summary::before{content:"⌄ "}
+  .spoken .sbody{
+    background:var(--amber-soft);border-radius:8px;padding:14px 16px;font-size:15px;color:var(--ink-2);
+    line-height:1.7;
+  }
+  .spoken .sbody p{margin:0 0 10px}
+  .spoken .sbody p:last-child{margin:0}
+
   footer{border-top:1px solid var(--line);padding:26px 0 60px;font-size:13px;color:var(--ink-3)}
 
   @media print{
@@ -212,9 +259,9 @@
 
 <header class="masthead">
   <div class="wrap">
-    <div class="eyebrow">Interview Lab · v1.0</div>
+    <div class="eyebrow">Interview Lab · v1.1</div>
     <h1>The PM toolkit behind the Ironclad case</h1>
-    <p class="sub">Not a plan for you to memorise. A set of tools, what question each one answers, and where this specific case is quietly asking you to reach for it. The thinking is yours to do.</p>
+    <p class="sub">Not a plan for you to memorise. A set of tools, what question each one answers, where this case is quietly asking you to reach for it, and what each one looks like when it is actually built. The thinking is still yours to do.</p>
     <p class="meta">HelloFresh ANZ · Senior Systems Enablement Manager · Built 19 Aug 2026</p>
   </div>
 </header>
@@ -298,12 +345,17 @@
 <!-- ================= 2. TOOLKIT ================= -->
 <section class="panel" id="toolkit">
   <h2>The toolkit</h2>
-  <p class="lede">Twenty-three tools, tiered by how well you need to know them by tomorrow. Tier A you should be able to run live if asked. Tier B you should be able to name, define and say when you would reach for. Tier C you only need to recognise so a term does not blindside you.</p>
+  <p class="lede">Twenty-four tools, tiered by how well you need to know them by tomorrow. Tier A you should be able to run live if asked. Tier B you should be able to name, define and say when you would reach for. Tier C you only need to recognise so a term does not blindside you.</p>
+
+  <div class="note warn">
+    <strong>New in v1.1</strong>
+    Every card now ends with <b>"What it actually looks like"</b>: a snippet of the real artefact, filled in with Ironclad content. They are deliberately short. Read them for <em>shape</em> rather than content, because the shape is the part you cannot guess and the content is the part you will have to invent live tomorrow anyway.
+  </div>
 
   <div class="filters">
-    <button class="chip on" data-f="all">All 23</button>
+    <button class="chip on" data-f="all">All 24</button>
     <button class="chip" data-f="A">Tier A · wield these (8)</button>
-    <button class="chip" data-f="B">Tier B · reach for these (9)</button>
+    <button class="chip" data-f="B">Tier B · reach for these (10)</button>
     <button class="chip" data-f="C">Tier C · recognise these (6)</button>
   </div>
 
@@ -313,11 +365,13 @@
 <!-- ================= 3. PRACTICE ================= -->
 <section class="panel" id="practice">
   <h2>Build it yourself</h2>
-  <p class="lede">Eleven steps, in the order a real project setup runs. Write your own answer first. Only then open "what a strong answer covers", which gives you criteria to check yourself against rather than the answer itself. Nothing here is saved automatically, so use the copy button at the bottom when you are done.</p>
+  <p class="lede">Eleven steps, in the order a real project setup runs. Nothing here is saved automatically, so use the copy button at the bottom when you are done.</p>
 
   <div class="note warn">
-    <strong>How to use this</strong>
-    Do not aim for completeness. Aim for the point where you stop needing the prompt. If a step takes more than six or seven minutes you are writing a document instead of building fluency.
+    <strong>Open the two reveals in order</strong>
+    Write your own answer first. Then open <b>1 · what a strong answer covers</b> and mark your own work against the criteria. Only then open <b>2 · a worked answer</b>.<br><br>
+    That order matters. If you read the worked answer first you will judge it better than yours and try to reproduce it tomorrow from memory, which produces a recital. If you self-mark first, the worked answer lands as a correction to something you already own, which is what actually sticks.<br><br>
+    Do not aim for completeness. Aim for the point where you stop needing the prompt.
   </div>
 
   <div id="steps"></div>
@@ -332,7 +386,12 @@
 <!-- ================= 4. MAPPER ================= -->
 <section class="panel" id="mapper">
   <h2>Question → tool</h2>
-  <p class="lede">Likely questions, the tools that answer each one, and the shape of a strong response. The shape matters more than the content: notice how often the strong version names a tension, offers options with trade-offs, and ends with a recommendation rather than a request for permission.</p>
+  <p class="lede">Likely questions, the tools that answer each one, the shape of a strong response, and now a spoken version of each. The shape matters more than the content: notice how often the strong version names a tension, offers options with trade-offs, and ends with a recommendation rather than a request for permission.</p>
+
+  <div class="note warn">
+    <strong>Read the spoken versions out loud, not silently</strong>
+    They are written the way people actually talk, with hedges, restarts and short sentences, because tomorrow is spoken and a written answer read aloud sounds rehearsed. Do not memorise them. Read one, close it, and say your own version at the wall. The gap between those two is the only thing worth practising tonight.
+  </div>
   <input class="search" id="qsearch" placeholder="Filter questions… try 'deadline', 'risk', 'stakeholder', 'UAT'">
   <div id="qas"></div>
 </section>
@@ -410,7 +469,7 @@
 </div>
 
 <footer>
-  <div class="wrap">Ironclad Rollout PM Toolkit Lab v1.0 · built for Safa · 19 August 2026</div>
+  <div class="wrap">Ironclad Rollout PM Toolkit Lab v1.1 · built for Safa · 19 August 2026</div>
 </footer>
 
 <script>
@@ -696,6 +755,513 @@ const DRILL = [
   {t:"Little's Law",q:"Should we run everything at once?",d:"WIP equals throughput times lead time. Fewer things in flight means each one finishes sooner."}
 ];
 
+/* ============ DATA: artefact examples, one per card ============ */
+const EXAMPLES = [
+/* 00 Charter */ `
+<div class="art"><div class="artt">Project charter · Ironclad ANZ · v0.1 DRAFT for sponsor</div><table>
+<tr><td>Objective</td><td>Move ANZ contract creation, approval, signature and storage into a single system, cutting manual handling and giving Legal and Procurement visibility they do not have in Icertis.</td></tr>
+<tr><td>Sponsor (A)</td><td>[Name], Launch Team Lead ANZ</td></tr>
+<tr><td>In scope</td><td>5 ANZ contract workflows · migration of Icertis contract records · UAT and sign-off · training and adoption · cutover and hypercare · Icertis decommission</td></tr>
+<tr><td>Out of scope</td><td>EU-specific workflow variants (owned by EU PM) · integrations to [ERP] · contract template redrafting · post-hypercare enhancements</td></tr>
+<tr><td>Hard constraint</td><td>Icertis contract expires [date]. Past that we lose access to the system holding our contract history, so this is a stop rather than a slip.</td></tr>
+<tr><td>Success measures</td><td>All committed workflows live · 100% of in-scope contracts migrated and reconciled to source · Icertis decommissioned with nothing stranded · 90% of new ANZ contracts raised in Ironclad by day 60</td></tr>
+<tr><td>Key assumptions</td><td>Icertis will support a full data export · SOW covers config of all 5 workflows without variation · no ERP integration required at go-live</td></tr>
+<tr><td>Decision rights</td><td>Scope changes: Sponsor. Go/No-Go: SteerCo. Requirements sign-off: named business owner per workflow. Day-to-day delivery: PM.</td></tr>
+</table></div>
+<p class="exnote"><b>Notice:</b> the out-of-scope section is doing as much work as the in-scope one. A charter you cannot say no with is not a charter.</p>`,
+
+/* 01 WBS */ `
+<div class="art"><div class="artt">Work breakdown structure · level 1 and 2</div><pre>1.0  REQUIREMENTS AND DESIGN
+     1.1  As-is process mapping, 5 contract types
+     1.2  ANZ vs EU gap analysis (shared vs local design)
+     1.3  To-be workflow design and approval matrices
+     1.4  Requirements sign-off per workflow
+
+2.0  VENDOR CONFIGURATION
+     2.1  Requirements brief pack to Ironclad
+     2.2  Build cycles and config reviews
+     2.3  Environment setup (sandbox, UAT, production)
+
+3.0  DATA MIGRATION
+     3.1  Icertis data profiling (volume, state, metadata quality)
+     3.2  Metadata cleanse at source
+     3.3  Field mapping and transformation rules
+     3.4  Mock migration runs (x2 minimum)
+     3.5  Reconciliation and controls
+     3.6  In-flight contract handling and freeze rule
+
+4.0  TESTING AND ACCEPTANCE
+     4.1  Test script authoring
+     4.2  SIT
+     4.3  UAT (per workflow)
+     4.4  Defect triage and fix cycles
+     4.5  Sign-off against exit criteria
+
+5.0  CHANGE, TRAINING AND ADOPTION
+     5.1  Change impact assessment per group
+     5.2  Comms campaign
+     5.3  Training design and delivery
+     5.4  Floorwalking and first-contract support
+
+6.0  CUTOVER AND HYPERCARE
+     6.1  Cutover runbook
+     6.2  Parallel running rules
+     6.3  Go/No-Go gate
+     6.4  Hypercare and exit to BAU
+
+7.0  ICERTIS DECOMMISSION AND EXIT
+     7.1  Final extraction and archive
+     7.2  Retention and audit obligations
+     7.3  Contract close-out
+
+8.0  PROJECT MANAGEMENT AND GOVERNANCE
+     8.1  Plan, RAID, RACI, reporting
+     8.2  SteerCo and forums
+     8.3  Post-implementation review and playbook</pre></div>
+<p class="exnote"><b>The 100% rule check:</b> is every hour of effort on this project inside one of these eight? If a chunk of work has nowhere to go, you are missing a branch. Note that all your project paperwork sits inside 8.0, which is one branch of eight.</p>`,
+
+/* 02 Iron triangle */ `
+<div class="art"><div class="artt">Constraint statement · goes on page one of the charter</div><table class="grid">
+<tr><td>Constraint</td><td>Status</td><td>Why</td></tr>
+<tr><td>Time</td><td>FIXED</td><td>Icertis expiry. Overrun risks losing access to contract records, not just cost.</td></tr>
+<tr><td>Cost</td><td>MOSTLY FIXED</td><td>SOW signed. Changes become commercial variations.</td></tr>
+<tr><td>Scope</td><td>FLEXIBLE</td><td>Not yet defined. This is the primary lever.</td></tr>
+<tr><td>Quality</td><td>PROTECTED</td><td>Contract records are legal records. Defended by UAT exit criteria, not by hope.</td></tr>
+</table></div>
+<p class="exnote"><b>The sentence that follows it:</b> "Scope is therefore the lever, which means it has to be prioritised and agreed before vendor build begins, not renegotiated under pressure in month four."</p>`,
+
+/* 03 MoSCoW */ `
+<div class="art"><div class="artt">Scope prioritisation · agreed with SteerCo before build</div><table class="grid">
+<tr><td>Scope item</td><td>Priority</td><td>Rationale</td></tr>
+<tr><td>NDA workflow (ANZ and EU)</td><td>MUST</td><td>Highest volume, shared design with EU</td></tr>
+<tr><td>Supply Agreement, ANZ Direct</td><td>MUST</td><td>Core to ANZ operations, no local alternative</td></tr>
+<tr><td>MSA / SOW workflow</td><td>MUST</td><td>Highest value contracts</td></tr>
+<tr><td>Migration: active contracts</td><td>MUST</td><td>Cannot operate without live agreements</td></tr>
+<tr><td>Third Party Agreements</td><td>SHOULD</td><td>Product Manager owns; can follow in phase 2</td></tr>
+<tr><td>Migration: closed, last 24 months</td><td>SHOULD</td><td>Referenced occasionally, not daily</td></tr>
+<tr><td>Framework Agreement, ANZ Indirect</td><td>COULD</td><td>Lowest volume; key user unavailable for UAT</td></tr>
+<tr><td>Migration: closed, over 24 months</td><td>WON'T (this time)</td><td>Retained as a read-only archive export. Meets retention obligation without blocking go-live.</td></tr>
+<tr><td>Reporting and dashboards</td><td>WON'T (this time)</td><td>Phase 2. Not required to transact.</td></tr>
+</table></div>
+<p class="exnote"><b>Notice:</b> Musts sit near 55% of effort, so there is real flex. And the Won't column contains a genuine loss, not a token one. Scope locks [date]. After that, changes go through change control.</p>`,
+
+/* 04 RAID */ `
+<div class="art"><div class="artt">RAID log · one fully worked risk</div><table>
+<tr><td>ID / type</td><td>R-01 · Risk</td></tr>
+<tr><td>Description</td><td>Migration scope cannot be sized because the volume, state and metadata quality of contracts in Icertis is unknown, so the schedule beyond week 6 is unestimated.</td></tr>
+<tr><td>Probability</td><td>5 of 5 (it is true today)</td></tr>
+<tr><td>Impact</td><td>5 of 5 (drives the critical path and the go-live date)</td></tr>
+<tr><td>Score</td><td>25 · CRITICAL</td></tr>
+<tr><td>Owner</td><td>PM (Ops Enablement)</td></tr>
+<tr><td>Mitigation</td><td>Start Icertis data profiling in week 1, in parallel with charter and scoping. Secure Icertis vendor cooperation on export before the relationship sours.</td></tr>
+<tr><td>Contingency</td><td>If profiling shows volume beyond capacity, descope to active contracts only and archive the rest as a read-only export (already agreed as a Won't).</td></tr>
+<tr><td>Trigger</td><td>Profiling not complete by end of week 3.</td></tr>
+<tr><td>Review</td><td>Weekly, core team. Escalate to SteerCo if trigger fires.</td></tr>
+</table></div>
+<div class="art"><div class="artt">And the other three letters, briefly</div><table>
+<tr><td>D-01</td><td>Key ANZ Indirect user unavailable for the whole UAT month. Certain, not probable. Decision required by [date]: move Indirect UAT, appoint and train a delegate, or have the key user author and pre-approve test scripts before leaving.</td></tr>
+<tr><td>A-01</td><td>Assumed: Icertis will provide a full structured data export at no additional cost. Untested. If false, migration effort and cost change materially. Test by [date].</td></tr>
+<tr><td>I-01</td><td>Issue, live today: project has sign-off but no plan, no RACI and no comms framework, and Legal and Procurement have been told it is happening without being engaged. Every week this persists costs vendor build runway.</td></tr>
+</table></div>
+<p class="exnote"><b>Notice:</b> mitigation and contingency are different sentences doing different jobs, and the trigger is something a person other than you could observe.</p>`,
+
+/* 05 RACI */ `
+<div class="art"><div class="artt">RACI · decisions, not tasks</div><table class="grid">
+<tr><td>Decision</td><td>PM</td><td>Prod Mgr</td><td>Legal</td><td>Direct Proc</td><td>Indirect Proc</td><td>SteerCo</td><td>Ironclad</td></tr>
+<tr><td>Requirements sign-off, NDA</td><td>R</td><td>C</td><td>A</td><td>C</td><td>C</td><td>I</td><td>I</td></tr>
+<tr><td>Requirements sign-off, Supply Agmt</td><td>R</td><td>C</td><td>C</td><td>A</td><td>I</td><td>I</td><td>I</td></tr>
+<tr><td>Migration scope and cut-off</td><td>A</td><td>C</td><td>C</td><td>C</td><td>C</td><td>I</td><td>C</td></tr>
+<tr><td>In-flight contract rule at cutover</td><td>A</td><td>C</td><td>C</td><td>R</td><td>R</td><td>I</td><td>C</td></tr>
+<tr><td>UAT exit / acceptance</td><td>R</td><td>A</td><td>C</td><td>C</td><td>C</td><td>I</td><td>C</td></tr>
+<tr><td>Go / No-Go</td><td>R</td><td>C</td><td>C</td><td>C</td><td>C</td><td>A</td><td>I</td></tr>
+<tr><td>Training approach</td><td>A</td><td>I</td><td>C</td><td>C</td><td>C</td><td>I</td><td>C</td></tr>
+</table></div>
+<p class="exnote"><b>Notice three things.</b> One A per row, never two. The PM holds A on the delivery mechanics and R on the things others own, which is the correct shape. And this grid is a <b>proposal to negotiate</b>, not a statement of fact. The value is the twenty minutes of argument it causes in week one, when the argument is cheap.</p>`,
+
+/* 06 Power/interest */ `
+<div class="art"><div class="artt">Stakeholder engagement matrix</div><table class="grid">
+<tr><td>Stakeholder</td><td>Power</td><td>Interest</td><td>Quadrant</td><td>Now</td><td>Needed</td></tr>
+<tr><td>Sponsor / Launch Team Lead</td><td>High</td><td>High</td><td>Manage closely</td><td>Supportive</td><td>Leading</td></tr>
+<tr><td>ANZ SteerCo</td><td>High</td><td>Low</td><td>Keep satisfied</td><td>Neutral</td><td>Supportive</td></tr>
+<tr><td>Legal</td><td>Low</td><td>Med</td><td>Keep informed</td><td>Unaware</td><td>Supportive</td></tr>
+<tr><td>Indirect Procurement key user</td><td>Low</td><td>High</td><td>Keep informed</td><td>Unaware</td><td>Leading</td></tr>
+<tr><td>Product Manager</td><td>High</td><td>High</td><td>Manage closely</td><td>Supportive</td><td>Supportive</td></tr>
+<tr><td>EU Project Manager</td><td>Med</td><td>Med</td><td>Manage closely</td><td>Neutral</td><td>Supportive</td></tr>
+<tr><td>Ironclad</td><td>Med</td><td>High</td><td>Manage closely</td><td>Supportive</td><td>Supportive</td></tr>
+<tr><td>Icertis (outgoing)</td><td>High</td><td>Low</td><td>Keep satisfied</td><td>Neutral</td><td>Neutral</td></tr>
+<tr><td>IT / Security</td><td>High</td><td>Low</td><td>Keep satisfied</td><td>Unaware</td><td>Neutral</td></tr>
+<tr><td>Finance</td><td>Med</td><td>Low</td><td>Monitor</td><td>Unaware</td><td>Informed</td></tr>
+<tr><td>Contract requesters (business)</td><td>Low</td><td>Low</td><td>Monitor</td><td>Unaware</td><td>Supportive</td></tr>
+</table></div>
+<p class="exnote"><b>The whole point is the last two columns.</b> The gap between Now and Needed is your comms plan. Also notice the two rows where low formal power meets total ability to block: those are the people who will actually decide whether you hit the date. And Icertis has high power (they control your data export) with zero interest in helping you leave.</p>`,
+
+/* 07 ADKAR */ `
+<div class="art"><div class="artt">ADKAR assessment · Indirect Procurement</div><table class="grid">
+<tr><td>Stage</td><td>True today</td><td>Intervention</td><td>Measure</td></tr>
+<tr><td>Awareness</td><td>Told it is happening, not told why</td><td>Sponsor-fronted 10 min at their existing team meeting. Their forum, not mine.</td><td>Can they state the reason unprompted at week 4?</td></tr>
+<tr><td>Desire</td><td>Unknown. Likely low: new system, same workload, plus testing effort</td><td>1:1 with key user to find what is worse for them, and fix or acknowledge it honestly. Separate this conversation from any ask for their time.</td><td>Do they volunteer a delegate, or wait to be assigned one?</td></tr>
+<tr><td>Knowledge</td><td>None</td><td>Role-based training on their real contract types, not a generic platform demo.</td><td>Completion, plus a short practical task</td></tr>
+<tr><td>Ability</td><td>None</td><td>Sandbox with their own contract data. Floorwalking for the first two weeks. Support on their first real contract.</td><td>Time to complete first unaided contract</td></tr>
+<tr><td>Reinforcement</td><td>N/A</td><td>Close the old route. Icertis read-only at cutover. Monitor for offline workarounds, treat each one as a design defect not a compliance failure.</td><td>Workaround rate, contracts raised outside Ironclad</td></tr>
+</table></div>
+<p class="exnote"><b>Notice:</b> training appears only in Knowledge and Ability. Awareness, Desire and Reinforcement are three fifths of adoption and none of them are training. The Reinforcement line also matters: treating a workaround as a design signal rather than as disobedience is what gets people to tell you about them.</p>`,
+
+/* 08 Critical path */ `
+<div class="art"><div class="artt">Dependency chains · which one is longest?</div><pre>CHAIN A  (the visible one)
+  Requirements workshops        3w
+  Requirements sign-off         1w   FS
+  Vendor build                  6w   FS
+  SIT                           2w   FS
+  UAT                           4w   FS
+  Sign-off and Go/No-Go         1w   FS
+                             = 17 weeks
+
+CHAIN B  (the quiet one)
+  Icertis data profiling        3w
+  Metadata cleanse              4w   FS
+  Field mapping                 2w   SS with cleanse, 1w lag
+  Mock run 1                    1w   FS
+  Fix and re-run (mock 2)       2w   FS
+  Reconciliation and sign-off   2w   FS
+  Cutover                       1w   FS
+                             = 14 weeks, BUT cannot start
+                               until profiling is scoped
+
+CHAIN B feeds CHAIN A: migration scope is a requirement input.
+So the real path is not A or B, it is:
+  profiling -> migration scope -> requirements -> build -> test -> cutover</pre></div>
+<p class="exnote"><b>The insight this tool produces:</b> profiling has no float and sits ahead of everything, yet it is the least visible task on the project. Float lives in Third Party Agreements and training design, which is where you would move resource from if the path slipped. <b>Crashing</b> here means adding a data analyst to the cleanse. <b>Fast-tracking</b> means starting build on the three confirmed workflows while requirements for the other two are still open, which buys weeks and costs rework risk.</p>`,
+
+/* 09 Rolling wave */ `
+<div class="art"><div class="artt">Plan on a page · detail decreasing with distance</div><pre>WEEKS 1-4        DETAILED, task level, named owners, dates
+  W1  Charter draft · stakeholder map · RACI proposal
+      Icertis profiling kicked off · Icertis extension talks
+  W2  Kickoff · requirements pack issued to SMEs
+      Profiling continues
+  W3  Requirements workshops (3 of 5 workflows)
+      Profiling output · migration sizing
+  W4  Requirements workshops (2 of 5) · migration scope proposal
+      SCOPE LOCK CHECKPOINT
+
+WEEKS 5-12       PLANNING PACKAGES, sized not scheduled
+  - Vendor build cycles          est. 6w  (+/- 2w until scope locks)
+  - Data cleanse and mapping     est. 6w  (unsized until W3 profiling)
+  - Test script authoring        est. 3w
+  - Training design              est. 3w
+
+WEEKS 13+        MILESTONES ONLY
+  - UAT window
+  - Go/No-Go gate
+  - Cutover
+  - Hypercare exit
+  - Icertis decommission</pre></div>
+<p class="exnote"><b>What makes this credible rather than evasive:</b> the scope lock checkpoint at week 4, and the fact that every unsized package names what will size it. "I do not know yet" is only acceptable when paired with "and here is when I will."</p>`,
+
+/* 10 Estimation */ `
+<div class="art"><div class="artt">Three-point estimate · migration workstream</div><table class="grid">
+<tr><td>Task</td><td>Opt</td><td>Likely</td><td>Pess</td><td>PERT</td><td>Confidence</td></tr>
+<tr><td>Icertis data profiling</td><td>2w</td><td>3w</td><td>6w</td><td>3.3w</td><td>Medium</td></tr>
+<tr><td>Metadata cleanse</td><td>2w</td><td>4w</td><td>12w</td><td>5.0w</td><td>LOW</td></tr>
+<tr><td>Field mapping</td><td>1w</td><td>2w</td><td>3w</td><td>2.0w</td><td>High</td></tr>
+<tr><td>Mock runs and reconciliation</td><td>2w</td><td>3w</td><td>5w</td><td>3.2w</td><td>Medium</td></tr>
+</table></div>
+<p class="exnote">PERT = (O + 4M + P) / 6. <b>Read the spread, not just the number.</b> Metadata cleanse ranges from 2 to 12 weeks, which is a ten week swing on a single line and tells you exactly where to spend your investigation effort. Contingency reserve of 3 weeks held by the PM against this workstream; management reserve held by the sponsor.</p>`,
+
+/* 11 Requirements */ `
+<div class="art"><div class="artt">As-is / to-be · NDA, ANZ Indirect</div><table class="grid">
+<tr><td>Step</td><td>As-is (Icertis)</td><td>To-be (Ironclad)</td><td>Change impact</td></tr>
+<tr><td>Request</td><td>Email to Procurement inbox</td><td>Self-serve form, auto-routed</td><td>HIGH: requesters must learn a new entry point</td></tr>
+<tr><td>Draft</td><td>Manual from Word template</td><td>Auto-generated from template</td><td>MED: Legal loses some drafting control</td></tr>
+<tr><td>Approve</td><td>Email chain, no audit trail</td><td>Routed by value threshold</td><td>HIGH: approval thresholds must be agreed and owned</td></tr>
+<tr><td>Sign</td><td>Print, sign, scan</td><td>E-signature</td><td>MED: signatories become system users</td></tr>
+<tr><td>Store</td><td>Manual upload, inconsistent naming</td><td>Auto-filed with metadata</td><td>LOW: improvement, no behaviour change</td></tr>
+</table></div>
+<div class="art"><div class="artt">A requirement with acceptance criteria</div><table>
+<tr><td>REQ-NDA-004</td><td>NDAs over [value] must route to Legal for review before signature.</td></tr>
+<tr><td>Acceptance</td><td>GIVEN an NDA with a value above [threshold], WHEN the requester submits it, THEN it appears in the Legal review queue and cannot progress to signature until a Legal user approves it.</td></tr>
+<tr><td>Owner</td><td>Legal · signed off [date]</td></tr>
+</table></div>
+<p class="exnote"><b>Notice:</b> the change impact column is free. You built it while gathering requirements, and it is simultaneously your training plan and your ADKAR input. That is why as-is / to-be beats a requirements questionnaire. Also, this is a <b>draft to react to</b>. Handing a time-poor SME this half-filled and asking "what is wrong with it" costs them ten minutes. Handing them a blank template costs them two hours, which is why it comes back empty.</p>`,
+
+/* 12 Testing */ `
+<div class="art"><div class="artt">UAT entry and exit criteria · agreed before UAT starts</div><table>
+<tr><td>Entry</td><td>SIT complete with zero Sev 1 and Sev 2 defects open · UAT environment loaded with migrated test data · test scripts written and reviewed by business owner · named testers confirmed and trained · defect triage process agreed</td></tr>
+<tr><td>Exit</td><td>100% of Sev 1 and Sev 2 scripts passed · no open Sev 1 or Sev 2 · Sev 3 defects logged with an agreed fix window · business owner sign-off per workflow · migration reconciliation passed</td></tr>
+</table></div>
+<div class="art"><div class="artt">Defect triage · severity is not priority</div><table class="grid">
+<tr><td>Defect</td><td>Severity</td><td>Priority</td><td>Why</td></tr>
+<tr><td>Approval routes to the wrong approver</td><td>1</td><td>1</td><td>Contracts approved by the wrong person, both axes maxed</td></tr>
+<tr><td>Contract type dropdown mislabelled</td><td>4</td><td>1</td><td>Trivial impact, but every user sees it on day one and it destroys confidence</td></tr>
+<tr><td>Bulk export fails over 500 records</td><td>2</td><td>3</td><td>Serious, but used quarterly. Fix in the first post-go-live window.</td></tr>
+</table></div>
+<p class="exnote"><b>Row two is the whole lesson.</b> A cosmetic defect can be the highest priority fix on the project. Severity is how bad. Priority is how soon. Confusing them is the classic tell.</p>`,
+
+/* 13 Migration */ `
+<div class="art"><div class="artt">Migration approach · six phases</div><table class="grid">
+<tr><td>Phase</td><td>What it produces</td><td>Gate to pass</td></tr>
+<tr><td>1 Profile</td><td>Volume, record types, state, metadata completeness, duplicates, orphans</td><td>Sized and reported to SteerCo</td></tr>
+<tr><td>2 Cleanse</td><td>Corrected records, at source in Icertis</td><td>Agreed quality threshold met</td></tr>
+<tr><td>3 Map</td><td>Field-to-field mapping with rules for gaps and defaults</td><td>Signed by business owner</td></tr>
+<tr><td>4 Mock run</td><td>Full rehearsal on real data, timed. Minimum twice.</td><td>Run 2 completes inside the cutover window</td></tr>
+<tr><td>5 Reconcile</td><td>Counts, values and spot-checks proving source equals target</td><td>Zero unexplained variance</td></tr>
+<tr><td>6 Cutover</td><td>Final delta migration and switchover</td><td>Go decision</td></tr>
+</table></div>
+<div class="art"><div class="artt">Reconciliation control · what "proved" actually means</div><table>
+<tr><td>Count</td><td>Records in Icertis in scope = records in Ironclad. Variance investigated to zero, not explained away.</td></tr>
+<tr><td>Value</td><td>Sum of contract values matches by legal entity.</td></tr>
+<tr><td>Sample</td><td>30 randomly selected contracts opened side by side and checked field by field, signed by the business owner.</td></tr>
+<tr><td>Exceptions</td><td>Every record that failed migration is listed, categorised and dispositioned. None are silently dropped.</td></tr>
+</table></div>
+<div class="art"><div class="artt">In-flight rule · the thing everyone forgets</div><div class="body">From [freeze date], all new contracts start in Ironclad. Contracts already in progress in Icertis complete there and are migrated as closed records in the final delta run. Between freeze and cutover, Icertis is authoritative for in-flight only and Ironclad is authoritative for everything new. One named person adjudicates edge cases.</div></div>
+<p class="exnote"><b>Notice:</b> the freeze rule is a business decision, not a technical one, and it needs an owner and a date well before cutover week.</p>`,
+
+/* 14 Cutover and hypercare */ `
+<div class="art"><div class="artt">Cutover runbook · extract</div><table class="grid">
+<tr><td>Time</td><td>Task</td><td>Owner</td><td>Rollback?</td></tr>
+<tr><td>Fri 17:00</td><td>Icertis set to read-only, freeze confirmed</td><td>PM</td><td>Yes</td></tr>
+<tr><td>Fri 18:00</td><td>Final delta extract from Icertis</td><td>Data lead</td><td>Yes</td></tr>
+<tr><td>Sat 09:00</td><td>Load into Ironclad production</td><td>Ironclad</td><td>Yes</td></tr>
+<tr><td>Sat 14:00</td><td>Reconciliation run and review</td><td>Data lead</td><td>Yes</td></tr>
+<tr><td>Sat 17:00</td><td>GO / NO-GO decision point</td><td>SteerCo chair</td><td>LAST ROLLBACK POINT</td></tr>
+<tr><td>Sun 09:00</td><td>Production access opened to users</td><td>PM</td><td>No</td></tr>
+<tr><td>Mon 08:00</td><td>Hypercare begins, floorwalkers on site</td><td>PM</td><td>No</td></tr>
+</table></div>
+<div class="art"><div class="artt">Go / No-Go criteria · written two weeks before, not on the day</div><table>
+<tr><td>GO requires</td><td>UAT exit criteria met and signed · reconciliation passed with zero unexplained variance · no open Sev 1 or Sev 2 · training completion above 85% for day-one users · support model staffed and rostered · rollback tested</td></tr>
+<tr><td>Hypercare</td><td>10 business days. Daily triage standup at 09:00. Named first-line contact per team. Exit criteria: fewer than 3 new Sev 3 defects per day for 3 consecutive days, and no open Sev 1 or Sev 2.</td></tr>
+</table></div>
+<p class="exnote"><b>Why criteria get written in advance:</b> on the day, with a room full of people who want to launch, a criterion invented in the meeting will be argued down. One written a fortnight earlier, when nobody had skin in it, will hold.</p>`,
+
+/* 15 Governance */ `
+<div class="art"><div class="artt">Forum design</div><table class="grid">
+<tr><td>Forum</td><td>Who</td><td>Cadence</td><td>Exists to</td></tr>
+<tr><td>Core team standup</td><td>PM, data lead, Ironclad IM</td><td>2x weekly, 20 min</td><td>Unblock the week</td></tr>
+<tr><td>Workstream check-in</td><td>PM + each workstream owner</td><td>Weekly, 30 min</td><td>Progress and risks</td></tr>
+<tr><td>ANZ / EU sync</td><td>Both PMs</td><td>Weekly, skippable</td><td>Shared vs local design, divergence calls</td></tr>
+<tr><td>SME working session</td><td>PM, Legal, Procurement</td><td>Bookended: heavy in requirements and UAT, light between</td><td>Decisions, not updates</td></tr>
+<tr><td>SteerCo</td><td>Sponsor, Product Mgr, function heads</td><td>Fortnightly, 45 min</td><td>Decide, unblock, own the Go/No-Go</td></tr>
+</table></div>
+<div class="art"><div class="artt">SteerCo pack · one page, in this order</div><pre>1  DECISIONS REQUESTED TODAY      <- first, always
+2  Status: RAG per workstream, one line each
+3  Milestones: hit, at risk, missed
+4  Top 3 risks with owner and trigger status
+5  Scope changes since last meeting
+6  What I need from you before next time</pre></div>
+<div class="art"><div class="artt">Decision log · one row</div><table>
+<tr><td>D-004</td><td>Closed contracts older than 24 months will not be migrated; retained as read-only archive export.</td></tr>
+<tr><td>Decided by</td><td>SteerCo, [date]</td></tr>
+<tr><td>Basis</td><td>Profiling showed 41k records over 24 months, est. 6 weeks cleanse effort, against a legal retention obligation satisfiable by archive.</td></tr>
+<tr><td>Revisit if</td><td>Legal advises the archive does not meet audit requirements.</td></tr>
+</table></div>
+<p class="exnote"><b>Escalation rule worth stating:</b> any decision not made within 5 working days escalates to the sponsor automatically. Written down in advance, it stops escalation being a personal act.</p>`,
+
+/* 16 Comms plan */ `
+<div class="art"><div class="artt">Communications plan · built from the engagement gap, not a template</div><table class="grid">
+<tr><td>Audience</td><td>Message</td><td>Channel</td><td>When</td><td>Owner</td><td>Response wanted</td></tr>
+<tr><td>SteerCo</td><td>Decisions needed, risks, milestones</td><td>1-page pack + 45 min</td><td>Fortnightly</td><td>PM</td><td>A decision</td></tr>
+<tr><td>Legal / Procurement leads</td><td>Why this is happening, what it changes for you</td><td>Sponsor at their team meeting</td><td>Week 2, then monthly</td><td>Sponsor</td><td>Named SMEs released</td></tr>
+<tr><td>SMEs / testers</td><td>Specific asks with deadlines</td><td>Booked working sessions</td><td>Bookended</td><td>PM</td><td>Input and sign-off</td></tr>
+<tr><td>Contract requesters</td><td>From [date] you raise contracts here instead</td><td>Team meetings + 1-page guide</td><td>4 weeks out, 1 week out, day 1</td><td>Change lead</td><td>Behaviour change</td></tr>
+<tr><td>Signatories</td><td>You will sign electronically now</td><td>Direct email + 10 min walkthrough</td><td>2 weeks out</td><td>Change lead</td><td>Account activated</td></tr>
+<tr><td>EU PM</td><td>ANZ design decisions and divergences</td><td>Weekly sync + shared decision log</td><td>Weekly</td><td>PM</td><td>Alignment or escalation</td></tr>
+</table></div>
+<p class="exnote"><b>Notice:</b> the last column. A communication with no desired response is a broadcast, and broadcasts are how projects convince themselves they have engaged people.</p>`,
+
+/* 17 Methodology */ `
+<div class="art"><div class="artt">Delivery approach · as it would appear in the charter</div><div class="body">This project runs as a hybrid. The vendor build, testing and cutover follow a staged, gated approach, because the SOW is fixed-scope, the date is hard, and the vendor cannot absorb iteration without a commercial variation. Requirements gathering and migration discovery run iteratively in short cycles, because in both cases we do not yet know enough to specify the work up front and would only be guessing on paper.<br><br>The two are joined at the scope lock checkpoint in week 4: everything discovered iteratively before that date feeds the fixed plan after it.</div></div>
+<p class="exnote"><b>Why this beats naming a methodology:</b> it shows the constraints driving the choice. "I'm an agile PM" on a project with a signed fixed-scope SOW and a regulatory-style deadline reads as identity rather than judgement.</p>`,
+
+/* 18 Benefits */ `
+<div class="art"><div class="artt">Benefits and measures</div><table class="grid">
+<tr><td>Level</td><td>Measure</td><td>Baseline</td><td>Target</td><td>When</td></tr>
+<tr><td>Output</td><td>Workflows live in production</td><td>0 of 5</td><td>All committed</td><td>Go-live</td></tr>
+<tr><td>Output</td><td>Contracts migrated and reconciled</td><td>0</td><td>100% in-scope</td><td>Go-live</td></tr>
+<tr><td>Outcome</td><td>New ANZ contracts raised in Ironclad</td><td>0%</td><td>90%</td><td>Day 60</td></tr>
+<tr><td>Outcome</td><td>Contracts raised outside the system (workarounds)</td><td>capture pre-go-live</td><td>Under 5%</td><td>Day 90</td></tr>
+<tr><td>Benefit</td><td>Median contract cycle time, request to signature</td><td>capture pre-go-live</td><td>-30%</td><td>Day 120</td></tr>
+<tr><td>Benefit</td><td>Contracts with complete metadata</td><td>capture at profiling</td><td>Over 95%</td><td>Day 90</td></tr>
+</table></div>
+<p class="exnote"><b>The line that signals experience:</b> three of these baselines have to be captured <b>before</b> go-live or the comparison is gone forever. That is a week-two task, not a month-four one.</p>`,
+
+/* 19 Pre-mortem */ `
+<div class="art"><div class="artt">Pre-mortem output · 45 min session, week 2</div><div class="body">Framing to the room: "It is go-live weekend. The project has failed badly and it is being reviewed. Write down why, individually, for five minutes. No wrong answers."<br><br>Then collected, grouped and ranked by how many people raised it:</div><table class="grid">
+<tr><td>Cause raised</td><td>Raised by</td><td>Already in RAID?</td></tr>
+<tr><td>Icertis data was far worse than anyone expected</td><td>6 of 8</td><td>Yes, R-01</td></tr>
+<tr><td>Legal never really engaged, requirements were guessed</td><td>5 of 8</td><td>Yes, R-04</td></tr>
+<tr><td>EU changed a shared workflow late and we rebuilt</td><td>4 of 8</td><td>NO, new</td></tr>
+<tr><td>Nobody owned the approval thresholds so nothing routed</td><td>3 of 8</td><td>NO, new</td></tr>
+<tr><td>Signatories were never onboarded, contracts stalled at signature</td><td>2 of 8</td><td>NO, new</td></tr>
+</table></div>
+<p class="exnote"><b>Three new risks in forty-five minutes,</b> none of which a risk workshop would have surfaced, because "what could go wrong" invites politeness and "it has already failed" does not. Notice the last one: a whole user group nobody had counted.</p>`,
+
+/* 20 Change control */ `
+<div class="art"><div class="artt">Change request · CR-007</div><table>
+<tr><td>Requested by</td><td>Indirect Procurement, [date]</td></tr>
+<tr><td>Change</td><td>Add a second approval step for Framework Agreements over [value]</td></tr>
+<tr><td>Reason</td><td>New delegation of authority policy issued after scope lock</td></tr>
+<tr><td>Impact: time</td><td>+1.5 weeks vendor build, lands on the critical path</td></tr>
+<tr><td>Impact: cost</td><td>Outside SOW. Vendor variation, est. [amount]</td></tr>
+<tr><td>Impact: quality/risk</td><td>Compresses UAT by 1 week unless go-live moves</td></tr>
+<tr><td>Options</td><td>(a) Accept, absorb into contingency, compress UAT. (b) Defer to phase 2, manage manually at go-live. (c) Reject.</td></tr>
+<tr><td>Recommendation</td><td>(b). The policy can be met with a manual control for 8 weeks at low risk, and UAT compression is the one thing we agreed not to trade.</td></tr>
+<tr><td>Decision</td><td>Sponsor, [date]</td></tr>
+</table></div>
+<p class="exnote"><b>Notice:</b> change control is a route, not a wall. The form does not say no. It makes the cost of yes visible, offers options, and recommends one. That is the difference between administering change and managing it.</p>`,
+
+/* 21 Influence */ `
+<div class="art"><div class="artt">The structured ask · what "low cost to say yes" looks like</div><div class="body"><b>Subject: 40 minutes on NDA workflow, Thursday, draft attached</b><br><br>Hi [name],<br><br>I have drafted how I think the NDA approval process works today, based on the Icertis config and three sample contracts. It is attached and it is one page.<br><br>I am fairly sure two of the steps are wrong. Rather than ask you to write it out from scratch, could I have 40 minutes on Thursday to walk you through it and have you correct me?<br><br>If Thursday does not work, I can take corrections in the margin of the attachment instead and skip the meeting entirely.<br><br>What I need from this: sign-off on the approval thresholds, because Ironclad cannot start building the NDA workflow until they are fixed, and that build is currently the longest item on the plan.</div></div>
+<p class="exnote"><b>Four things this does.</b> It replaces creation with reaction, which is the single biggest cost reduction available. It names the exact time required. It offers an escape route that still gets you the answer. And it makes the consequence of delay concrete without threatening anyone. Compare that to "when are you free to discuss requirements?"</p>`,
+
+/* 22 PIR */ `
+<div class="art"><div class="artt">Post-implementation review · agenda and outputs</div><table>
+<tr><td>Timing</td><td>Two weeks after hypercare exit, while memory is fresh and people are still on the project</td></tr>
+<tr><td>Section 1</td><td>Did we deliver what we said? Scope, date, cost against baseline, with variance explained.</td></tr>
+<tr><td>Section 2</td><td>Are the benefits landing? Measures against baseline, with a date for the next read.</td></tr>
+<tr><td>Section 3</td><td>What worked and should become standard practice.</td></tr>
+<tr><td>Section 4</td><td>What did not, and what specifically we would do differently.</td></tr>
+<tr><td>Section 5</td><td>Where each lesson goes and who owns it, so the next project actually finds it.</td></tr>
+<tr><td>Output</td><td>An updated ANZ system launch playbook, not a document filed in a folder.</td></tr>
+</table></div>
+<p class="exnote"><b>Section 5 is the one everyone skips</b>, and it is the only one that changes anything. Note the link to the job description: "refining playbooks and establishing operational best practices" is exactly this, made durable.</p>`,
+
+/* 23 Brooks and Little */ `
+<div class="art"><div class="artt">How these show up in a real recommendation</div><div class="body"><b>When someone says "can we add two people to catch up?"</b><br>"We can, but not to the cleanse. Whoever joins needs two weeks to understand the Icertis metadata before they are net positive, and the person training them is the person currently doing the work. If we are adding resource, it should go to test script authoring, which is self-contained and off the critical path, freeing the data lead to stay on the cleanse."<br><br><b>When someone says "why not configure all five workflows at once?"</b><br>"Because the SMEs are the constraint, not the vendor. Five parallel workflows means five simultaneous demands on the same four people, and every one takes longer. Sequencing three then two means the first three finish sooner and we learn things from them that make the last two cheaper."</div></div>
+<p class="exnote"><b>Notice:</b> neither answer names the law. You use the idea to support a recommendation. Naming the law out loud is trivia; using it is judgement.</p>`
+];
+
+/* ============ DATA: worked answers for the practice steps ============ */
+const WORKED = [
+/* 01 */ `<p>HelloFresh ANZ is replacing Icertis with Ironclad so that contracts are created, approved, signed and stored in one system, cutting manual handling and giving Legal and Procurement visibility they do not have today.</p>
+<p>The Icertis contract expires on a fixed date, and that is a stop rather than a slip, because after it we lose access to the system holding our contract history.</p>
+<p>Done means the workflows we committed to are live and in use, every contract we committed to migrate is in Ironclad and reconciled against source, and Icertis has been decommissioned with nothing stranded in it.</p>
+<p style="margin-top:12px"><b>Why this works:</b> sentence one is an outcome, not an activity. Sentence two names the constraint and why it bites harder than a normal deadline. Sentence three is testable by someone who is not you, and it deliberately says "committed to migrate" rather than "everything", because scope is not decided yet and you should not promise it here.</p>`,
+
+/* 02 */ `<p><b>Blocks estimating</b> (these determine the plan, so they go first):</p>
+<ul>
+<li>How many contracts are in Icertis, in what state, with what metadata quality. → <b>Discovery task</b>, PM + data resource, start week 1.</li>
+<li>The actual Icertis expiry date and the commercial cost and terms of extending. → <b>Discovery task</b>, PM with Procurement and Finance, week 1.</li>
+<li>Which month the Indirect key user is on leave. → <b>Discovery task</b>, PM, day 2. Trivially cheap and it constrains the whole test plan.</li>
+<li>What the SOW actually covers and excludes. → <b>Discovery task</b>, PM, week 1.</li>
+<li>What the EU has already decided or committed to on the three shared workflows. → <b>Discovery task</b>, PM with EU PM, week 1.</li>
+<li>What resource I actually have. Is there a data analyst, a BA, a change resource, or is it me? → <b>Discovery task</b>, PM with sponsor, day 1.</li>
+</ul>
+<p><b>Blocks starting</b> (these slow the work but not the plan):</p>
+<ul>
+<li>Who the named business owner is for each of the five workflows. → Discovery, week 1.</li>
+<li>Whether Icertis integrates with anything (ERP, procurement, e-signature) that Ironclad must also serve. → Discovery, week 2.</li>
+<li>Legal and records retention obligations on contract data. → Discovery, week 2, Legal owns.</li>
+</ul>
+<p><b>Assumptions I will state and test:</b></p>
+<ul>
+<li>Icertis will provide a full structured export at no extra cost. If false, migration cost and effort change materially. Test week 1.</li>
+<li>No system integration is required at go-live. If false, this becomes a new WBS branch. Test week 2.</li>
+<li>Migrating raw data preserves everything of value. <b>Worth challenging:</b> raw files are not the same as usable records with correct metadata, ownership and legal entity. And once Icertis is switched off, "we can always look back" stops being true. There is a point of no return and it needs a date.</li>
+</ul>
+<p style="margin-top:12px"><b>Why this works:</b> every unknown became either a dated task with an owner or a stated assumption with a test. A list of unknowns is an observation. This is a plan.</p>`,
+
+/* 03 */ `<p>See the worked stakeholder matrix on the power/interest card in tab 2 for the full grid. The reasoning behind it:</p>
+<ul>
+<li><b>Missing from the brief entirely:</b> the sponsor, IT and security (a third-party cloud system holding contracts will need review, SSO and a data location answer), signatories (e-signature makes executives into users), and the business teams who actually request contracts, who are the largest user group and appear nowhere.</li>
+<li><b>The quadrant that matters:</b> SteerCo has all the formal authority and can barely delay you. A Procurement SME has none and can stop the project dead. Power and ability to block are different axes, and the second one is the one that hits your date.</li>
+<li><b>Icertis is a stakeholder with high power and hostile incentives.</b> They control your data export and they are being terminated. Secure their cooperation early, while the relationship is still commercial rather than personal.</li>
+<li><b>The EU PM is the interesting one.</b> Medium power, medium interest, no authority in either direction. That means the relationship has to run on an agreed mechanism rather than on goodwill, because when you disagree there is no one obvious to break the tie.</li>
+</ul>
+<p style="margin-top:12px"><b>Why this works:</b> it uses the tool to produce a decision about where attention goes, rather than producing a list of names. If your stakeholder map does not change what you do on Monday, you have drawn a diagram, not analysed anything.</p>`,
+
+/* 04 */ `<p>See the full worked WBS on the scope management card in tab 2. Eight branches: requirements and design, vendor configuration, data migration, testing and acceptance, change and training, cutover and hypercare, Icertis decommission, and project management.</p>
+<p><b>Share of effort outside the vendor SOW:</b> the vendor delivers branch 2 and part of branch 4. On a CLM replacement with a full migration, that is typically somewhere between a quarter and a third of the total effort. Which means if you plan the vendor's work and call it the project plan, you have planned roughly 30% of the project and will miss the date by the other 70%.</p>
+<p style="margin-top:12px"><b>Why this works:</b> it is deliverable-oriented rather than document-oriented, it passes the 100% rule, and it forces migration and change out into the open as workstreams with their own owners, estimates and risks rather than as tasks buried under someone else's branch.</p>`,
+
+/* 05 */ `<p>See the full worked RACI grid on the RACI card in tab 2. The three things to say about it:</p>
+<ul>
+<li><b>On requirements sign-off, the A sits with the business owner of that contract type, not with me.</b> I am R: I run the process, chase the input and produce the pack. But I cannot be accountable for whether an NDA approval threshold is correct, and pretending otherwise gives Legal an easy out later.</li>
+<li><b>On migration scope, the in-flight rule and training approach, the A is mine.</b> These are delivery mechanics. If I am not accountable for them I cannot be held to the date, and I would rather hold the A than be informed. Being merely informed on the workstream most likely to sink your date is not a position any delivery lead should accept.</li>
+<li><b>On the responsible-versus-accountable ambiguity with the Product Manager:</b> I would surface it in week one rather than discover it in month four. The practical resolution I would propose is that the Product Manager holds A for the outcome and the vendor relationship, including UAT acceptance, and I hold A for delivery decisions inside the project. If they want a different split, fine, but it gets agreed while it is a conversation rather than after it has become a disagreement.</li>
+</ul>
+<p style="margin-top:12px"><b>Why this works:</b> it is applied only to contested decisions, every row has exactly one A, and it treats the grid as an opening position in a negotiation rather than as a fact.</p>`,
+
+/* 06 */ `<p>See the fully worked R-01, D-01, A-01 and I-01 entries on the RAID card in tab 2. Four points of method:</p>
+<ul>
+<li><b>The key user's leave is a dependency, not a risk.</b> It is certain. Certainties do not get probabilities. And because you do not yet know which month it falls in, the honest entry is not a mitigation, it is a decision required by a date.</li>
+<li><b>The unmapped Icertis data is the number one risk</b> and it scores 25, because the probability is 5 (it is true right now) and the impact is 5 (it sets the critical path). Most people score it lower because it feels like an admin gap rather than a threat.</li>
+<li><b>Impact framing.</b> Overrunning the Icertis contract is not primarily a cost impact. It is potential loss of access to contract records, which for a contracts system is a legal and audit exposure. Frame the impact at the level it actually lands.</li>
+<li><b>There are live Issues today.</b> No plan, no RACI, no comms framework, SMEs told but not engaged. Those are current states, not future possibilities, and every week they persist burns vendor build runway.</li>
+</ul>
+<p style="margin-top:12px"><b>Why this works:</b> classification is right, mitigation and contingency do different jobs, and every trigger is observable by someone other than the PM.</p>`,
+
+/* 07 */ `<p>See the two worked chains on the critical path card in tab 2. The conclusion:</p>
+<p>The real path is <b>profile Icertis data → size migration scope → requirements → vendor build → SIT → UAT → sign-off → cutover</b>. Profiling has zero float and sits ahead of everything, yet it is the least visible task on the project and the one most likely to be scheduled late because it feels like preparation rather than delivery.</p>
+<ul>
+<li><b>Float</b> sits in Third Party Agreements (Product Manager owns it, it can phase), training design, and the cleanse of older records. That is where you take resource from when the path slips.</li>
+<li><b>Fast-tracking option:</b> start vendor build on the three workflows whose requirements are settled while the other two are still in workshops. Buys weeks, costs rework risk if a shared design decision changes.</li>
+<li><b>Crashing option:</b> add a data analyst to the cleanse. Costs money, and Brooks's Law limits how much it helps if you do it late.</li>
+</ul>
+<p style="margin-top:12px"><b>Why this works:</b> it names a chain rather than a list, it identifies where the slack is (which is the actionable half of critical path analysis and the half everyone forgets), and it distinguishes the two compression levers by what each one costs.</p>`,
+
+/* 08 */ `<p>See the full worked MoSCoW table on the prioritisation card in tab 2.</p>
+<p><b>The phasing insight:</b> there is more than one shape of go-live available. All five workflows live with only active contracts migrated is a different project from three workflows live with everything migrated. Those are different dates, different risks and different conversations, and offering the SteerCo a choice between shapes is far stronger than offering them a single plan and hoping.</p>
+<p><b>The sentence to open the SteerCo conversation:</b></p>
+<p style="border-left:2px solid var(--amber);padding-left:14px;margin:12px 0">"The date is fixed by the Icertis expiry and the cost is fixed by the signed SOW, so scope is the only variable I have. I would rather agree with you now what go-live must include and what can follow, while it is a planning decision, than come back to you in month four when it will be a crisis decision. Here are two shapes of go-live and what each one costs us."</p>
+<p style="margin-top:12px"><b>Why this works:</b> it prioritises actual deliverables rather than outcomes, the Won't column contains a real loss, there is a scope lock date, and the SteerCo sentence names the tension before asking for the decision, which is the move that makes you sound senior rather than nervous.</p>`,
+
+/* 09 */ `<p>See the worked ADKAR table for Indirect Procurement on the change management card in tab 2. The three things worth saying out loud:</p>
+<ul>
+<li><b>Awareness cannot be optional.</b> Respecting people's time is right, but a person who does not know why this is happening will read it as something being done to them. The answer is not to skip Awareness, it is to deliver it in ten minutes at <i>their</i> existing team meeting, fronted by the sponsor rather than by me, so it costs them nothing extra and carries weight.</li>
+<li><b>Desire means finding out who this makes worse off, and saying so.</b> For Legal, auto-generated templates may mean less drafting control. That is a real loss. Naming it honestly buys far more credibility than promising everyone will love it, and it is usually where the actual resistance lives.</li>
+<li><b>Ability is not documentation.</b> Documentation is Knowledge. Ability is whether someone can do it under pressure with a weird edge case in front of them, which means sandbox time with their own data, floorwalking, and support on their first real contract.</li>
+</ul>
+<p style="margin-top:12px"><b>Language note:</b> the word is <b>adoption</b>, not adherence. Adherence sounds like compliance monitoring. Adoption is what the job description asks for.</p>`,
+
+/* 10 */ `<p>See the worked forum table, SteerCo pack structure and decision log row on the governance card in tab 2, and the comms plan on the communications card.</p>
+<ul>
+<li><b>Fortnightly SteerCo, not weekly.</b> A weekly executive forum gets cancelled by week three and then you have no governance at all. Fortnightly with a defined exception path (anything urgent escalates to the sponsor inside five working days) is more likely to survive contact with reality.</li>
+<li><b>Decisions requested goes first in the pack,</b> above status. A SteerCo that only receives status is being used as an audience rather than as a resource, and you will need them as a resource when scope has to move.</li>
+<li><b>Bookended SME engagement</b> is right and worth keeping. Heavy in requirements, light in build, heavy again in UAT.</li>
+<li><b>The gap:</b> there is no communication to anyone outside the working groups. The people who request contracts and the people who sign them are the largest user population on this project and they appear in nobody's plan until the week before go-live, which is exactly how adoption fails.</li>
+</ul>`,
+
+/* 11 */ `<p><b>Day 1.</b> Meet the sponsor and agree what done looks like and what they are most worried about. Find out what resource I actually have. Ask two cheap questions with expensive answers: when exactly does the Icertis contract expire, and which month is the Indirect key user away.</p>
+<p><b>Week 1.</b> Three things in parallel. Draft the charter and a proposed RACI as things for people to react to, not as finished work. Open the Icertis conversation on extension terms, because knowing the price of time changes every decision after it. And start the Icertis data profiling immediately, because it sets the critical path and every week it waits is a week the whole plan stays unestimated.</p>
+<p><b>Weeks 2 to 4.</b> Kickoff with the sponsor fronting the why. Issue requirements packs as half-drafted as-is process maps for SMEs to correct rather than blank templates to fill. Run a pre-mortem with the core team. Requirements workshops across the five workflows. Establish the ANZ and EU sync and agree what is shared design versus local. Capture the benefit baselines before anything changes, because after go-live it is too late forever.</p>
+<p><b>By day 30 I would know</b> what is actually in Icertis and therefore what migration costs, whether the deadline is genuinely immovable or merely expensive, which of the five workflows are contested, who really owns each decision, and what the honest shape of go-live is. That is the point at which I could put a plan in front of the SteerCo that I would defend.</p>
+<p style="margin-top:12px"><b>Why this works:</b> discovery starts in week one rather than week four, the artefacts are drafts to react to rather than documents to admire, and it ends with what changed rather than with what was produced.</p>`
+];
+
+/* ============ DATA: spoken answers for the mapper ============ */
+const SPOKEN = [
+/* 1 */ `<p>Three things, in this order. What does done actually look like, who gets to decide things, and what do I not know yet.</p><p>But the one I would start immediately, day one, is finding out what is actually sitting in Icertis. Nobody has mapped it, and until it is mapped I cannot size the migration. And if I cannot size the migration I cannot commit to a date for anything, which means I do not really have a plan, I have a wish.</p><p>So while I am doing the normal week one things, drafting a charter, mapping stakeholders, proposing a RACI, the data profiling is running in parallel from day one. It feels like preparation, so it tends to get scheduled late, and I think that is the mistake this project is set up to make.</p>`,
+
+/* 2 */ `<p>I would start by being clear about which constraint is actually fixed. The date is fixed by the Icertis expiry. The cost is mostly fixed because the SOW is signed. So scope is the only real lever I have, and quality is the one I do not want to trade because these are legal records.</p><p>Which means the conversation I want early, while it is still cheap, is what go-live must include versus what can follow. I would rather have that as a planning conversation in week two than as a crisis conversation in month four.</p><p>For the plan itself, I would plan the first four weeks in proper detail and hold the rest as sized placeholders, with a hard checkpoint where scope locks. I think saying "I do not know yet" is fine, but only if you can also say when you will know and what will tell you.</p>`,
+
+/* 3 */ `<p>First I would be clear that this is not a risk any more, it has happened, so it is an issue and I manage it today rather than log it.</p><p>Then I would check my own side before escalating. Was the ask specific and small, or did I send a blank requirements template. Did I book time in advance or ask when they were free. Did I give them something to react to or something to create, because reacting takes ten minutes and creating takes two hours, which is why blank templates come back empty.</p><p>If I had done all that and still had nothing, I would go to the sponsor. But I would go with the consequence made concrete: this specific vendor slot, this many days, and here is what it costs. Escalating works about twice before you become the person who escalates.</p>`,
+
+/* 4 */ `<p>The first thing I would say is that this is not a risk, because it is certain. It is a known constraint, so it needs a decision now rather than a line in the risk register.</p><p>I can see about four options. Move the Indirect UAT window so it does not overlap. Split UAT by workflow so Indirect runs separately. Get the key user to write and pre-approve the test scripts before they go, so someone else can execute against their criteria. Or appoint and train a delegate early enough that they are genuinely capable, not just present.</p><p>They all cost something. Moving the window pressures the date. A delegate risks a weaker sign-off on the one workflow nobody else knows. My instinct is the pre-approved scripts plus a trained delegate, because it keeps the schedule and keeps their authority over the acceptance.</p><p>But I would not decide alone. I would take those options to whoever owns acceptance, with a recommendation. I think arriving with options and no recommendation is just moving the problem.</p>`,
+
+/* 5 */ `<p>I would start from their side of it. A request from me is a cost to them, and my job is to make that cost as low as possible.</p><p>Practically that means never sending a blank template. I would map out how I think their process works from the Icertis config and a few sample contracts, get it deliberately slightly wrong, and ask them to correct me. Correcting is fast and people quite enjoy it. Creating from nothing is slow and it gets deferred.</p><p>Then short pre-booked sessions rather than open-ended requests, and being honest about what I need and by when. I would also publish dependencies so it is visible what is waiting on whom, which is not about blame, it is about making the cost of not responding real.</p><p>And I would use the sponsor sparingly. Borrowed authority works, but it has a limited number of uses.</p>`,
+
+/* 6 */ `<p>I would rather give you three properly than ten as a list.</p><p>The biggest is that nobody knows what is in Icertis. That is not really a risk, it is true right now, and it means the critical path is unestimated. Owner is me, mitigation is profiling starting week one, and the trigger is if it is not done by end of week three.</p><p>Second is Legal and Procurement not engaging in time. They are the requirements, they do not report to me, and the vendor cannot start without them.</p><p>Third is the migration itself. Messy data in Icertis becomes messy data in Ironclad, and once Icertis is switched off there is a point where you cannot go back and check.</p><p>What I would want to say about all three is that the trigger matters more than the score. A risk with a mitigation and no trigger just sits there until it has already happened.</p>`,
+
+/* 7 */ `<p>The thing I would say first is that migration is not a task at the end, it is a workstream, and it is probably what sets the date.</p><p>The sequence is profile, cleanse, map, mock run, reconcile, cut over. Profile first, because nothing can be sized until you know the volume and the state of the metadata. Cleanse at source rather than in transit, because if you fix it on the way through you have two versions of the truth and no way to prove which is right.</p><p>Then at least two full mock runs on real data, timed, so you know it fits in the cutover window. And reconciliation as an actual control: counts match, values match, a sample opened side by side and signed off, and every failed record listed rather than quietly dropped.</p><p>The part people forget is in-flight contracts. You need a freeze date and a rule about which system is authoritative during the overlap, and that is a business decision, not a technical one.</p>`,
+
+/* 8 */ `<p>I think this is the most interesting part of the project, actually.</p><p>Looking at the five contract types, three span ANZ and EU and two are ANZ only. So the first thing I would want to do is separate what should be shared by design from what genuinely has to diverge. And I would want to hold a fairly high bar on that, because "we have always done it this way here" is not a local requirement, whereas a difference in local law or entity structure is.</p><p>Practically, a weekly sync with the EU PM and one shared decision log, so we are not each holding a different version of a shared design. And I would want to agree upfront who arbitrates when we disagree, because neither of us has authority over the other and working that out during a disagreement is much harder than working it out before one.</p><p>The other thing I would want to know early is whether the EU is ahead of us and has already committed to something, because that changes whether I am contributing to a design or inheriting one.</p>`,
+
+/* 9 */ `<p>The honest answer is that training is the easy bit and it is not usually where adoption fails.</p><p>The way I think about it, there are about five reasons someone does not use a new system. They do not know why it is changing. They know why but it makes their life worse. They want to but do not know how. They know how but cannot do it under real pressure. Or they can, but the old way is still open so they drift back.</p><p>Training only touches two of those. So for this one, I would want to understand who the change actually makes worse off. If auto-generated templates mean Legal has less drafting control, that is a real loss, and saying so honestly earns more trust than promising everyone will love it.</p><p>And I would treat workarounds as a design signal rather than as people misbehaving. If someone is doing a contract offline, they usually have a reason, and I would rather they told me.</p>`,
+
+/* 10 */ `<p>Hybrid, and I would want to explain why rather than just pick one.</p><p>The vendor side has to be staged. The SOW is fixed-scope, the date is hard, and Ironclad cannot absorb iteration without it becoming a commercial variation. So build, test and cutover run as gated phases.</p><p>But requirements and the migration discovery cannot work that way, because we do not know enough yet to specify them up front. If I tried, I would just be guessing on paper and then paying for the guess later. So those run iteratively in short cycles.</p><p>The two join at the scope lock point. Everything we learn iteratively before that date feeds the fixed plan after it. I think declaring yourself an agile PM or a waterfall PM is a bit beside the point. The constraints here are quite loud and they mostly choose for you.</p>`,
+
+/* 11 */ `<p>One page, fortnightly, and the first section is decisions I need from them.</p><p>I would put decisions above status deliberately. If the pack is all status, you have used an hour of six senior people's time as an audience, and then when you actually need them to move scope they are not warmed up and they are not invested.</p><p>After that, RAG per workstream in one line each, milestones hit and at risk, the top three risks with owners and whether any triggers have fired, and any scope changes since last time.</p><p>I would also want a written escalation rule, something like any decision not made within five working days goes to the sponsor automatically. Having it written down in advance means escalating stops being a personal act, which makes it much easier to actually do.</p>`,
+
+/* 12 */ `<p>I would separate three levels, because they get conflated a lot.</p><p>The output is that the system is live and the contracts are migrated. That is done at go-live and honestly nobody funded that.</p><p>The outcome is that people are actually using it. So, what percentage of new ANZ contracts are being raised in Ironclad, and how many are still happening outside the system. That is the adoption number, and the workaround rate is the one I would watch hardest.</p><p>The benefit is the thing they paid for. Contract cycle time from request to signature, and metadata completeness.</p><p>The bit I would flag is that two of those baselines have to be captured before go-live. If you do not measure cycle time beforehand you have permanently lost the ability to prove the project worked, and that is a week two task, not a month four one.</p>`,
+
+/* 13 */ `<p>Flag it early. I think the actual failure is not missing a date, it is a sponsor finding out late. That is the thing you do not recover from.</p><p>Then I would come with options rather than a problem. Descope, using the priorities we already agreed, which is the cheapest lever and it is easy precisely because we had that conversation in week two rather than in the moment. Phase the go-live, so some workflows land now and some follow. Crash it, add resource, which costs money and does not help much late. Or fast-track, overlap things that were sequential, which costs rework risk.</p><p>And I would want to be clear about what I would not trade. Compressing UAT to save a week on a system holding legal records is not a trade I would recommend, and I would say so.</p>`,
+
+/* 14 */ `<p>Not many, and I would want to say why in that order.</p><p>You cannot write a plan until you know the scope. You cannot know the scope until the discovery is done. And you cannot run discovery efficiently until you know who owns what. So the order picks itself: get decision rights and a definition of done agreed, start the data discovery immediately, and let the plan follow the facts.</p><p>What I would not do is produce a full Gantt chart in week one. It would be fiction, everyone would know it was fiction, and then the plan stops being something people trust.</p><p>The three things I would actually have by end of week one are a draft charter, a proposed RACI, and profiling underway. All of them deliberately as drafts for people to argue with, because a draft gets corrected and a finished document gets nodded at.</p>`,
+
+/* 15 */ `<p>Use the structure but do not announce it. Situation and task quickly, then spend most of your time on what you actually did, then a number at the end.</p><p>The thing that lifts this from a story to evidence is closing with method: "and if I ran that again, the thing I would do differently is X, because Y." That converts an anecdote into something they can generalise about how you work, which is what they are really asking for.</p>`,
+
+/* 16 */ `<p>Two things, and they are both the ones that stop me estimating rather than the ones that just interest me.</p><p>First, what is actually in Icertis. Volume, state, metadata quality. Because until that is known, migration is unsized, and migration is probably the critical path.</p><p>Second, the exact expiry date and what an extension would cost. Not because I would plan to extend, but because knowing the price of time changes every trade-off after it. If four extra weeks is cheap, this is a different project from one where it is impossible.</p><p>And a third if I can have it: whether the EU has already committed to a design on the shared workflows. That changes whether I am contributing to a blueprint or inheriting one.</p>`
+];
+
 /* ============ RENDER ============ */
 const tierLabel = {A:"Wield",B:"Reach for",C:"Recognise"};
 document.getElementById('cards').innerHTML = CARDS.map((c,i)=>`
@@ -706,11 +1272,12 @@ document.getElementById('cards').innerHTML = CARDS.map((c,i)=>`
       <div class="field"><div class="lbl">What it is</div><div class="val">${c.w}</div></div>
       <div class="field case"><div class="lbl">Where this case points at it</div><div class="val">${c.c}</div></div>
       <div class="field trap"><div class="lbl">The trap</div><div class="val">${c.x}</div></div>
+      <details class="ex"><summary>What it actually looks like</summary><div class="exb">${EXAMPLES[i]||''}</div></details>
     </div>
   </details>`).join('');
 
 let lastPhase="";
-document.getElementById('steps').innerHTML = STEPS.map(s=>{
+document.getElementById('steps').innerHTML = STEPS.map((s,i)=>{
   let head = s.ph!==lastPhase ? `<div class="phase">${s.ph}</div>` : "";
   lastPhase = s.ph;
   return head + `
@@ -720,17 +1287,23 @@ document.getElementById('steps').innerHTML = STEPS.map(s=>{
     <div class="sp">${s.p}</div>
     <div class="tools">${s.tools.map(t=>`<span>${t}</span>`).join('')}</div>
     <textarea data-step="${s.n}" data-title="${s.t}" placeholder="Your answer…"></textarea>
-    <details class="reveal"><summary>What a strong answer covers</summary>
+    <details class="reveal"><summary>1 · What a strong answer covers</summary>
       <div class="rbody"><ul>${s.r.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    </details>
+    <details class="reveal wa"><summary>2 · A worked answer (open this second)</summary>
+      <div class="rbody">${WORKED[i]||''}</div>
     </details>
   </div>`;
 }).join('');
 
-document.getElementById('qas').innerHTML = QAS.map(q=>`
+document.getElementById('qas').innerHTML = QAS.map((q,i)=>`
   <div class="qa" data-txt="${(q.q+' '+q.tools.join(' ')+' '+q.s).replace(/<[^>]+>/g,'').toLowerCase().replace(/"/g,'')}">
     <div class="qq">“${q.q}”</div>
     <div class="qt">${q.tools.map(t=>`<b>${t}</b>`).join('')}</div>
     <div class="qs">${q.s}</div>
+    <details class="spoken"><summary>What it sounds like out loud</summary>
+      <div class="sbody">${SPOKEN[i]||''}</div>
+    </details>
   </div>`).join('');
 
 /* ============ TABS ============ */
