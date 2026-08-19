@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ironclad Rollout: PM Toolkit Lab v2.0</title>
+<title>Ironclad Rollout: PM Toolkit Lab v2.1</title>
 <style>
   :root{
     --paper:#FBFAF7;
@@ -498,7 +498,7 @@
 
 <header class="masthead">
   <div class="wrap">
-    <div class="eyebrow">Interview Lab · v2.0</div>
+    <div class="eyebrow">Interview Lab · v2.1</div>
     <h1>The PM toolkit behind the Ironclad case</h1>
     <p class="sub">Not a plan for you to memorise. A set of tools, what question each one answers, where this case is quietly asking you to reach for it, and what each one looks like when it is actually built. The thinking is still yours to do.</p>
     <p class="meta">HelloFresh ANZ · Senior Systems Enablement Manager · Ironclad CLM case study</p>
@@ -586,7 +586,7 @@
 <!-- ================= 2. TOOLKIT ================= -->
 <section class="panel" id="toolkit">
   <h2>The toolkit</h2>
-  <p class="lede">Twenty-four tools, tiered by how well you need to know them by tomorrow. Tier A you should be able to run live if asked. Tier B you should be able to name, define and say when you would reach for. Tier C you only need to recognise so a term does not blindside you.</p>
+  <p class="lede">Twenty-five tools, tiered by how well you need to know them by tomorrow. Tier A you should be able to run live if asked. Tier B you should be able to name, define and say when you would reach for. Tier C you only need to recognise so a term does not blindside you.</p>
 
   <div class="note warn">
     <strong>Read the tags on each diagram</strong>
@@ -599,9 +599,9 @@
   <p class="scrollhint">On a phone, the diagrams scroll sideways. Swipe them.</p>
 
   <div class="filters">
-    <button class="chip on" data-f="all">All 24</button>
+    <button class="chip on" data-f="all">All 25</button>
     <button class="chip" data-f="A">Tier A · wield these (8)</button>
-    <button class="chip" data-f="B">Tier B · reach for these (10)</button>
+    <button class="chip" data-f="B">Tier B · reach for these (11)</button>
     <button class="chip" data-f="C">Tier C · recognise these (6)</button>
   </div>
 
@@ -941,7 +941,7 @@
     <div class="wgrp">Testing and launch</div>
     <div class="words"><span class="word" data-go="toolkit">SIT vs UAT</span><span class="word" data-go="toolkit">entry and exit criteria</span><span class="word" data-go="toolkit">severity vs priority</span><span class="word" data-go="toolkit">Go/No-Go</span><span class="word" data-go="toolkit">cutover runbook</span><span class="word" data-go="toolkit">rollback point</span><span class="word" data-go="toolkit">hypercare</span><span class="word" data-go="toolkit">parallel running</span></div>
     <div class="wgrp">Value</div>
-    <div class="words"><span class="word" data-go="toolkit">output vs outcome vs benefit</span><span class="word" data-go="toolkit">baseline</span><span class="word" data-go="toolkit">leading indicator</span><span class="word" data-go="toolkit">adoption rate</span><span class="word" data-go="toolkit">workaround rate</span><span class="word" data-go="toolkit">post-implementation review</span></div>
+    <div class="words"><span class="word" data-go="toolkit">output vs outcome vs benefit</span><span class="word" data-go="toolkit">benefits baseline</span><span class="word" data-go="toolkit">performance baseline</span><span class="word" data-go="toolkit">re-baseline</span><span class="word" data-go="toolkit">measurement definition</span><span class="word" data-go="toolkit">leading indicator</span><span class="word" data-go="toolkit">adoption rate</span><span class="word" data-go="toolkit">workaround rate</span><span class="word" data-go="toolkit">post-implementation review</span></div>
   </div>
 
   <div class="rc">
@@ -1004,7 +1004,7 @@
 </div>
 
 <footer>
-  <div class="wrap">Ironclad Rollout PM Toolkit Lab v2.0 · a self-study system for the HelloFresh ANZ case</div>
+  <div class="wrap">Ironclad Rollout PM Toolkit Lab v2.1 · a self-study system for the HelloFresh ANZ case</div>
 </footer>
 
 <script>
@@ -1099,6 +1099,11 @@ const CARDS = [
    w:"<b>Waterfall</b>: sequential, plan-heavy, suits fixed scope and contracted vendors. <b>Agile / Scrum</b>: iterative, suits evolving scope and internal teams. <b>Hybrid</b>: the usual reality, waterfall governance around iterative discovery. <b>PRINCE2</b>: governance-heavy, stage-gated, strong on business case, roles and tolerances, common in AU and UK enterprise. <b>PMBOK / PMI</b>: a body of knowledge organised around process groups (initiating, planning, executing, monitoring and controlling, closing) and knowledge areas. <b>Lean and Six Sigma / DMAIC</b>: process improvement heritage, well regarded in supply chain contexts.",
    c:"There is a signed fixed-scope vendor SOW and a hard date, but requirements and migration discovery both benefit from iterative loops. Think about which parts of this project want which approach, and be ready to say why rather than just naming one.",
    x:"Declaring an identity (\"I'm an agile PM\") rather than making a choice. Method follows constraints, and here the constraints are loud."},
+
+  {t:"B",n:"Baselining and defining the measure",q:"What was true before we changed anything, and can we still find out?",
+   w:"<b>Baseline means two different things and conflating them causes real confusion.</b><br><br><b>1. The performance measurement baseline.</b> The approved version of scope, schedule and cost that progress gets tracked against. This is what people mean by <i>two weeks behind baseline</i>. When a change is formally approved you <b>re-baseline</b>, which resets the yardstick. Sub-baselines: scope baseline, schedule baseline, cost baseline.<br><br><b>2. The benefits baseline.</b> The measurement of whatever you are trying to improve, taken <i>before</i> you change it, so the improvement can be proven later.<br><br>Inseparable from both is the <b>measurement definition</b>. Cycle time is meaningless until you write down whether the clock starts at the request email or when Procurement picks it up, and whether it stops at signature or at filing. Define it, write it down, and use the same definition afterwards.",
+   c:"The job description names adoption rates and manual workarounds, and neither can be measured retrospectively. Work out which measures come free as a byproduct of data profiling, and which need a manual sample or a short survey and therefore need SME time booked and budgeted. Then ask, for each one, when the last possible moment to capture it is.",
+   x:"Assuming the timestamps exist. In a system with messy metadata they frequently do not, so a cycle-time baseline can mean manually sampling forty contracts, which is a real task that belongs in the work breakdown. The second trap is subtler: defining a measure one way before go-live and another way after, which quietly voids the comparison without anyone noticing."},
 
   {t:"C",n:"Benefits realisation and success metrics",q:"How will we know this was worth doing, and when do we measure?",
    w:"<b>Output</b>: the system is live. <b>Outcome</b>: people are using it as intended. <b>Benefit</b>: contract cycle time falls, visibility improves, manual handling drops. Only the third is why anyone funded it. <b>Leading indicators</b> (training completion, logins, workflows initiated) tell you early. <b>Lagging indicators</b> (cycle time, workaround rate, contract compliance) tell you truly. Baselines have to be captured before go-live or the comparison is unavailable forever.",
@@ -1279,6 +1284,7 @@ const DRILL = [
   {t:"In-flight records",q:"What happens to work that is mid-process at switchover?",d:"Needs an explicit rule and a freeze date. The most commonly forgotten part of a cutover plan."},
   {t:"Hypercare",q:"What happens in the fortnight after go-live?",d:"Defined period of elevated support with a triage path, a daily standup and explicit exit criteria back to BAU."},
   {t:"Go/No-Go gate",q:"On what basis do we decide to launch?",d:"Criteria agreed well in advance, precisely so the decision on the day is not made on optimism."},
+  {t:"Baseline (two meanings)",q:"Which baseline do you mean?",d:"Performance baseline: the approved plan you track progress against, reset through change control. Benefits baseline: what was true before you changed anything, capturable only before go-live."},
   {t:"Output vs outcome vs benefit",q:"Did we ship it, do they use it, did it help?",d:"System live, adoption achieved, cycle time reduced. Only the last one is why it was funded."},
   {t:"Three-point estimate / PERT",q:"How confident is that number?",d:"Optimistic, Most likely, Pessimistic. PERT weights it (O + 4M + P) / 6. The spread matters as much as the number."},
   {t:"Contingency vs management reserve",q:"Whose buffer is this?",d:"Contingency covers known unknowns and the PM controls it. Management reserve covers unknown unknowns and the sponsor controls it."},
@@ -1605,6 +1611,16 @@ WEEKS 13+        MILESTONES ONLY
 /* 17 Methodology */ `
 <div class="art"><div class="artt">Delivery approach · as it would appear in the charter</div><div class="body">This project runs as a hybrid. The vendor build, testing and cutover follow a staged, gated approach, because the SOW is fixed-scope, the date is hard, and the vendor cannot absorb iteration without a commercial variation. Requirements gathering and migration discovery run iteratively in short cycles, because in both cases we do not yet know enough to specify the work up front and would only be guessing on paper.<br><br>The two are joined at the scope lock checkpoint in week 4: everything discovered iteratively before that date feeds the fixed plan after it.</div></div>
 <p class="exnote"><b>Why this beats naming a methodology:</b> it shows the constraints driving the choice. "I'm an agile PM" on a project with a signed fixed-scope SOW and a regulatory-style deadline reads as identity rather than judgement.</p>`,
+
+/* 18 Baselining */ `
+<div class="art"><div class="artt">Measurement definition &middot; written before anything is measured</div><table>
+<tr><td>Measure</td><td>Contract cycle time</td></tr>
+<tr><td>Definition</td><td>Elapsed calendar days from the timestamp of the original request to the timestamp of the final signature. Not business days. Not from when Procurement picked it up.</td></tr>
+<tr><td>Scope</td><td>ANZ only. Per contract type, reported as a median rather than a mean, because a handful of stalled contracts distort the average.</td></tr>
+<tr><td>Excludes</td><td>Contracts cancelled before signature. Contracts migrated as historical records.</td></tr>
+<tr><td>Owner</td><td>PM, agreed with sponsor [date]</td></tr>
+</table></div>
+<p class="exnote"><b>Why this exists:</b> in six months someone will produce a different number and the argument will be about the definition rather than the result. Writing it down in week two ends that argument before it starts.</p>`,
 
 /* 18 Benefits */ `
 <div class="art"><div class="artt">Benefits and measures</div><table class="grid">
@@ -1965,6 +1981,24 @@ const VIS = [
 </div>
 <p class="dial"><i><span class="sw" style="background:#FBF3E4"></span> Iterative, because we do not know enough to specify it</i><i><span class="sw" style="background:#EAF1ED"></span> Staged, because the SOW is fixed and the date is hard</i></p>
 <p class="dial"><i>Showing where the two halves join beats naming a methodology. It is the constraints doing the choosing, which is the point.</i></p></div>`,
+
+/* 18 Baselining */ `<div class="dia">${H('Baseline capture plan &middot; what, how, and by when','doc','Working doc &middot; agreed with the sponsor')}
+<div class="art"><table class="grid">
+<tr><td>Measure</td><td>Source</td><td>Effort</td><td>Capture by</td></tr>
+<tr><td>Volume by contract type</td><td>Falls out of profiling</td><td>Free</td><td>Week 4</td></tr>
+<tr><td>Metadata completeness</td><td>Falls out of profiling</td><td>Free</td><td>Week 4</td></tr>
+<tr><td>Cycle time, request to signature</td><td>Manual sample of 40 contracts</td><td>2 days</td><td>Week 5</td></tr>
+<tr><td>Workaround rate</td><td>2 week team log, or contracts filed with a signature date before creation date</td><td>SME time, book it</td><td>Week 6</td></tr>
+<tr><td>How it feels today</td><td>Short interviews, verbatim quotes</td><td>Half a day</td><td>Week 5</td></tr>
+</table></div>
+<div class="chain" style="margin-top:14px">
+<div class="nd ok" style="max-width:150px">Weeks 2-6<small>capture baseline<br>while the old way still exists</small></div>
+<span class="arw">&rsaquo;</span>
+<div class="nd crit" style="max-width:130px">GO-LIVE<small>window closes<br>permanently</small></div>
+<span class="arw">&rsaquo;</span>
+<div class="nd" style="max-width:150px">Day 60 / 90 / 120<small>measure again<br>using the same definition</small></div>
+</div>
+<p class="dial"><i>Two of these are free because profiling produces them anyway, so sequence them together. The other three cost real time and get skipped precisely because they feel like admin. The red box is the point: after cutover the old process no longer exists, so there is nothing left to measure.</i></p></div>`,
 
 /* 18 Benefits */ `<div class="dia">${H('Output → outcome → benefit','sl','Slide · closes the business case')}
 <div class="flow">
