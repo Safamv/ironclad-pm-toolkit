@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ironclad Rollout: PM Toolkit Lab v1.2</title>
+<title>Ironclad Rollout: PM Toolkit Lab v1.3</title>
 <style>
   :root{
     --paper:#FBFAF7;
@@ -352,6 +352,23 @@
   .wa{margin-top:8px}
   .wa>summary{color:var(--amber)}
   .wa .rbody{background:var(--amber-soft)}
+  .tt{margin-top:12px}
+  .tt>summary{cursor:pointer;list-style:none;font-size:13px;font-weight:700;color:var(--green);padding:6px 0}
+  .tt>summary::-webkit-details-marker{display:none}
+  .tt>summary::before{content:"› "}
+  .tt[open]>summary::before{content:"⌄ "}
+  .ttb{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .ttcol{border-radius:8px;padding:13px 15px}
+  .ttcol.on{background:var(--green-soft)}
+  .ttcol.tr{background:var(--rose-soft)}
+  .ttcol h5{margin:0 0 8px;font-size:10px;letter-spacing:.09em;text-transform:uppercase;font-weight:700}
+  .ttcol.on h5{color:var(--green)}
+  .ttcol.tr h5{color:var(--rose)}
+  .ttcol ul{margin:0;padding-left:17px}
+  .ttcol li{font-size:13.5px;line-height:1.5;margin-bottom:7px;color:var(--ink-2)}
+  .ttcol li:last-child{margin-bottom:0}
+  @media(max-width:640px){.ttb{grid-template-columns:1fr}}
+
   .spoken{margin-top:12px}
   .spoken>summary{cursor:pointer;list-style:none;font-size:13px;font-weight:700;color:var(--amber);padding:6px 0}
   .spoken>summary::-webkit-details-marker{display:none}
@@ -383,7 +400,7 @@
 
 <header class="masthead">
   <div class="wrap">
-    <div class="eyebrow">Interview Lab · v1.2</div>
+    <div class="eyebrow">Interview Lab · v1.3</div>
     <h1>The PM toolkit behind the Ironclad case</h1>
     <p class="sub">Not a plan for you to memorise. A set of tools, what question each one answers, where this case is quietly asking you to reach for it, and what each one looks like when it is actually built. The thinking is still yours to do.</p>
     <p class="meta">HelloFresh ANZ · Senior Systems Enablement Manager · Built 19 Aug 2026</p>
@@ -516,8 +533,15 @@
   <p class="lede">Likely questions, the tools that answer each one, the shape of a strong response, and now a spoken version of each. The shape matters more than the content: notice how often the strong version names a tension, offers options with trade-offs, and ends with a recommendation rather than a request for permission.</p>
 
   <div class="note warn">
-    <strong>Read the spoken versions out loud, not silently</strong>
-    They are written the way people actually talk, with hedges, restarts and short sentences, because tomorrow is spoken and a written answer read aloud sounds rehearsed. Do not memorise them. Read one, close it, and say your own version at the wall. The gap between those two is the only thing worth practising tonight.
+    <strong>This is the commute tab · read it in this order</strong>
+    Read the question. Say your answer out loud before opening anything. Then open <b>Must touch on · and the traps</b> and mark yourself. Only then open <b>How it comes together</b>.<br><br>
+    The touch-on list is deliberately not an answer. It is the set of things a strong response contains in some order, so you can build your own version around them instead of reciting mine. The spoken versions are written the way people actually talk, with hedges and short sentences, because a written answer read aloud sounds rehearsed and that is the one thing they will notice.
+  </div>
+
+  <div class="note hot">
+    <strong>Your two known weak spots, from tonight's drill</strong>
+    <b>1 · Under pressure you go sequential and inward.</b> Understand everything first, then act, and no people in the room. Both times you were asked to plan, the Icertis data profiling dropped out of week one even though you had already identified it as the critical path. If you catch yourself describing a week of reading and analysis, stop and ask who you have not spoken to and what long-lead item has not started.<br><br>
+    <b>2 · You keep promising a locked scope earlier than the evidence allows.</b> A charter does not need a complete scope. It needs an objective, a constraint, decision rights and success measures, with the quantum marked as to be confirmed by a named date. Separate the charter from the scope baseline: the first you want in week two, the second you cannot have until profiling lands.
   </div>
   <input class="search" id="qsearch" placeholder="Filter questions… try 'deadline', 'risk', 'stakeholder', 'UAT'">
   <div id="qas"></div>
@@ -596,7 +620,7 @@
 </div>
 
 <footer>
-  <div class="wrap">Ironclad Rollout PM Toolkit Lab v1.2 · built for Safa · 19 August 2026</div>
+  <div class="wrap">Ironclad Rollout PM Toolkit Lab v1.3 · built for Safa · 19 August 2026</div>
 </footer>
 
 <script>
@@ -1692,6 +1716,141 @@ const WORKED = [
 <p style="margin-top:12px"><b>Why this works:</b> discovery starts in week one rather than week four, the artefacts are drafts to react to rather than documents to admire, and it ends with what changed rather than with what was produced.</p>`
 ];
 
+/* ============ DATA: touch-on points and traps, per question ============ */
+const TOUCH = [
+{on:["Start the Icertis profiling on day one, in parallel, not after the plan. It is the long-lead item and you cannot buy the time back.",
+"Meet the sponsor: what does done look like, and what are you most worried about.",
+"Two cheap questions with expensive answers: the exact expiry date, and which month the key user is away.",
+"Find out what resource you actually have. Is there a data analyst, or is it you.",
+"Produce drafts for people to react to, not finished documents for people to admire."],
+ traps:["A desk-based week with no people in it. You cannot do a gap analysis alone.",
+"Front-loading product familiarisation. You need enough to ask good questions, not mastery. You have an implementation partner for the software.",
+"Promising a complete scope or a signed baseline by week two.",
+"Sequential thinking: understand everything, then act. That instinct is what puts the data review in week four."]},
+
+{on:["Name which constraint is fixed and follow it out loud. Time is fixed, cost is contracted, so scope is the lever.",
+"Rolling wave: detailed near, sized far, milestones beyond.",
+"A date when scope locks, and what closes the gap by then.",
+"Offer more than one shape of go-live rather than a single plan."],
+ traps:["Rolling wave with no lock date. That reads as avoidance, not planning.",
+"Committing to a full plan you have no basis to estimate.",
+"Treating the deadline as unchallengeable without first finding out what an extension costs."]},
+
+{on:["Classify it first. A missed vendor slot has happened, so it is an issue, not a risk.",
+"Check your own asks before anyone else's behaviour: small, specific, pre-booked, and a draft to react to.",
+"Make the consequence concrete in days and vendor slots, not in frustration.",
+"If you escalate, escalate with a specific ask."],
+ traps:["Escalating first. It works about twice.",
+"Sending a blank requirements template and calling it engagement.",
+"Framing it as Legal being difficult rather than as the cost of your ask being too high."]},
+
+{on:["It is certain, so it is a dependency and a decision due now, not a risk with a probability.",
+"Lay out three or four options and what each one costs.",
+"Land on a recommendation.",
+"Take it to whoever owns acceptance rather than deciding alone."],
+ traps:["Logging it in the risk register with a probability score.",
+"Escalating with options and no recommendation. That is moving the problem, not managing it.",
+"Assuming a delegate is equivalent without asking what only the key user knows."]},
+
+{on:["Start from their cost, not your need.",
+"Replace creation with reaction. Correcting a wrong draft takes ten minutes; filling a blank template takes two hours and comes back empty.",
+"Short pre-booked sessions with a named deliverable and a named deadline.",
+"Publish dependencies so the cost of not responding is visible without being personal.",
+"Sponsor air cover, used sparingly."],
+ traps:["Saying 'buy-in' without saying what you are trading for it.",
+"Treating it as a communications problem when it is a workload problem.",
+"Unlimited escalation."]},
+
+{on:["Three, worked properly, not ten listed.",
+"Each with an owner, a mitigation, a contingency and a trigger.",
+"Rank them and be able to defend the ranking.",
+"The unmapped Icertis data is number one, and its probability is 5 because it is true right now."],
+ traps:["Listing risks without scoring or owning them.",
+"Mitigation and contingency written as the same sentence. They do different jobs.",
+"Vague triggers like 'if we fall behind'. A trigger someone else cannot observe is not a trigger."]},
+
+{on:["Lead with the sequencing insight: migration is a workstream, and nothing can be sized until profiling is done.",
+"Profile, cleanse, map, mock run twice, reconcile, cut over.",
+"Cleanse at source, not in transit, or you end up with two versions of the truth.",
+"Reconciliation as a real control: counts, values, a signed sample, and every failed record listed.",
+"The in-flight rule and the freeze date."],
+ traps:["Calling it an IT task that happens at the end.",
+"Missing that once Icertis is switched off there is a point of no return.",
+"Assuming migrating raw files is the same as migrating usable records with correct metadata."]},
+
+{on:["Three of the five workflows span ANZ and EU, two are ANZ only. Notice that out loud.",
+"Separate shared-by-design from genuinely local, and hold a high bar on what counts as local.",
+"One shared decision log so you are not each holding a different version of a shared design.",
+"Agree the arbitration route before you need it, because neither of you has authority over the other.",
+"Ask whether the EU is ahead and has already committed."],
+ traps:["Treating it as a scheduling problem solved by a weekly call.",
+"Accepting 'we have always done it this way here' as a local requirement.",
+"Relying on goodwill instead of a mechanism."]},
+
+{on:["Use a model to show that training addresses two of five reasons people fail to adopt.",
+"Identify who this change makes worse off, and say so honestly.",
+"Awareness fronted by the sponsor, in the team's own forum, so it costs them nothing extra.",
+"Ability means sandbox time and floorwalking, not documentation. Documentation is Knowledge.",
+"Reinforcement means closing the old route, not just praising the new one."],
+ traps:["'Training and comms' as the entire answer.",
+"Promising that everyone will love it.",
+"Treating workarounds as disobedience rather than as a design signal you want reported."]},
+
+{on:["Answer with the constraints, not with a label.",
+"Vendor build staged, because the SOW is fixed-scope and the date is hard.",
+"Requirements and migration discovery iterative, because you cannot specify what you do not know.",
+"Name where the two halves join. That is the scope lock."],
+ traps:["Declaring a methodology identity rather than making a fitted choice.",
+"Saying agile because it sounds modern on a project with a signed fixed-scope contract.",
+"Naming a methodology and not being able to say why."]},
+
+{on:["One page, fortnightly.",
+"Decisions requested first, above status.",
+"Then RAG per workstream, milestones, top three risks with trigger status, scope changes.",
+"A written escalation rule with a time limit, so escalating stops being a personal act."],
+ traps:["A weekly executive forum, which gets cancelled by week three leaving you with no governance at all.",
+"Status with no asks. That uses six senior people as an audience.",
+"Reporting to them rather than using them."]},
+
+{on:["Separate output, outcome and benefit as three distinct levels with a measure at each.",
+"Adoption rate and workaround rate for outcome.",
+"Cycle time and metadata completeness for benefit.",
+"Baselines captured before go-live, or the comparison is gone forever."],
+ traps:["Declaring success at go-live. Go-live is an output and nobody funded an output.",
+"Targets with no baseline.",
+"Measuring only what is easy, like training attendance."]},
+
+{on:["Flag it early. Surprising a sponsor late is the actual failure, not missing a date.",
+"Options with trade-offs: descope, phase, crash, fast-track.",
+"Note that descoping is cheap because the priorities were agreed in week two.",
+"Name what you would not trade, and why."],
+ traps:["Absorbing it quietly and hoping it recovers.",
+"Presenting a problem with no options attached.",
+"Trading UAT to save a week on a system holding legal records."]},
+
+{on:["A small number of things, with the order justified rather than the list recited.",
+"The logic: cannot plan until you know scope, cannot know scope until discovery runs, cannot run discovery until ownership is clear.",
+"Drafts for people to argue with.",
+"Say explicitly that you would not produce a detailed plan in week one."],
+ traps:["Listing every artefact you can name.",
+"A full Gantt chart in week one that everyone knows is fiction, which costs you the trust in every plan afterwards.",
+"Confusing the PM's paperwork with the project's work."]},
+
+{on:["STAR, but weighted heavily to Action.",
+"Quantify the result.",
+"Close with what you would do differently and which tool you would use, which turns an anecdote into evidence of method."],
+ traps:["Spending half the answer on Situation.",
+"No number at the end.",
+"No reflection, so it stays a story rather than becoming evidence."]},
+
+{on:["Pick the questions that unlock estimating, not the ones that satisfy curiosity.",
+"Volume and state of the contracts in Icertis.",
+"The exact expiry date and what an extension would cost.",
+"Whether the EU has already committed to a design on the shared workflows."],
+ traps:["Asking something the brief already answers.",
+"Interesting questions that change nothing about what you would do on Monday."]}
+];
+
 /* ============ DATA: spoken answers for the mapper ============ */
 const SPOKEN = [
 /* 1 */ `<p>Three things, in this order. What does done actually look like, who gets to decide things, and what do I not know yet.</p><p>But the one I would start immediately, day one, is finding out what is actually sitting in Icertis. Nobody has mapped it, and until it is mapped I cannot size the migration. And if I cannot size the migration I cannot commit to a date for anything, which means I do not really have a plan, I have a wish.</p><p>So while I am doing the normal week one things, drafting a charter, mapping stakeholders, proposing a RACI, the data profiling is running in parallel from day one. It feels like preparation, so it tends to get scheduled late, and I think that is the mistake this project is set up to make.</p>`,
@@ -1766,7 +1925,13 @@ document.getElementById('qas').innerHTML = QAS.map((q,i)=>`
     <div class="qq">“${q.q}”</div>
     <div class="qt">${q.tools.map(t=>`<b>${t}</b>`).join('')}</div>
     <div class="qs">${q.s}</div>
-    <details class="spoken"><summary>What it sounds like out loud</summary>
+    <details class="tt"><summary>Must touch on · and the traps</summary>
+      <div class="ttb">
+        <div class="ttcol on"><h5>Touch on</h5><ul>${(TOUCH[i]?TOUCH[i].on:[]).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div class="ttcol tr"><h5>Do not</h5><ul>${(TOUCH[i]?TOUCH[i].traps:[]).map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      </div>
+    </details>
+    <details class="spoken"><summary>How it comes together, out loud</summary>
       <div class="sbody">${SPOKEN[i]||''}</div>
     </details>
   </div>`).join('');
