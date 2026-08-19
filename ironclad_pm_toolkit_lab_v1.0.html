@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ironclad Rollout: PM Toolkit Lab v1.0</title>
+<style>
+  :root{
+    --paper:#FBFAF7;
+    --card:#FFFFFF;
+    --ink:#16211C;
+    --ink-2:#3E4B45;
+    --ink-3:#77857E;
+    --line:#E3E0D8;
+    --green:#2D6A4F;
+    --green-soft:#EAF1ED;
+    --lime:#7FB227;
+    --amber:#B8801F;
+    --amber-soft:#FBF3E4;
+    --rose:#A6402F;
+    --rose-soft:#FBECE9;
+    --radius:10px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+
+  /* ---------- header ---------- */
+  header.masthead{padding:56px 0 30px;border-bottom:1px solid var(--line)}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:14px}
+  h1{
+    font-family:Georgia,"Iowan Old Style","Times New Roman",serif;
+    font-size:clamp(30px,5vw,44px);line-height:1.12;margin:0 0 12px;font-weight:600;letter-spacing:-.015em;
+  }
+  .sub{color:var(--ink-2);font-size:17px;max-width:64ch;margin:0}
+  .meta{margin-top:18px;font-size:13px;color:var(--ink-3)}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .navinner{display:flex;gap:2px;max-width:940px;margin:0 auto;padding:0 24px;overflow-x:auto;scrollbar-width:none}
+  .navinner::-webkit-scrollbar{display:none}
+  .tab{
+    appearance:none;border:0;background:none;padding:15px 14px;cursor:pointer;white-space:nowrap;
+    font:inherit;font-size:14px;font-weight:600;color:var(--ink-3);border-bottom:2px solid transparent;transition:.15s;
+  }
+  .tab:hover{color:var(--ink)}
+  .tab.on{color:var(--green);border-bottom-color:var(--green)}
+
+  /* ---------- panels ---------- */
+  .panel{display:none;padding:40px 0 90px;animation:fade .25s ease}
+  .panel.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  h2{font-family:Georgia,serif;font-size:27px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
+  h3{font-size:16px;font-weight:700;margin:34px 0 10px;letter-spacing:-.005em}
+  .lede{color:var(--ink-2);max-width:68ch;margin:0 0 26px}
+  p{margin:0 0 14px}
+  a{color:var(--green)}
+
+  .rule{height:1px;background:var(--line);margin:34px 0;border:0}
+
+  /* ---------- callouts ---------- */
+  .note{
+    border-left:3px solid var(--green);background:var(--green-soft);
+    padding:16px 18px;border-radius:0 var(--radius) var(--radius) 0;margin:22px 0;font-size:15px;
+  }
+  .note.warn{border-left-color:var(--amber);background:var(--amber-soft)}
+  .note.hot{border-left-color:var(--rose);background:var(--rose-soft)}
+  .note strong{display:block;margin-bottom:5px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+  /* ---------- tension list ---------- */
+  .tension{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:18px 20px;margin-bottom:12px}
+  .tension .q{font-weight:700;font-size:15px;margin-bottom:6px}
+  .tension .a{font-size:14.5px;color:var(--ink-2);margin:0}
+  .tension .a em{color:var(--green);font-style:normal;font-weight:600}
+
+  /* ---------- tier filter ---------- */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 24px}
+  .chip{
+    appearance:none;font:inherit;font-size:13px;font-weight:600;cursor:pointer;
+    border:1px solid var(--line);background:var(--card);color:var(--ink-2);
+    padding:7px 13px;border-radius:100px;transition:.15s;
+  }
+  .chip:hover{border-color:var(--ink-3)}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  /* ---------- concept cards ---------- */
+  .cc{border:1px solid var(--line);border-left:3px solid var(--line);border-radius:var(--radius);background:var(--card);margin-bottom:10px;overflow:hidden}
+  .cc[data-tier="A"]{border-left-color:var(--green)}
+  .cc[data-tier="B"]{border-left-color:var(--lime)}
+  .cc[data-tier="C"]{border-left-color:var(--ink-3)}
+  .cc summary{
+    list-style:none;cursor:pointer;padding:16px 20px;display:flex;align-items:center;gap:12px;
+    font-weight:700;font-size:15.5px;
+  }
+  .cc summary::-webkit-details-marker{display:none}
+  .cc summary:hover{background:#FAFAF8}
+  .num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--ink-3);min-width:22px}
+  .tierbadge{
+    margin-left:auto;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+    padding:3px 8px;border-radius:100px;white-space:nowrap;
+  }
+  [data-tier="A"] .tierbadge{background:var(--green-soft);color:var(--green)}
+  [data-tier="B"] .tierbadge{background:#F1F7E4;color:#5A7F19}
+  [data-tier="C"] .tierbadge{background:#F2F2F0;color:var(--ink-3)}
+  .ccbody{padding:2px 20px 20px;border-top:1px solid var(--line);margin-top:0}
+  .field{margin-top:16px}
+  .field .lbl{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-3);margin-bottom:5px}
+  .field .val{font-size:15px;color:var(--ink-2)}
+  .field.case .val{color:var(--ink)}
+  .field.case .lbl{color:var(--green)}
+  .field.trap .lbl{color:var(--rose)}
+  .cc ul{margin:6px 0 0;padding-left:20px}
+  .cc li{margin-bottom:5px;font-size:15px;color:var(--ink-2)}
+  .kbd{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:#F2F2EF;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+
+  /* ---------- practice ---------- */
+  .phase{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--green);margin:38px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .step{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:20px;margin-bottom:14px}
+  .step .sn{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--green);font-weight:700;margin-bottom:6px}
+  .step .st{font-weight:700;font-size:16px;margin-bottom:6px}
+  .step .sp{font-size:15px;color:var(--ink-2);margin-bottom:12px}
+  .step .tools{font-size:13px;color:var(--ink-3);margin-bottom:12px}
+  .step .tools span{display:inline-block;background:#F4F4F1;border:1px solid var(--line);border-radius:100px;padding:2px 9px;margin:0 5px 5px 0;font-weight:600;color:var(--ink-2)}
+  textarea{
+    width:100%;min-height:100px;border:1px solid var(--line);border-radius:8px;padding:12px 13px;
+    font:inherit;font-size:15px;line-height:1.55;background:#FDFDFB;color:var(--ink);resize:vertical;
+  }
+  textarea:focus{outline:2px solid var(--green);outline-offset:-1px;background:#fff}
+  .reveal{margin-top:12px}
+  .reveal summary{cursor:pointer;font-size:13.5px;font-weight:700;color:var(--green);list-style:none;padding:6px 0}
+  .reveal summary::-webkit-details-marker{display:none}
+  .reveal summary::before{content:"› ";font-weight:700}
+  .reveal[open] summary::before{content:"⌄ "}
+  .reveal .rbody{background:var(--green-soft);border-radius:8px;padding:14px 16px;font-size:14.5px;color:var(--ink-2)}
+  .reveal .rbody ul{margin:0;padding-left:19px}
+  .reveal .rbody li{margin-bottom:6px}
+
+  .actionbar{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 0;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+  button.act{
+    appearance:none;font:inherit;font-size:14px;font-weight:700;cursor:pointer;
+    background:var(--green);color:#fff;border:0;padding:11px 18px;border-radius:8px;transition:.15s;
+  }
+  button.act:hover{background:#245840}
+  button.act.ghost{background:transparent;color:var(--ink-2);border:1px solid var(--line)}
+  button.act.ghost:hover{background:#F4F4F1;color:var(--ink)}
+  .hint{font-size:13px;color:var(--ink-3);align-self:center}
+
+  /* ---------- mapper ---------- */
+  input.search{
+    width:100%;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font:inherit;font-size:15px;
+    background:var(--card);margin-bottom:18px;
+  }
+  input.search:focus{outline:2px solid var(--green);outline-offset:-1px}
+  .qa{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);padding:18px 20px;margin-bottom:10px}
+  .qa .qq{font-weight:700;font-size:15.5px;margin-bottom:10px}
+  .qa .qt{font-size:12px;color:var(--ink-3);margin-bottom:8px}
+  .qa .qt b{display:inline-block;background:var(--green-soft);color:var(--green);border-radius:100px;padding:3px 10px;margin:0 5px 5px 0;font-size:11.5px;font-weight:700}
+  .qa .qs{font-size:14.5px;color:var(--ink-2);border-left:2px solid var(--line);padding-left:14px}
+  .qa .qs b{color:var(--ink)}
+
+  /* ---------- drill ---------- */
+  .drill{
+    border:1px solid var(--line);border-radius:14px;background:var(--card);
+    min-height:250px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:40px 32px;text-align:center;cursor:pointer;user-select:none;
+  }
+  .drill .dfront{font-family:Georgia,serif;font-size:27px;font-weight:600;line-height:1.25}
+  .drill .dhint{font-size:12px;color:var(--ink-3);margin-top:18px;letter-spacing:.06em;text-transform:uppercase}
+  .drill .dback{display:none;text-align:left;width:100%}
+  .drill.flip .dfront,.drill.flip .dhint{display:none}
+  .drill.flip .dback{display:block}
+  .dback .dq{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:6px}
+  .dback .dqa{font-size:19px;font-weight:600;margin-bottom:16px;line-height:1.4}
+  .dback .dd{font-size:15px;color:var(--ink-2)}
+  .drillbar{display:flex;gap:10px;align-items:center;margin-top:16px}
+  .counter{font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--ink-3);margin-left:auto}
+
+  /* ---------- cheat sheet ---------- */
+  .sheet{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .sheet h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin:26px 0 10px;font-weight:700}
+  .sheet h4:first-child{margin-top:0}
+  .sheet table{width:100%;border-collapse:collapse;font-size:14px}
+  .sheet td{padding:7px 10px 7px 0;border-bottom:1px solid var(--line);vertical-align:top}
+  .sheet td:first-child{font-weight:700;width:34%;white-space:nowrap}
+  .sheet td:last-child{color:var(--ink-2)}
+  .sheet ol{padding-left:20px;margin:0;font-size:14.5px}
+  .sheet ol li{margin-bottom:7px;color:var(--ink-2)}
+  .sheet ol li b{color:var(--ink)}
+
+  footer{border-top:1px solid var(--line);padding:26px 0 60px;font-size:13px;color:var(--ink-3)}
+
+  @media print{
+    nav,.actionbar,.filters,footer,.drillbar{display:none}
+    .panel{display:block !important;page-break-before:always}
+    body{background:#fff;font-size:11pt}
+    .cc,.step,.qa,.sheet,.tension{break-inside:avoid}
+  }
+  @media(max-width:640px){
+    .wrap{padding:0 18px}
+    .navinner{padding:0 18px}
+    header.masthead{padding:36px 0 24px}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Interview Lab · v1.0</div>
+    <h1>The PM toolkit behind the Ironclad case</h1>
+    <p class="sub">Not a plan for you to memorise. A set of tools, what question each one answers, and where this specific case is quietly asking you to reach for it. The thinking is yours to do.</p>
+    <p class="meta">HelloFresh ANZ · Senior Systems Enablement Manager · Built 19 Aug 2026</p>
+  </div>
+</header>
+
+<nav>
+  <div class="navinner">
+    <button class="tab on" data-p="brief">1 · Read the case</button>
+    <button class="tab" data-p="toolkit">2 · The toolkit</button>
+    <button class="tab" data-p="practice">3 · Build it yourself</button>
+    <button class="tab" data-p="mapper">4 · Question → tool</button>
+    <button class="tab" data-p="drill">5 · Drill</button>
+    <button class="tab" data-p="sheet">6 · One page</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ================= 1. BRIEF ================= -->
+<section class="panel on" id="brief">
+  <h2>What they are actually testing</h2>
+  <p class="lede">They said there are no right answers and that they want to see how you think, how you plan, and how you bring people with you. Take that literally. A polished plan delivered from memory scores worse than visible reasoning. What follows is not the answer. It is a map of where they planted the questions.</p>
+
+  <div class="note">
+    <strong>The core skill on the job description</strong>
+    "Lead deep-dive gap analyses comparing global tech blueprints against local ANZ requirements, challenging proposals with data." Now look at the five contract types in the brief. Some are ANZ and EU. Some are ANZ only. That split is not decoration.
+  </div>
+
+  <h3>The six planted tensions, and what each one is a prompt for</h3>
+  <p class="lede">Each row below is a line the case authors chose to include. Read each one as an invitation to name a tool and explain your reasoning, not as a problem to solve on the spot.</p>
+
+  <div class="tension">
+    <div class="q">Fixed deadline, undefined scope</div>
+    <p class="a">The Icertis expiry is a hard date. Nobody has scoped migration. <em>Ask yourself:</em> when time is fixed and cost is contracted, which variable is left? What technique exists for agreeing in advance what drops? How do you plan credibly when you cannot yet estimate? → <em>Iron triangle · MoSCoW · rolling wave planning</em></p>
+  </div>
+
+  <div class="tension">
+    <div class="q">"No one has mapped out which contracts are currently in Icertis or what state they're in"</div>
+    <p class="a">This is the quietest sentence in the brief and possibly the loudest. <em>Ask yourself:</em> can anything downstream be sized, costed or sequenced before this is known? If not, what does that make it? → <em>Critical path · data profiling · discovery as a scheduled deliverable</em></p>
+  </div>
+
+  <div class="tension">
+    <div class="q">Vendor only builds what it is briefed</div>
+    <p class="a">Ironclad's implementation team is capacity you do not control and cannot bank. <em>Ask yourself:</em> what does the signed SOW actually cover, and what does it not? Whose delay is it when requirements are late? → <em>Scope vs SOW · change control · dependency management</em></p>
+  </div>
+
+  <div class="tension">
+    <div class="q">Time-poor SMEs who do not report to you</div>
+    <p class="a">Legal and Procurement own the requirements but not the project. <em>Ask yourself:</em> what makes an ask cheap enough for a busy person to say yes to? What is the difference between asking for input and asking for a decision? → <em>Stakeholder engagement matrix · RACI · structured elicitation</em></p>
+  </div>
+
+  <div class="tension">
+    <div class="q">Key ANZ Indirect user on leave for the whole of UAT</div>
+    <p class="a">Note the word "heads up". You already know. <em>Ask yourself:</em> is a certainty a risk? What is it instead? And does a senior PM escalate this, or arrive with options and a recommendation? → <em>RAID (and which letter) · UAT entry and exit criteria · decision framing</em></p>
+  </div>
+
+  <div class="tension">
+    <div class="q">"This isn't just a technology change... people need to understand why, not just how"</div>
+    <p class="a">They wrote this line for you. <em>Ask yourself:</em> if your answer is "training", how many of the five reasons a person fails to adopt a system have you addressed? → <em>ADKAR · benefits realisation · adoption metrics</em></p>
+  </div>
+
+  <hr class="rule">
+
+  <h3>Two things not in the tension table that you should notice</h3>
+
+  <div class="tension">
+    <div class="q">There are two project managers and no stated joint forum</div>
+    <p class="a">You are ANZ. Someone else is EU. Three of the five workflows span both. Neither of you has authority over the other. <em>Ask yourself:</em> where do you agree a shared design, where do you diverge, and who arbitrates when you disagree? This is the exact "global blueprint versus local market" skill in the job description, hiding inside the case.</p>
+  </div>
+
+  <div class="tension">
+    <div class="q">You are "responsible for delivery". The Product Manager is "ultimately accountable for the success of the roll out"</div>
+    <p class="a">Read those two lines from the stakeholder table together. <em>Ask yourself:</em> in a RACI, how many people can hold the A on one outcome? Is this an error in the brief, or a deliberate ambiguity you are expected to spot and negotiate in week one?</p>
+  </div>
+
+  <div class="note warn">
+    <strong>The trap of over-preparing</strong>
+    They asked you not to prepare. Preparing anyway is sensible. Sounding prepared is not. If you walk in and recite a plan, you have shown recall. If you walk in able to say "the thing I would want to know first is X, because until I know it I cannot size Y", you have shown judgement. Aim for fluency with the tools, then think out loud in the room.
+  </div>
+</section>
+
+<!-- ================= 2. TOOLKIT ================= -->
+<section class="panel" id="toolkit">
+  <h2>The toolkit</h2>
+  <p class="lede">Twenty-three tools, tiered by how well you need to know them by tomorrow. Tier A you should be able to run live if asked. Tier B you should be able to name, define and say when you would reach for. Tier C you only need to recognise so a term does not blindside you.</p>
+
+  <div class="filters">
+    <button class="chip on" data-f="all">All 23</button>
+    <button class="chip" data-f="A">Tier A · wield these (8)</button>
+    <button class="chip" data-f="B">Tier B · reach for these (9)</button>
+    <button class="chip" data-f="C">Tier C · recognise these (6)</button>
+  </div>
+
+  <div id="cards"></div>
+</section>
+
+<!-- ================= 3. PRACTICE ================= -->
+<section class="panel" id="practice">
+  <h2>Build it yourself</h2>
+  <p class="lede">Eleven steps, in the order a real project setup runs. Write your own answer first. Only then open "what a strong answer covers", which gives you criteria to check yourself against rather than the answer itself. Nothing here is saved automatically, so use the copy button at the bottom when you are done.</p>
+
+  <div class="note warn">
+    <strong>How to use this</strong>
+    Do not aim for completeness. Aim for the point where you stop needing the prompt. If a step takes more than six or seven minutes you are writing a document instead of building fluency.
+  </div>
+
+  <div id="steps"></div>
+
+  <div class="actionbar">
+    <button class="act" id="copyAll">Copy all my answers</button>
+    <button class="act ghost" id="clearAll">Clear everything</button>
+    <span class="hint" id="copyHint">Paste them back into the chat and I will pull them apart.</span>
+  </div>
+</section>
+
+<!-- ================= 4. MAPPER ================= -->
+<section class="panel" id="mapper">
+  <h2>Question → tool</h2>
+  <p class="lede">Likely questions, the tools that answer each one, and the shape of a strong response. The shape matters more than the content: notice how often the strong version names a tension, offers options with trade-offs, and ends with a recommendation rather than a request for permission.</p>
+  <input class="search" id="qsearch" placeholder="Filter questions… try 'deadline', 'risk', 'stakeholder', 'UAT'">
+  <div id="qas"></div>
+</section>
+
+<!-- ================= 5. DRILL ================= -->
+<section class="panel" id="drill">
+  <h2>Drill</h2>
+  <p class="lede">Term on the front. The question it answers on the back. Click the card to flip. If you can say the back before flipping, you are fluent enough. Do not aim for the textbook definition, aim for the question.</p>
+  <div class="drill" id="dcard">
+    <div class="dfront" id="dfront">Loading…</div>
+    <div class="dhint">Click to flip</div>
+    <div class="dback">
+      <div class="dq">The question it answers</div>
+      <div class="dqa" id="dq"></div>
+      <div class="dd" id="dd"></div>
+    </div>
+  </div>
+  <div class="drillbar">
+    <button class="act ghost" id="dprev">Previous</button>
+    <button class="act" id="dnext">Next</button>
+    <button class="act ghost" id="dshuffle">Shuffle</button>
+    <span class="counter" id="dcount"></span>
+  </div>
+</section>
+
+<!-- ================= 6. SHEET ================= -->
+<section class="panel" id="sheet">
+  <h2>One page</h2>
+  <p class="lede">Print this or read it on the way in. Nothing here is a script. It is the minimum set of hooks that lets you find the right tool while you are talking.</p>
+
+  <div class="sheet">
+    <h4>The eight you must be able to wield</h4>
+    <table>
+      <tr><td>Charter</td><td>What are we committing to, and who has authority to change it?</td></tr>
+      <tr><td>WBS</td><td>What is all the work? Does it add to 100%, including the parts the vendor is not doing?</td></tr>
+      <tr><td>Iron triangle</td><td>Which constraint is fixed, and therefore which one has to give?</td></tr>
+      <tr><td>MoSCoW</td><td>If we run out of time, what drops, and who agreed that in advance?</td></tr>
+      <tr><td>RAID</td><td>What could derail this, who owns it, and what is the trigger for the fallback?</td></tr>
+      <tr><td>RACI</td><td>Who decides, who does, who is consulted, who is just told?</td></tr>
+      <tr><td>Power/interest grid</td><td>Where do I spend my limited attention, and in what style?</td></tr>
+      <tr><td>ADKAR</td><td>Why will people not use this, and does my plan treat that specific reason?</td></tr>
+    </table>
+
+    <h4>The distinctions that separate a senior answer from a junior one</h4>
+    <ol>
+      <li><b>Risk vs issue vs dependency vs assumption.</b> A certainty is not a risk. The key user's leave is known, so it is a dependency and a decision due now, not a line in the risk register.</li>
+      <li><b>Mitigation vs contingency vs trigger.</b> Mitigation reduces likelihood or impact now. Contingency is what you do if it lands anyway. The trigger is the signal that tells you to activate it.</li>
+      <li><b>Severity vs priority.</b> A cosmetic defect on the go-live screen can be low severity and high priority. They are different axes.</li>
+      <li><b>Output vs outcome vs benefit.</b> System is live. People use it. Contract cycle time drops. Only the third one is why anyone funded this.</li>
+      <li><b>Vendor SOW vs project scope.</b> The SOW covers configuration. Your scope also covers migration, training, cutover and adoption.</li>
+      <li><b>Responsible vs accountable.</b> Only ever one A. If the brief hands the A to two people, that is your first negotiation.</li>
+      <li><b>Crashing vs fast-tracking.</b> Adding resource costs money. Overlapping tasks costs risk. Neither is free, and saying which you would choose and why is the answer.</li>
+    </ol>
+
+    <h4>The three sentences worth having ready</h4>
+    <ol>
+      <li><b>On the deadline:</b> "The date is fixed and the commercial is signed, so scope and quality are the only variables I have. That means the first conversation I want with the SteerCo is about what go-live must include, not what it could include."</li>
+      <li><b>On unknown scope:</b> "I would not pretend to have a full plan on day one. I would plan the next four weeks in detail, put a date on when scope locks, and treat the Icertis data profiling as the deliverable that unlocks the rest of the schedule."</li>
+      <li><b>On people:</b> "Training only answers whether someone knows how. It does not answer whether they want to. If Legal thinks this makes their week harder, no amount of training fixes that, so I would want to understand what the change costs each group before I design the rollout."</li>
+    </ol>
+
+    <h4>Structure to fall back on if a question is broad</h4>
+    <ol>
+      <li><b>Orient.</b> What is the objective, what does done look like, who decides, what do I not know?</li>
+      <li><b>Structure.</b> Break the work down, map the people, name the risks, sequence it, decide what is a Must.</li>
+      <li><b>Deliver.</b> Build, test, migrate, cut over, support, measure, review.</li>
+      <li><b>And throughout:</b> govern it, communicate it, and bring people with you.</li>
+    </ol>
+
+    <h4>If you only remember one thing</h4>
+    <p style="font-size:15px;color:var(--ink-2);margin:0">Name the tension before you offer the tool. "These two things are in conflict, here is how I would work out which one gives" is the whole job, and it is what the brief is testing.</p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">Ironclad Rollout PM Toolkit Lab v1.0 · built for Safa · 19 August 2026</div>
+</footer>
+
+<script>
+/* ============ DATA: concept cards ============ */
+const CARDS = [
+  {t:"A",n:"Project charter and initiation",q:"What are we actually committing to, and who has the authority to say so?",
+   w:"A short document, signed by the sponsor, that fixes the objective, the scope boundaries, the success measures, the key roles and the decision rights. It is the thing you point at in month four when someone says they thought this included something else.",
+   c:"Nothing has started and there is no charter. There is a signed SOW, but a SOW is a commercial agreement with a vendor, not an internal agreement about what your project is for. Worth asking yourself what the SOW covers and what it silently leaves to you.",
+   x:"Treating the SOW as the scope baseline. The vendor's scope is configuration of five workflows. Your scope also contains migration, testing, training, cutover and adoption, none of which the vendor is contracted to do."},
+
+  {t:"A",n:"Scope management and the Work Breakdown Structure (WBS)",q:"What is all the work, and have we missed a whole branch of it?",
+   w:"Decompose the total work into deliverables, then into work packages small enough to estimate, own and track. The <b>100% rule</b>: the WBS must contain all of the work, including project management effort itself, and nothing that is not the work. A common heuristic is to decompose until a package is roughly 8 to 80 hours with a single owner. A WBS is deliverable-oriented, not a task list.",
+   c:"The obvious decomposition is the five contract workflows. Ask yourself whether that is a WBS or just the vendor's build plan. What are the branches that exist outside the vendor's SOW, and how much of the total effort do you think they represent?",
+   x:"Building the WBS around the visible workstream. If the vendor build is 30% of the effort and 100% of your WBS, every estimate downstream is wrong."},
+
+  {t:"A",n:"The iron triangle (scope, time, cost, with quality in the middle)",q:"Which constraint is genuinely fixed here, and therefore which one has to give?",
+   w:"Scope, time and cost are interdependent. Fix any two and the third must flex. Push one without acknowledging the others and quality silently absorbs the difference. Sometimes drawn as the triple constraint, sometimes extended to six (adding risk and resources).",
+   c:"Time is hard-fixed by the Icertis expiry. Cost is largely fixed by a signed SOW. Follow that logic to its conclusion and you will find you have exactly one honest lever, plus one dishonest one. Naming which is which, out loud, early, is the senior move in this case.",
+   x:"Agreeing to all five workflows and full migration by a date you cannot yet estimate. That is not commitment, it is deferring bad news."},
+
+  {t:"A",n:"MoSCoW prioritisation",q:"If we run out of time, what drops, and who agreed that before it got tense?",
+   w:"Must have (go-live fails without it), Should have (painful but survivable), Could have (nice), Won't have this time (explicitly out, revisit later). Built for fixed-date delivery. A useful discipline is that Musts should be around 60% of effort or less, so there is real flex. The <b>Won't</b> column does the most work because it is the written record that stops scope creep. Cousins: RICE and ICE scoring, value vs effort matrices, and Kano (basic, performance, delighter).",
+   c:"Ask yourself which of the five contract types are genuinely day-one Musts, and whether all historical contract data has to migrate before go-live or only the active ones. There may be more than one shape of go-live available to you here.",
+   x:"Letting the SteerCo grade everything a Must. If everything is a Must you have not prioritised, you have just written a list. The fix is to force it against a fixed capacity."},
+
+  {t:"A",n:"RAID log (Risks, Assumptions, Issues, Dependencies)",q:"What could derail this, who owns doing something about it, and what tells us to act?",
+   w:"A living register, not a document. <b>Risk</b>: might happen. <b>Issue</b>: has happened, needs managing now. <b>Assumption</b>: something you are treating as true but have not verified. <b>Dependency</b>: something you need from someone outside your control. Score risks on probability × impact (usually 1 to 5 each, so 1 to 25). Threat responses: avoid, transfer, mitigate, accept, escalate. Opportunity responses: exploit, share, enhance, accept. Every entry needs an owner, a mitigation, a contingency and a trigger.",
+   c:"Named explicitly in the job description, so expect it. Two things to think through: which letter does the key user's annual leave belong under, and which letter covers 'we do not know what is in Icertis'. Getting those classifications right signals more than listing ten risks does.",
+   x:"A RAID log with no named owners and no review cadence is decoration. Also, unverified assumptions are where projects actually die, and they are the letter everyone skips."},
+
+  {t:"A",n:"RACI",q:"Who decides, who does the work, who gets asked first, and who just gets told?",
+   w:"A matrix of decisions and deliverables against people. <b>R</b>esponsible does the work. <b>A</b>ccountable owns the outcome and there is only ever one per row. <b>C</b>onsulted gives input before the decision. <b>I</b>nformed is told after. Variants worth knowing: RASCI (adds Support), DACI, and Bain's RAPID (Recommend, Agree, Perform, Input, Decide) which is better for pure decision rights.",
+   c:"The brief says there is no RACI. It also gives you delivery responsibility while giving the Product Manager ultimate accountability for the rollout. Sit with that. Then ask who holds the A on requirements sign-off for each of the five workflows, on migration scope, on UAT exit, and on Go/No-Go.",
+   x:"Two people holding the A on one row. Also, producing the RACI as a document rather than running it as a negotiation. The grid is worthless. The conversation that produces the grid is the point."},
+
+  {t:"A",n:"Stakeholder analysis: power/interest grid (Mendelow)",q:"Where do I spend my limited attention, and in what style?",
+   w:"Plot each stakeholder on power (ability to affect the project) against interest (how much they care). Four strategies fall out: high power, high interest = manage closely. High power, low interest = keep satisfied, brief and regular. Low power, high interest = keep informed, they are often your advocates. Low power, low interest = monitor. The stronger companion tool is the <b>stakeholder engagement assessment matrix</b>: rate each stakeholder's current engagement (unaware, resistant, neutral, supportive, leading) against where you need them to be. The gap between the two columns is your communications plan.",
+   c:"Map the five groups in the brief plus the EU PM. Think about which group has almost no formal power over you but total ability to stop you, and what that implies about how you ask for their time.",
+   x:"Doing it once and filing it. Engagement moves, especially after the first bit of bad news."},
+
+  {t:"A",n:"Change management: ADKAR",q:"Why will people not use this, and does my plan actually treat that reason?",
+   w:"Prosci's model. Adoption fails at one of five sequential stages: <b>A</b>wareness (why this is changing), <b>D</b>esire (what is in it for me, or at least why I am not being harmed), <b>K</b>nowledge (how to do it), <b>A</b>bility (can actually do it in the real job), <b>R</b>einforcement (it sticks and the old way is closed off). It is a diagnostic, not a checklist: you find the stage a person is stuck at and treat that stage. Alternatives: Kotter's 8 steps (top-down, better for org-wide transformation), Lewin's unfreeze / change / refreeze (simplest mental model), Bridges' Transition Model (focuses on the psychological transition rather than the change itself).",
+   c:"The brief says people need to understand why, not just how. Map that sentence onto the five letters and notice which two it is pointing at. Then notice which two letters training addresses.",
+   x:"Assuming resistance is irrational. It usually is not. The new workflow may genuinely be worse for one team even while it is better for the company. Naming that honestly is far more credible than promising everyone will love it."},
+
+  {t:"B",n:"Critical path method and dependency types",q:"What is the longest chain, and what actually moves the end date?",
+   w:"The critical path is the longest sequence of dependent tasks, which sets the shortest possible project duration. Tasks on it have zero <b>float</b> (also called slack). Dependency types: Finish-to-Start (most common), Start-to-Start, Finish-to-Finish, Start-to-Finish. <b>Lead</b> lets a task start early and overlap. <b>Lag</b> is an enforced wait. Two compression techniques: <b>crashing</b> (add resource, costs money) and <b>fast-tracking</b> (run in parallel what was sequential, costs risk).",
+   c:"Sketch the obvious chain: requirements, vendor build, system testing, UAT, sign-off, cutover. Then ask whether a workstream nobody has scheduled yet might be longer than that chain, and what that would mean for where you spend week one.",
+   x:"Identifying the critical path from the work you can see. The real constraint is often a discovery task that is not on anyone's plan yet."},
+
+  {t:"B",n:"Rolling wave planning and progressive elaboration",q:"How do I plan credibly when I genuinely do not know the scope yet?",
+   w:"Plan the near term in detail and the far term coarsely, then elaborate as you learn. The formal answer to planning under uncertainty. Related ideas: the <b>cone of uncertainty</b> (estimate accuracy improves as you progress, so early precision is false precision) and <b>planning packages</b> (a WBS branch you know exists but cannot yet decompose, held with a placeholder and a date).",
+   c:"This is the direct, defensible answer to the fixed-deadline-undefined-scope tension. The credibility test is whether you pair it with a commitment. Ask yourself: what would you have to promise alongside it so that it reads as planning rather than avoidance?",
+   x:"Using it as a permanent excuse not to commit to anything. It only works if you can say when the fog clears and what clears it."},
+
+  {t:"B",n:"Estimation: three-point, PERT, buffers and reserves",q:"How confident is that number, and where is the padding?",
+   w:"Ask for three estimates: Optimistic, Most likely, Pessimistic. PERT weights them: (O + 4M + P) / 6. The spread tells you as much as the number. <b>Contingency reserve</b> covers known unknowns and the PM controls it. <b>Management reserve</b> covers unknown unknowns and the sponsor controls it. Two behavioural laws worth naming: <b>Parkinson's Law</b> (work expands to fill the time available) and <b>student syndrome</b> (work starts at the last possible moment), which together explain why padding inside each task gets consumed, and why critical chain method moves the buffer to the end of the chain instead.",
+   c:"You will be asked how long something takes when you cannot know. A three-point estimate with a stated confidence level is a much stronger answer than either a guess or a refusal.",
+   x:"Presenting a single-point estimate as fact. Once a number is said out loud it becomes a commitment, whether you meant it that way or not."},
+
+  {t:"B",n:"Requirements elicitation and as-is / to-be mapping",q:"How do I get usable requirements out of people who have no time for me?",
+   w:"Techniques: structured workshops, one-to-one interviews, document analysis, observation, and prototyping. <b>As-is / to-be process mapping</b> documents the current process against the intended one. The delta between them is simultaneously your requirement set, your gap analysis, your training content and your change impact assessment, which is why it is worth doing properly. <b>Acceptance criteria</b> define how you will know a requirement is met, and are written before build, not after.",
+   c:"The brief tells you the SMEs are time-poor and will need structured asks. That is a hint about the format of your engagement, not just its frequency. Think about the difference in cost, to a busy person, between creating something and reacting to something.",
+   x:"Asking people what they want. That produces a wish list. Asking them to walk you through the last contract they actually processed produces requirements."},
+
+  {t:"B",n:"Testing: SIT, UAT, entry and exit criteria, defect triage",q:"How do we know it works, and how do we know when testing is finished?",
+   w:"<b>SIT</b> (System Integration Testing) is technical: does it work as built and do the integrations hold. <b>UAT</b> (User Acceptance Testing) is business: does it do what we actually need in a real scenario. <b>Entry criteria</b> are what must be true before UAT starts (environment ready, scripts written, testers trained, SIT defects below a threshold). <b>Exit criteria</b> are what must be true before sign-off. Defect triage separates <b>severity</b> (how bad is the impact) from <b>priority</b> (how soon must it be fixed), which are different axes that people constantly conflate.",
+   c:"The ANZ Indirect key user is away for the entire UAT month. Rather than picking an answer, list every option you can see, including the unattractive ones, and note what each one costs. Then ask yourself who you would take that list to, and whether you would arrive with a recommendation.",
+   x:"Running UAT as a demo. Also, UAT with no exit criteria never ends, because there is always one more defect."},
+
+  {t:"B",n:"Data migration approach",q:"How do we move the data without moving the mess?",
+   w:"The sequence: <b>profile</b> (what do we actually have and in what state), <b>cleanse</b> (fix it, ideally at source), <b>map</b> (field to field, with rules for the gaps), <b>mock run</b> (rehearse on real data, more than once), <b>reconcile</b> (prove counts and values match), then <b>cutover</b>. Two governing principles: cleanse at source rather than in transit, and reconciliation is a control, not a nice-to-have. <b>In-flight records</b> are those mid-process at the moment of switchover and always need an explicit rule.",
+   c:"The brief says nobody has mapped what is in Icertis, and separately warns that messy data in means messy data out. Work out which step of the sequence above has not started, then work out how many of the later steps can be sized before it does.",
+   x:"Treating migration as a technical task that happens at the end. It is a workstream with its own requirements, testing, sign-off and change impact, and it is frequently the thing that moves the date."},
+
+  {t:"B",n:"Cutover, Go/No-Go and hypercare",q:"How do we actually switch over, and what happens in the two weeks after?",
+   w:"A <b>cutover plan</b> is an hour-by-hour runbook: task, owner, duration, dependency, and the last point at which you can still roll back. <b>Go/No-Go</b> is a governance gate where the criteria are agreed in advance, precisely so the decision on the day is not emotional or political. <b>Hypercare</b> is a defined post-launch period with elevated support, a named triage path, a daily standup and explicit exit criteria back to business as usual. Related: stage gates or phase gates, where each phase has to be formally passed.",
+   c:"Hypercare is named in the job description, so it is fair game. Also note that Icertis cannot be switched off until migration is confirmed, which means there is a period where both systems are live. Ask yourself what rule you need for that period, and who is authoritative during it.",
+   x:"No rollback plan, and a Go/No-Go meeting where the criteria get invented in the room. If you have not written the criteria a fortnight before, the decision will be made on optimism."},
+
+  {t:"B",n:"Governance, cadence and the decision log",q:"Who meets, how often, and what are they there to decide?",
+   w:"A typical structure: core team standup two or three times a week, workstream check-ins weekly, SteerCo fortnightly or monthly. Plus a written escalation path with a time limit, for example any decision not made within five working days escalates automatically. A <b>decision log</b> records what was decided, by whom, when, and on what basis. It is what stops the same argument recurring in month three with different people.",
+   c:"The brief says the SteerCo needs regular concise updates and owns Go/No-Go. Think about what a SteerCo pack is for. If it contains status but no decisions requested, what have you actually used their hour on?",
+   x:"Reporting upward rather than asking upward. Governance forums exist to unblock you, and a PM who only reports is not using them."},
+
+  {t:"B",n:"Communications plan",q:"Who needs to hear what, how often, through what channel, and to do what?",
+   w:"Columns: audience, message, channel, frequency, owner, and the response you want. Built from the gap in your stakeholder engagement matrix, not from a template. Tailor register by audience: the SteerCo wants one page and a decision, an end user wants to know what changes for them on Monday.",
+   c:"The brief says there is no stakeholder communication framework in place. Ask yourself which audiences exist here that are easy to forget, and what the EU side needs from you that is different from what ANZ needs.",
+   x:"One update for everyone. The message that reassures an executive is the message that alarms an end user."},
+
+  {t:"B",n:"Methodology: waterfall, agile, hybrid, PRINCE2, PMBOK",q:"What delivery approach fits, and can I defend the choice?",
+   w:"<b>Waterfall</b>: sequential, plan-heavy, suits fixed scope and contracted vendors. <b>Agile / Scrum</b>: iterative, suits evolving scope and internal teams. <b>Hybrid</b>: the usual reality, waterfall governance around iterative discovery. <b>PRINCE2</b>: governance-heavy, stage-gated, strong on business case, roles and tolerances, common in AU and UK enterprise. <b>PMBOK / PMI</b>: a body of knowledge organised around process groups (initiating, planning, executing, monitoring and controlling, closing) and knowledge areas. <b>Lean and Six Sigma / DMAIC</b>: process improvement heritage, well regarded in supply chain contexts.",
+   c:"There is a signed fixed-scope vendor SOW and a hard date, but requirements and migration discovery both benefit from iterative loops. Think about which parts of this project want which approach, and be ready to say why rather than just naming one.",
+   x:"Declaring an identity (\"I'm an agile PM\") rather than making a choice. Method follows constraints, and here the constraints are loud."},
+
+  {t:"C",n:"Benefits realisation and success metrics",q:"How will we know this was worth doing, and when do we measure?",
+   w:"<b>Output</b>: the system is live. <b>Outcome</b>: people are using it as intended. <b>Benefit</b>: contract cycle time falls, visibility improves, manual handling drops. Only the third is why anyone funded it. <b>Leading indicators</b> (training completion, logins, workflows initiated) tell you early. <b>Lagging indicators</b> (cycle time, workaround rate, contract compliance) tell you truly. Baselines have to be captured before go-live or the comparison is unavailable forever.",
+   c:"The job description explicitly mentions tracking adoption rates and minimising manual workarounds. Have a view on what you would measure, and on when the baseline needs to be taken.",
+   x:"Declaring success at go-live. Go-live is an output. Nobody funded an output."},
+
+  {t:"C",n:"Pre-mortem and assumption mapping",q:"What are we wrong about, and how do we find out cheaply?",
+   w:"<b>Pre-mortem</b>: assume it is go-live day and the project has failed badly, then work backwards and write down why. It surfaces risks a standard risk workshop misses, because people speak more freely when failure is presented as a given rather than an accusation. <b>Assumption mapping</b>: plot each assumption on certainty against impact, then go and test the high-impact, low-certainty ones first, before they become facts by default.",
+   c:"A cheap, memorable technique to name if asked how you would build the risk register with a team that has not worked together before.",
+   x:"Running it as a formality. It only works if someone senior goes first and says something uncomfortable."},
+
+  {t:"C",n:"Scope creep, gold plating and change control",q:"How does scope grow, and what is the formal route to change it?",
+   w:"<b>Scope creep</b>: uncontrolled growth, usually through small unrecorded yeses. <b>Gold plating</b>: the team adding unrequested extras because they can. <b>Change control</b>: a formal route of request, impact assessment against time, cost, quality and risk, decision by the accountable party, and an entry in the log. With a vendor on a fixed SOW, every change is a commercial event as well as a scheduling one.",
+   c:"Given the vendor only builds what it is briefed, think about what happens when a Procurement SME asks for one more approval step in week nine, and what the cost of saying yes casually actually is.",
+   x:"Refusing all change. Change control is a route, not a wall. The failure is undocumented change, not change."},
+
+  {t:"C",n:"Influence without authority",q:"How do I get time and decisions from people who do not report to me?",
+   w:"Levers that actually work: sponsor air cover (borrowing authority explicitly rather than implying it), making the ask small, specific and time-boxed, making the cost of not deciding visible by publishing what is blocked and by whom, trading (protecting their time somewhere else in exchange), and giving credit publicly. Related reading: matrix organisations, and the general principle that in a matrix your currency is credibility rather than reporting lines.",
+   c:"This is the underlying skill the whole case is testing. Legal and Procurement are the critical path and none of them work for you. Worth thinking about what a request from you actually costs them, and how to lower that cost.",
+   x:"Escalating early and often. It works twice, then you are the person who escalates."},
+
+  {t:"C",n:"Post-implementation review and lessons learned",q:"What did we learn, and where does the lesson go so someone finds it?",
+   w:"A formal close-out covering what worked, what did not, what we would do differently, and whether the benefits case actually landed. The part everyone skips is the last one: where the lesson is stored and how the next project finds it. In agile settings the equivalent is the retrospective, run continuously rather than once at the end.",
+   c:"The job description says you would conduct post-launch reviews to drive continuous improvement, and separately mentions refining playbooks. Those two things connect, and there is a strong answer available about turning this rollout into a reusable ANZ launch playbook.",
+   x:"Running it as a blame exercise, or running it so late that the people involved have moved on."},
+
+  {t:"C",n:"Brooks's Law and Little's Law",q:"Does adding people help, and does doing everything at once help?",
+   w:"<b>Brooks's Law</b>: adding people to a late project makes it later, because of onboarding cost and the way communication paths grow roughly with the square of team size. <b>Little's Law</b>: work in progress equals throughput multiplied by lead time, so reducing the number of things in flight shortens how long each takes.",
+   c:"Two useful counters to hold. One for when somebody suggests throwing bodies at the deadline. One for when somebody suggests configuring all five workflows simultaneously.",
+   x:"Quoting them as trivia. Use them to support a recommendation, not to sound well read."}
+];
+
+/* ============ DATA: practice steps ============ */
+const STEPS = [
+  {ph:"Phase 1 · Orient",n:"01",t:"State the project in three sentences",
+   p:"Objective, hard constraint, and definition of done. No jargon. If you cannot do this in three sentences you do not yet have a project, you have a task list.",
+   tools:["Charter","Iron triangle"],
+   r:["Names the business outcome, not the software. 'Implement Ironclad' is a task. What is the outcome?","States the hard constraint and why it is hard.","Defines done in a way that is testable by someone else. Would two people agree whether you had hit it?","Distinguishes what the vendor delivers from what the project delivers."]},
+
+  {ph:"Phase 1 · Orient",n:"02",t:"List everything you do not know",
+   p:"Write the unknowns first, before any planning. Then convert each one into either a stated assumption (with the risk if wrong) or a discovery task (with an owner and a date). Aim for at least eight.",
+   tools:["Assumption mapping","RAID","Pre-mortem"],
+   r:["Includes unknowns about data, not just about scope and people.","Every unknown becomes either an assumption or a task. None are left floating.","Flags which unknowns block estimating and which merely block starting. That distinction determines your week one.","Notices at least one unknown the brief does not name, for example volumes, integrations, or what the EU side has already decided."]},
+
+  {ph:"Phase 1 · Orient",n:"03",t:"Map the stakeholders",
+   p:"Plot everyone from the brief plus anyone missing on power against interest. Then add two columns: engagement now, and engagement needed. The gap between those columns is the thing you will actually work on.",
+   tools:["Power/interest grid","Engagement matrix"],
+   r:["Includes people the brief does not list. Who else touches a contract?","Distinguishes formal power from ability to block. They are rarely the same person.","States a different engagement style per quadrant, not a single comms plan.","Says something specific about the EU PM, who is a peer with no authority in either direction."]},
+
+  {ph:"Phase 2 · Structure",n:"04",t:"Break down the work",
+   p:"List the top-level workstreams. Aim for six to nine. Then sanity check against the 100% rule: is every hour of effort in this project inside one of these branches, including your own?",
+   tools:["WBS","100% rule"],
+   r:["Migration appears as its own branch, not as a task under build.","Change, training and adoption appear as a branch.","Cutover and hypercare appear separately from build and test.","Project management, governance and reporting appear somewhere.","You can say roughly what share of total effort sits outside the vendor SOW."]},
+
+  {ph:"Phase 2 · Structure",n:"05",t:"Assign decision rights",
+   p:"Take six decisions: requirements sign-off per workflow, migration scope, UAT exit, Go/No-Go, training approach, and the rule for in-flight contracts at cutover. For each, name the A, the R, the Cs and the Is.",
+   tools:["RACI","RAPID"],
+   r:["Exactly one A per decision. If you found yourself wanting two, say so, because that is the point.","You have resolved, or explicitly flagged, the responsible-versus-accountable ambiguity between you and the Product Manager.","At least one decision has an A outside your reporting line, and you have thought about what that means.","There is an escalation route and a time limit for when a decision does not get made."]},
+
+  {ph:"Phase 2 · Structure",n:"06",t:"Build the top of the RAID log",
+   p:"Five risks with probability, impact, owner, mitigation, contingency and trigger. Plus three assumptions and three dependencies. Be strict about which letter each item belongs to.",
+   tools:["RAID","Risk scoring"],
+   r:["The key user's leave is not filed as a risk. Work out what it actually is.","The unmapped Icertis data appears near the top, and you can say why.","Every risk has a distinct mitigation and contingency. If they are the same sentence, you have only done one of them.","At least one trigger is specific enough that someone other than you would recognise it.","At least one assumption is genuinely uncomfortable to write down."]},
+
+  {ph:"Phase 2 · Structure",n:"07",t:"Sequence it and find the critical path",
+   p:"What must finish before what. Draw the chains. Then identify the longest one, and separately identify which chain you are least confident about.",
+   tools:["CPM","Dependency types","Crashing vs fast-tracking"],
+   r:["The critical path is stated as a chain, not as a list of important things.","You have considered whether a discovery task, rather than a build task, is the real constraint.","You have named at least one place where fast-tracking is possible and said what risk it buys.","You have identified what has float, because that is where you would take resource from."]},
+
+  {ph:"Phase 2 · Structure",n:"08",t:"Prioritise against the fixed date",
+   p:"MoSCoW the scope. Force yourself to put something real in the Won't column. Then write the one sentence you would use to open that conversation with the SteerCo.",
+   tools:["MoSCoW","Iron triangle","Rolling wave"],
+   r:["The Won't column is not empty and not trivial.","You have considered phasing, meaning more than one shape of go-live rather than one big one.","Migration scope is prioritised separately from workflow scope, because they may not need the same go-live.","Your SteerCo sentence names the tension before asking for the decision.","You have put a date on when scope locks."]},
+
+  {ph:"Phase 3 · Deliver",n:"09",t:"Design the adoption plan",
+   p:"Take one stakeholder group and run them through the five ADKAR stages. What specifically would you do at each stage, and how would you know it had worked?",
+   tools:["ADKAR","Benefits realisation","Leading indicators"],
+   r:["Awareness and Desire have real interventions, not just an email.","You have identified who this change makes worse off, and been honest about it.","Reinforcement includes closing off the old way, not just praising the new one.","You can name a measure for adoption that is not training attendance.","You know when the baseline gets taken."]},
+
+  {ph:"Phase 3 · Deliver",n:"10",t:"Set the governance and comms rhythm",
+   p:"Who meets, how often, to decide what. Then write the six headings of your one-page SteerCo update.",
+   tools:["Governance cadence","Decision log","Comms plan"],
+   r:["Different cadences for different audiences, and you can justify each.","The SteerCo page has a decisions-requested section, and it is near the top.","There is a forum, or at least a mechanism, connecting you and the EU PM.","There is a defined escalation path with a time limit attached."]},
+
+  {ph:"Phase 3 · Deliver",n:"11",t:"Write your first thirty days",
+   p:"Day one, week one, weeks two to four. This is most likely the literal question they open with, so make this the version you could say out loud in ninety seconds.",
+   tools:["Everything above"],
+   r:["Day one is about listening and orienting, not producing artefacts.","Week one produces something the sponsor can react to, because a draft to react to is cheaper for busy people than a blank page.","The Icertis data discovery starts far earlier than feels comfortable.","You have named the one conversation that has to happen in week one and cannot wait.","It ends with what you would know by day thirty that you do not know now."]}
+];
+
+/* ============ DATA: question mapper ============ */
+const QAS = [
+  {q:"So, where would you start? What does your first week look like?",
+   tools:["Charter","Stakeholder map","Assumption log","Discovery scheduling"],
+   s:"<b>Shape:</b> three things you want to establish, in order, and why that order. Something like: what done looks like, who decides, and what I do not yet know. Then name the single piece of discovery you would start immediately because everything downstream depends on it. Resist listing artefacts. They are listening for sequencing logic, not for a document inventory."},
+
+  {q:"How do you plan a project with a hard deadline when nobody knows the scope yet?",
+   tools:["Iron triangle","MoSCoW","Rolling wave","Cone of uncertainty"],
+   s:"<b>Shape:</b> name which constraint is fixed and follow it to its conclusion, so the room hears you reason rather than recite. Then pair rolling wave planning with a commitment: a date by which scope locks, and the discovery that unlocks it. Planning under uncertainty without a lock date sounds like avoidance."},
+
+  {q:"The vendor needs requirements in two weeks and Legal has not responded to you. What do you do?",
+   tools:["RACI","Structured elicitation","Escalation path","RAID (issue)"],
+   s:"<b>Shape:</b> first classify it, because a missed vendor slot is an issue, not a risk. Then work the cheap options before the expensive one: has the ask been small and specific, was time booked in advance, did you bring a draft to react to rather than a blank template. Escalation is a real tool but it is not the first one, and reaching for it immediately reads as junior."},
+
+  {q:"Your key user for ANZ Indirect Procurement is on leave for the entire UAT month. How do you handle that?",
+   tools:["RAID classification","UAT entry/exit criteria","Decision framing"],
+   s:"<b>Shape:</b> this is the sharpest question in the pack because it tests classification and decision-making at once. Note out loud that it is a known certainty rather than a risk. Then lay out the options you can see with what each costs, and land on a recommendation. Arriving with options and no recommendation is the difference between coordinating and managing."},
+
+  {q:"How would you get time out of Legal and Procurement when they do not report to you?",
+   tools:["Engagement matrix","Influence without authority","Structured asks","Sponsor air cover"],
+   s:"<b>Shape:</b> start from their side of the table. What does a request from you actually cost them, and how do you lower that cost. Then name concrete levers: pre-booked short sessions, a draft to react to, published dependencies so the cost of not responding is visible, and sponsor air cover used sparingly. Avoid the word 'buy-in' unless you can say what you are exchanging for it."},
+
+  {q:"What would you say are the biggest risks here?",
+   tools:["RAID","Risk scoring","Mitigation vs contingency"],
+   s:"<b>Shape:</b> do not list ten. Give three, scored, with an owner, a mitigation, a contingency and a trigger for each. Three well-worked risks demonstrate the method. Ten listed risks demonstrate that you read the brief. Have a view on which one is number one and be able to defend the ranking."},
+
+  {q:"How would you approach the contract migration?",
+   tools:["Data profiling","Cleanse at source","Mock runs","Reconciliation","In-flight rules"],
+   s:"<b>Shape:</b> lead with the sequencing insight rather than the steps. Nothing about migration can be sized, costed or scheduled until profiling is done, which tells you where it sits in your plan. Then walk the sequence, and finish on the two things people forget: reconciliation as a control, and an explicit rule for contracts mid-flight at switchover."},
+
+  {q:"How would you work with the EU project manager?",
+   tools:["Gap analysis","Shared vs local design","Decision log","Governance"],
+   s:"<b>Shape:</b> this is the job description's core skill in disguise, so spend time here. Separate what should be common by design from what must diverge for genuine local reasons, and be clear that 'we have always done it this way' is not a local reason. Propose a mechanism for arbitration before you need one. Bonus if you notice which of the five contract types are ANZ-only."},
+
+  {q:"How do you bring people along on a change like this?",
+   tools:["ADKAR","Benefits realisation","Reinforcement"],
+   s:"<b>Shape:</b> the fastest way to lose this question is to answer 'training and comms'. Use a model to show that training addresses two of five failure modes. Then be specific about who this change makes worse off, because acknowledging that is more credible than promising universal enthusiasm."},
+
+  {q:"Would you run this as waterfall or agile?",
+   tools:["Hybrid","Methodology fit","Constraints"],
+   s:"<b>Shape:</b> answer with the constraints, not with a label. A signed fixed-scope SOW and a hard date pull one way. Unknown requirements and unmapped data pull the other. Say which parts of the project you would run which way and why. Declaring a methodology identity is a weaker answer than making a fitted choice."},
+
+  {q:"How would you report to the SteerCo?",
+   tools:["Governance","Decision log","Comms plan"],
+   s:"<b>Shape:</b> one page, and lead with decisions requested rather than status. State the cadence and say what you would escalate versus what you would simply note. The insight worth voicing: a SteerCo that only receives status is being used as an audience rather than as a resource."},
+
+  {q:"What does success look like six months after go-live?",
+   tools:["Outputs vs outcomes vs benefits","Adoption metrics","Baselines"],
+   s:"<b>Shape:</b> separate the three levels explicitly, then give a measure at each. Note that the baseline has to be captured before go-live or the comparison is gone forever, which is a detail that signals you have done this before. Tie at least one measure back to the language in the job description, meaning adoption rate and manual workarounds."},
+
+  {q:"What would you do if it became clear you were going to miss the date?",
+   tools:["Iron triangle","MoSCoW","Crashing vs fast-tracking","Escalation"],
+   s:"<b>Shape:</b> flag early, and say plainly that surprising a sponsor late is the actual failure. Then present options with trade-offs: descope via the priorities already agreed, phase the go-live, crash with added resource, fast-track with added risk. The strength of this answer is that the descope conversation is easy precisely because you had it in week two."},
+
+  {q:"Nothing has started. There is no plan, no RACI, no comms framework. What do you build first?",
+   tools:["Sequencing","Charter","Discovery"],
+   s:"<b>Shape:</b> they are testing whether you produce artefacts or make progress. Pick a small number and justify the order. A defensible line of reasoning: you cannot write a plan until you know the scope, you cannot know the scope until discovery runs, and you cannot run discovery until you know who owns what. Follow that logic and the order chooses itself."},
+
+  {q:"Tell me about a time you managed a project with competing stakeholders.",
+   tools:["STAR","Stakeholder analysis"],
+   s:"<b>Shape:</b> use STAR (Situation, Task, Action, Result) but weight it heavily toward Action, and quantify the Result. Then close the loop by naming the tool you would use if you ran it again, which converts a story into evidence of method."},
+
+  {q:"What is the first thing you would want to know that is not in this brief?",
+   tools:["Assumption mapping","Discovery"],
+   s:"<b>Shape:</b> a gift of a question if it comes. Have two or three ready, and make them the ones that unlock estimating rather than the ones that satisfy curiosity. The actual date of the Icertis expiry, the volume and state of contracts in Icertis, and whether the EU has already committed to a design are all live candidates."}
+];
+
+/* ============ DATA: drill deck ============ */
+const DRILL = [
+  {t:"Iron triangle",q:"Which constraint is fixed, so which one has to give?",d:"Scope, time, cost. Fix two and the third moves. Ignore it and quality quietly absorbs the difference."},
+  {t:"MoSCoW",q:"If we run out of time, what drops, and who agreed it in advance?",d:"Must, Should, Could, Won't this time. Built for fixed dates. The Won't column does the real work."},
+  {t:"RAID",q:"What could derail us, who owns it, and what tells us to act?",d:"Risks, Assumptions, Issues, Dependencies. Every entry needs an owner, a mitigation, a contingency and a trigger."},
+  {t:"RACI",q:"Who decides, who does, who is asked, who is told?",d:"Responsible, Accountable, Consulted, Informed. Only ever one A per row."},
+  {t:"WBS",q:"What is all the work, and does it add to 100%?",d:"Deliverable-oriented decomposition down to packages with a single owner. Includes your own effort."},
+  {t:"Critical path",q:"What actually moves the end date?",d:"The longest chain of dependent tasks. Zero float. Everything else has slack you can borrow from."},
+  {t:"Float / slack",q:"How much can this slip before it hurts?",d:"Spare time on a non-critical task. Where you go looking for resource when the critical path is in trouble."},
+  {t:"Crashing",q:"Can I buy time with money?",d:"Add resource to shorten duration. Costs budget, and Brooks's Law limits how well it works late."},
+  {t:"Fast-tracking",q:"Can I buy time with risk?",d:"Run in parallel what was meant to be sequential. Free in cash terms, expensive in rework risk."},
+  {t:"Rolling wave planning",q:"How do I plan when I do not yet know the scope?",d:"Detail near, coarse far, elaborate as you learn. Only credible when paired with a date for when scope locks."},
+  {t:"ADKAR",q:"Why will people not use this, and does my plan treat that reason?",d:"Awareness, Desire, Knowledge, Ability, Reinforcement. Training only touches the middle two."},
+  {t:"Power/interest grid",q:"Where do I spend my limited attention?",d:"Manage closely, keep satisfied, keep informed, monitor. Formal power and ability to block are different things."},
+  {t:"Engagement matrix",q:"Where is each stakeholder now versus where do I need them?",d:"Unaware, resistant, neutral, supportive, leading. The gap between current and needed is your comms plan."},
+  {t:"Mitigation vs contingency",q:"Am I reducing the chance, or planning for the hit?",d:"Mitigation acts now to lower likelihood or impact. Contingency is what you do if it lands anyway."},
+  {t:"Risk vs issue",q:"Might it happen, or has it happened?",d:"A risk has a probability. An issue is already true and needs managing today. A certainty is neither."},
+  {t:"Severity vs priority",q:"How bad is it, versus how soon must it be fixed?",d:"Two independent axes. A cosmetic defect on the go-live landing screen is low severity and high priority."},
+  {t:"UAT entry and exit criteria",q:"When can testing start, and when is it finished?",d:"Agreed before testing begins. Without exit criteria, UAT never ends, because there is always one more defect."},
+  {t:"Data profiling",q:"What have we actually got, and in what state?",d:"The first migration step. Nothing downstream can be sized, costed or scheduled until it is done."},
+  {t:"In-flight records",q:"What happens to work that is mid-process at switchover?",d:"Needs an explicit rule and a freeze date. The most commonly forgotten part of a cutover plan."},
+  {t:"Hypercare",q:"What happens in the fortnight after go-live?",d:"Defined period of elevated support with a triage path, a daily standup and explicit exit criteria back to BAU."},
+  {t:"Go/No-Go gate",q:"On what basis do we decide to launch?",d:"Criteria agreed well in advance, precisely so the decision on the day is not made on optimism."},
+  {t:"Output vs outcome vs benefit",q:"Did we ship it, do they use it, did it help?",d:"System live, adoption achieved, cycle time reduced. Only the last one is why it was funded."},
+  {t:"Three-point estimate / PERT",q:"How confident is that number?",d:"Optimistic, Most likely, Pessimistic. PERT weights it (O + 4M + P) / 6. The spread matters as much as the number."},
+  {t:"Contingency vs management reserve",q:"Whose buffer is this?",d:"Contingency covers known unknowns and the PM controls it. Management reserve covers unknown unknowns and the sponsor controls it."},
+  {t:"Scope creep vs gold plating",q:"Who is adding the extra work?",d:"Creep comes from outside through unrecorded yeses. Gold plating comes from inside, unrequested."},
+  {t:"Pre-mortem",q:"Assume we failed. Why?",d:"Imagine the failure as a given and work backwards. Surfaces what a normal risk workshop is too polite to say."},
+  {t:"Brooks's Law",q:"Will adding people help?",d:"Adding people to a late project makes it later. Onboarding cost plus communication paths growing faster than headcount."},
+  {t:"100% rule",q:"Is anything missing from the breakdown?",d:"The WBS contains all of the work and none of the not-work, including project management effort itself."},
+  {t:"Decision log",q:"Why are we having this argument again?",d:"What was decided, by whom, when, on what basis. The cure for month-three relitigation."},
+  {t:"Little's Law",q:"Should we run everything at once?",d:"WIP equals throughput times lead time. Fewer things in flight means each one finishes sooner."}
+];
+
+/* ============ RENDER ============ */
+const tierLabel = {A:"Wield",B:"Reach for",C:"Recognise"};
+document.getElementById('cards').innerHTML = CARDS.map((c,i)=>`
+  <details class="cc" data-tier="${c.t}">
+    <summary><span class="num">${String(i+1).padStart(2,'0')}</span>${c.n}<span class="tierbadge">${tierLabel[c.t]}</span></summary>
+    <div class="ccbody">
+      <div class="field"><div class="lbl">The question it answers</div><div class="val"><b>${c.q}</b></div></div>
+      <div class="field"><div class="lbl">What it is</div><div class="val">${c.w}</div></div>
+      <div class="field case"><div class="lbl">Where this case points at it</div><div class="val">${c.c}</div></div>
+      <div class="field trap"><div class="lbl">The trap</div><div class="val">${c.x}</div></div>
+    </div>
+  </details>`).join('');
+
+let lastPhase="";
+document.getElementById('steps').innerHTML = STEPS.map(s=>{
+  let head = s.ph!==lastPhase ? `<div class="phase">${s.ph}</div>` : "";
+  lastPhase = s.ph;
+  return head + `
+  <div class="step">
+    <div class="sn">STEP ${s.n}</div>
+    <div class="st">${s.t}</div>
+    <div class="sp">${s.p}</div>
+    <div class="tools">${s.tools.map(t=>`<span>${t}</span>`).join('')}</div>
+    <textarea data-step="${s.n}" data-title="${s.t}" placeholder="Your answer…"></textarea>
+    <details class="reveal"><summary>What a strong answer covers</summary>
+      <div class="rbody"><ul>${s.r.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    </details>
+  </div>`;
+}).join('');
+
+document.getElementById('qas').innerHTML = QAS.map(q=>`
+  <div class="qa" data-txt="${(q.q+' '+q.tools.join(' ')+' '+q.s).replace(/<[^>]+>/g,'').toLowerCase().replace(/"/g,'')}">
+    <div class="qq">“${q.q}”</div>
+    <div class="qt">${q.tools.map(t=>`<b>${t}</b>`).join('')}</div>
+    <div class="qs">${q.s}</div>
+  </div>`).join('');
+
+/* ============ TABS ============ */
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  document.getElementById(b.dataset.p).classList.add('on');
+  window.scrollTo({top:0,behavior:'instant'});
+}));
+
+/* ============ TIER FILTER ============ */
+document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  const f=b.dataset.f;
+  document.querySelectorAll('.cc').forEach(c=>{
+    c.style.display = (f==='all'||c.dataset.tier===f) ? '' : 'none';
+  });
+}));
+
+/* ============ SEARCH ============ */
+document.getElementById('qsearch').addEventListener('input',e=>{
+  const v=e.target.value.toLowerCase().trim();
+  document.querySelectorAll('.qa').forEach(el=>{
+    el.style.display = !v || el.dataset.txt.includes(v) ? '' : 'none';
+  });
+});
+
+/* ============ COPY / CLEAR ============ */
+document.getElementById('copyAll').addEventListener('click',()=>{
+  const out = [...document.querySelectorAll('textarea')]
+    .filter(t=>t.value.trim())
+    .map(t=>`### STEP ${t.dataset.step}: ${t.dataset.title}\n${t.value.trim()}`)
+    .join('\n\n');
+  const hint=document.getElementById('copyHint');
+  if(!out){ hint.textContent="Nothing written yet."; return; }
+  navigator.clipboard.writeText("MY IRONCLAD PLAN DRAFT\n\n"+out).then(()=>{
+    hint.textContent="Copied. Paste it into the chat and I will pull it apart.";
+    setTimeout(()=>hint.textContent="Paste them back into the chat and I will pull them apart.",4000);
+  }).catch(()=>{ hint.textContent="Copy blocked by the browser. Select the boxes manually."; });
+});
+document.getElementById('clearAll').addEventListener('click',()=>{
+  document.querySelectorAll('textarea').forEach(t=>t.value='');
+});
+
+/* ============ DRILL ============ */
+let deck=[...DRILL], di=0;
+const card=document.getElementById('dcard');
+function paint(){
+  const c=deck[di];
+  document.getElementById('dfront').textContent=c.t;
+  document.getElementById('dq').textContent=c.q;
+  document.getElementById('dd').textContent=c.d;
+  document.getElementById('dcount').textContent=`${di+1} / ${deck.length}`;
+  card.classList.remove('flip');
+}
+card.addEventListener('click',()=>card.classList.toggle('flip'));
+document.getElementById('dnext').addEventListener('click',()=>{di=(di+1)%deck.length;paint();});
+document.getElementById('dprev').addEventListener('click',()=>{di=(di-1+deck.length)%deck.length;paint();});
+document.getElementById('dshuffle').addEventListener('click',()=>{
+  for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
+  di=0;paint();
+});
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('drill').classList.contains('on'))return;
+  if(e.key==='ArrowRight'){di=(di+1)%deck.length;paint();}
+  if(e.key==='ArrowLeft'){di=(di-1+deck.length)%deck.length;paint();}
+  if(e.key===' '){e.preventDefault();card.classList.toggle('flip');}
+});
+paint();
+</script>
+</body>
+</html>
